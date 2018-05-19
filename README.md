@@ -22,7 +22,7 @@ for root,dirs,files in os.walk(args):
 
 ### 要求
 
-装换前
+转换前
 
 `sudo apt update`
 
