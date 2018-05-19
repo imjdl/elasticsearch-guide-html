@@ -24,8 +24,6 @@ for root,dirs,files in os.walk(args):
 
 装换前
 
-&emsp;装换之前
-
 `sudo apt update`
 
 `sudo apt install asciidoctor`

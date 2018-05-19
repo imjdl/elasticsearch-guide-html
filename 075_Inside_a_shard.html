@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.2">
+<title>分片内部原理</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+audio,canvas,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+[hidden],template{display:none}
+script{display:none!important}
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+a{background:transparent}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
+p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:none}
+p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #ddddd8;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
+abbr{text-transform:none}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
+blockquote cite:before{content:"\2014 \0020"}
+blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media only screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table thead,table tfoot{background:#f7f8f7;font-weight:bold}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
+.clearfix:after,.float-group:after{clear:both}
+*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+*:not(pre)>code.nobreak{word-wrap:normal}
+*:not(pre)>code.nowrap{white-space:nowrap}
+pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
+b.button:before{content:"[";padding:0 3px 0 2px}
+b.button:after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header:before,#header:after,#content:before,#content:after,#footnotes:before,#footnotes:after,#footer:before,#footer:after{content:" ";display:table}
+#header:after,#content:after,#footnotes:after,#footer:after{clear:both}
+#content{margin-top:1.25em}
+#content:before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #ddddd8}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #ddddd8;padding-bottom:8px}
+#header .details{border-bottom:1px solid #ddddd8;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span:before{content:"\00a0\2013\00a0"}
+#header .details br+span.author:before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark:before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber:after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #ddddd8;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #efefed;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media only screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+.sect1{padding-bottom:.625em}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
+.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{color:rgba(0,0,0,.85)}
+table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:initial}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
+.sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
+.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
+.literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]:before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:#999}
+.listingblock:hover code[data-lang]:before{display:block}
+.listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
+.listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
+table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
+table.pyhltable td.code{padding-left:.75em;padding-right:0}
+pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
+pre.pygments .lineno{display:inline-block;margin-right:.25em}
+table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock blockquote p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote:before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.5em;margin-right:.5ex;text-align:right}
+.quoteblock .quoteblock{margin-left:0;margin-right:0;padding:.5em 0;border-left:3px solid rgba(0,0,0,.6)}
+.quoteblock .quoteblock blockquote{padding:0 0 0 .75em}
+.quoteblock .quoteblock blockquote:before{display:none}
+.verseblock{margin:0 1em 1.25em 1em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract{margin:0 0 1.25em 0;display:block}
+.quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
+.quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
+table.tableblock{max-width:100%;border-collapse:separate}
+table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
+table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
+table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
+table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px 0}
+table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0 0}
+table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
+table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
+table.frame-all{border-width:1px}
+table.frame-sides{border-width:0 1px}
+table.frame-topbot{border-width:1px 0}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+td>div.verse{white-space:pre}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
+ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
+ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
+ul.inline>li>*{display:block}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist>table tr>td:first-of-type{padding:.4em .75em 0 .75em;line-height:1;vertical-align:top}
+.colist>table tr>td:first-of-type img{max-width:initial}
+.colist>table tr>td:last-of-type{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
+.imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
+.imageblock.right,.imageblock[style*="float: right"]{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background-color:#00fafa}
+.black{color:#000}
+.black-background{background-color:#000}
+.blue{color:#0000bf}
+.blue-background{background-color:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background-color:#fa00fa}
+.gray{color:#606060}
+.gray-background{background-color:#7d7d7d}
+.green{color:#006000}
+.green-background{background-color:#007d00}
+.lime{color:#00bf00}
+.lime-background{background-color:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background-color:#7d0000}
+.navy{color:#000060}
+.navy-background{background-color:#00007d}
+.olive{color:#606000}
+.olive-background{background-color:#7d7d00}
+.purple{color:#600060}
+.purple-background{background-color:#7d007d}
+.red{color:#bf0000}
+.red-background{background-color:#fa0000}
+.silver{color:#909090}
+.silver-background{background-color:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background-color:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background-color:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background-color:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]:after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@media print{@page{margin:1.25cm .75cm}
+*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]:after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #ddddd8!important;padding-bottom:0!important}
+.sect1{padding-bottom:0!important}
+.sect1+.sect1{border:0!important}
+#header>h1:first-child{margin-top:1.25rem}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em 0}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span:before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]:before{display:block}
+#footer{background:none!important;padding:0 .9375em}
+#footer-text{color:rgba(0,0,0,.6)!important;font-size:.9em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+</style>
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="inside-a-shard">分片内部原理</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在 <a href="#distributed-cluster">[distributed-cluster]</a>, 我们介绍了 <em>分片</em>, 并将它 描述成最小的 <em>工作单元</em>。但是究竟什么 <em>是</em> 一个分片，它是如何工作的？
+在这个章节，我们回答以下问题:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>为什么搜索是 <em>近</em> 实时的？</p>
+</li>
+<li>
+<p>为什么文档的 CRUD (创建-读取-更新-删除) 操作是 <em>实时</em> 的?</p>
+</li>
+<li>
+<p>Elasticsearch 是怎样保证更新被持久化在断电时也不丢失数据?</p>
+</li>
+<li>
+<p>为什么删除文档不会立刻释放空间？</p>
+</li>
+<li>
+<p><code>refresh</code>, <code>flush</code>, 和 <code>optimize</code> API 都做了什么, 你什么情况下应该是用他们？</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>最简单的理解一个分片如何工作的方式是上一堂历史课。 我们将要审视提供一个带近实时搜索和分析的 分布式持久化数据存储需要解决的问题。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">内容警告</div>
+<div class="paragraph">
+<p>本章展示的这些信息仅供您兴趣阅读。为了使用 Elasticsearch 您并不需要理解和记忆所有的细节。 读这个章节是为了了解工作机制，并且为了将来您需要这些信息时，知道这些信息在哪里。但是不要被这些细节所累。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="making-text-searchable">使文本可被搜索</h3>
+<div class="paragraph">
+<p>必须解决的第一个挑战是如何使文本可被搜索。
+传统的数据库每个字段存储单个值，但这对全文检索并不够。文本字段中的每个单词需要被搜索，对数据库意味着需要单个字段有索引多值(这里指单词)的能力。</p>
+</div>
+<div class="paragraph">
+<p>最好的支持 <em>一个字段多个值</em> 需求的数据结构是我们在 <a href="#inverted-index">[inverted-index]</a> 章节中介绍过的 <em>倒排索引</em> 。
+倒排索引包含一个有序列表，列表包含所有文档出现过的不重复个体，或称为 <em>词项</em> ，对于每一个词项，包含了它所有曾出现过文档的列表。</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Term  | Doc 1 | Doc 2 | Doc 3 | ...
+------------------------------------
+brown |   X   |       |  X    | ...
+fox   |   X   |   X   |  X    | ...
+quick |   X   |   X   |       | ...
+the   |   X   |       |  X    | ...</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>当讨论倒排索引时，我们会谈到 <em>文档</em> 标引，因为历史原因，倒排索引被用来对整个非结构化文本文档进行标引。
+Elasticsearch 中的 <em>文档</em> 是有字段和值的结构化 JSON 文档。事实上，在 JSON 文档中，
+每个被索引的字段都有自己的倒排索引。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这个倒排索引相比特定词项出现过的文档列表，会包含更多其它信息。它会保存每一个词项出现过的文档总数，
+在对应的文档中一个具体词项出现的总次数，词项在文档中的顺序，每个文档的长度，所有文档的平均长度，等等。这些统计信息允许
+Elasticsearch 决定哪些词比其它词更重要，哪些文档比其它文档更重要，这些内容在 <a href="#relevance-intro">[relevance-intro]</a> 中有描述。</p>
+</div>
+<div class="paragraph">
+<p>为了能够实现预期功能，倒排索引需要知道集合中的 <em>所有</em> 文档，这是需要认识到的关键问题。</p>
+</div>
+<div class="paragraph">
+<p>早期的全文检索会为整个文档集合建立一个很大的倒排索引并将其写入到磁盘。
+一旦新的索引就绪，旧的就会被其替换，这样最近的变化便可以被检索到。</p>
+</div>
+<div class="sect3 pagebreak-before">
+<h4 id="_不变性">不变性</h4>
+<div class="paragraph">
+<p>倒排索引被写入磁盘后是 <em>不可改变</em> 的:它永远不会修改。
+不变性有重要的价值：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>不需要锁。如果你从来不更新索引，你就不需要担心多进程同时修改数据的问题。</p>
+</li>
+<li>
+<p>一旦索引被读入内核的文件系统缓存，便会留在哪里，由于其不变性。只要文件系统缓存中还有足够的空间，那么大部分读请求会直接请求内存，而不会命中磁盘。这提供了很大的性能提升。</p>
+</li>
+<li>
+<p>其它缓存(像filter缓存)，在索引的生命周期内始终有效。它们不需要在每次数据改变时被重建，因为数据不会变化。</p>
+</li>
+<li>
+<p>写入单个大的倒排索引允许数据被压缩，减少磁盘 I/O 和 需要被缓存到内存的索引的使用量。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>当然，一个不变的索引也有不好的地方。主要事实是它是不可变的! 你不能修改它。如果你需要让一个新的文档
+可被搜索，你需要重建整个索引。这要么对一个索引所能包含的数据量造成了很大的限制，要么对索引可被更新的频率造成了很大的限制。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dynamic-indices">动态更新索引</h3>
+<div class="paragraph">
+<p>下一个需要被解决的问题是怎样在保留不变性的前提下实现倒排索引的更新？答案是: 用更多的索引。</p>
+</div>
+<div class="paragraph">
+<p>通过增加新的补充索引来反映新近的修改，而不是直接重写整个倒排索引。每一个倒排索引都会被轮流查询到&#8212;&#8203;从最早的开始&#8212;&#8203;查询完后再对结果进行合并。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 基于 Lucene, 这个 java 库引入了 <em>按段搜索</em> 的概念。
+每一 <em>段</em> 本身都是一个倒排索引，
+但 <em>索引</em> 在 Lucene 中除表示所有 <em>段</em> 的集合外， 还增加了 <em>提交点</em> 的概念 &#x2014; 一个列出了所有已知段的文件，就像在 <a href="#img-index-segments">一个 Lucene 索引包含一个提交点和三个段</a> 中描绘的那样。
+如 <a href="#img-memory-buffer">一个在内存缓存中包含新文档的 Lucene 索引</a> 所示，新的文档首先被添加到内存索引缓存中，然后写入到一个基于磁盘的段，如 <a href="#img-post-commit">在一次提交后，一个新的段被添加到提交点而且缓存被清空。</a> 所示。</p>
+</div>
+<div id="img-index-segments" class="imageblock">
+<div class="content">
+<img src="images/elas_1101.png" alt="A Lucene index with a commit point and three segments">
+</div>
+<div class="title">Figure 1. 一个 Lucene 索引包含一个提交点和三个段</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">索引与分片的比较</div>
+<div class="paragraph">
+<p>被混淆的概念是，一个 <em>Lucene 索引</em> 我们在 Elasticsearch 称作 <em>分片</em> 。
+一个 Elasticsearch <em>索引</em> 是分片的集合。
+当 Elasticsearch 在索引中搜索的时候， 他发送查询到每一个属于索引的分片(Lucene 索引)，然后像 <a href="#distributed-search">[distributed-search]</a>
+提到的那样，合并每个分片的结果到一个全局的结果集。</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>逐段搜索会以如下流程进行工作：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>新文档被收集到内存索引缓存， 见 <a href="#img-memory-buffer">一个在内存缓存中包含新文档的 Lucene 索引</a> 。</p>
+</li>
+<li>
+<p>不时地, 缓存被 <em>提交</em> ：</p>
+<div class="ulist">
+<ul>
+<li>
+<p>一个新的段&#8212;&#8203;一个追加的倒排索引&#8212;&#8203;被写入磁盘。</p>
+</li>
+<li>
+<p>一个新的包含新段名字的 <em>提交点</em> 被写入磁盘。</p>
+</li>
+<li>
+<p>磁盘进行 <em>同步</em> &#x2014; 所有在文件系统缓存中等待的写入都刷新到磁盘，以确保它们被写入物理文件。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>新的段被开启，让它包含的文档可见以被搜索。</p>
+</li>
+<li>
+<p>内存缓存被清空，等待接收新的文档。</p>
+</li>
+</ol>
+</div>
+<div id="img-memory-buffer" class="imageblock">
+<div class="content">
+<img src="images/elas_1102.png" alt="A Lucene index with new documents in the in-memory buffer, ready to commit">
+</div>
+<div class="title">Figure 2. 一个在内存缓存中包含新文档的 Lucene 索引</div>
+</div>
+<div id="img-post-commit" class="imageblock">
+<div class="content">
+<img src="images/elas_1103.png" alt="After a commit, a new segment is added to the index and the buffer is cleared">
+</div>
+<div class="title">Figure 3. 在一次提交后，一个新的段被添加到提交点而且缓存被清空。</div>
+</div>
+<div class="paragraph">
+<p>当一个查询被触发，所有已知的段按顺序被查询。词项统计会对所有段的结果进行聚合，以保证每个词和每个文档的关联都被准确计算。
+这种方式可以用相对较低的成本将新文档添加到索引。</p>
+</div>
+<div class="sect3">
+<h4 id="deletes-and-updates">删除和更新</h4>
+<div class="paragraph">
+<p>段是不可改变的，所以既不能从把文档从旧的段中移除，也不能修改旧的段来进行反映文档的更新。
+取而代之的是，每个提交点会包含一个 <code>.del</code> 文件，文件中会列出这些被删除文档的段信息。</p>
+</div>
+<div class="paragraph">
+<p>当一个文档被 “删除” 时，它实际上只是在 <code>.del</code> 文件中被 <em>标记</em> 删除。一个被标记删除的文档仍然可以被查询匹配到，
+但它会在最终结果被返回前从结果集中移除。</p>
+</div>
+<div class="paragraph">
+<p>文档更新也是类似的操作方式：当一个文档被更新时，旧版本文档被标记删除，文档的新版本被索引到一个新的段中。
+可能两个版本的文档都会被一个查询匹配到，但被删除的那个旧版本文档在结果集返回前就已经被移除。</p>
+</div>
+<div class="paragraph">
+<p>在 <a href="#merge-process">段合并</a> , 我们展示了一个被删除的文档是怎样被文件系统移除的。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="near-real-time">近实时搜索</h3>
+<div class="paragraph">
+<p>随着按段（per-segment）搜索的发展，一个新的文档从索引到可被搜索的延迟显著降低了。新文档在几分钟之内即可被检索，但这样还是不够快。</p>
+</div>
+<div class="paragraph">
+<p>磁盘在这里成为了瓶颈。提交（Commiting）一个新的段到磁盘需要一个
+<a href="http://en.wikipedia.org/wiki/Fsync"><code>fsync</code></a> 来确保段被物理性地写入磁盘，这样在断电的时候就不会丢失数据。
+但是 <code>fsync</code> 操作代价很大; 如果每次索引一个文档都去执行一次的话会造成很大的性能问题。</p>
+</div>
+<div class="paragraph">
+<p>我们需要的是一个更轻量的方式来使一个文档可被搜索，这意味着 <code>fsync</code> 要从整个过程中被移除。</p>
+</div>
+<div class="paragraph">
+<p>在Elasticsearch和磁盘之间是文件系统缓存。 像之前描述的一样，
+在内存索引缓冲区（ <a href="#img-pre-refresh">在内存缓冲区中包含了新文档的 Lucene 索引</a> ）中的文档会被写入到一个新的段中（ <a href="#img-post-refresh">缓冲区的内容已经被写入一个可被搜索的段中，但还没有进行提交</a> ）。
+但是这里新段会被先写入到文件系统缓存&#8212;&#8203;这一步代价会比较低，稍后再被刷新到磁盘&#8212;&#8203;这一步代价比较高。不过只要文件已经在缓存中，
+就可以像其它文件一样被打开和读取了。</p>
+</div>
+<div id="img-pre-refresh" class="imageblock">
+<div class="content">
+<img src="images/elas_1104.png" alt="A Lucene index with new documents in the in-memory buffer">
+</div>
+<div class="title">Figure 4. 在内存缓冲区中包含了新文档的 Lucene 索引</div>
+</div>
+<div class="paragraph">
+<p>Lucene 允许新段被写入和打开&#8212;&#8203;使其包含的文档在未进行一次完整提交时便对搜索可见。
+这种方式比进行一次提交代价要小得多，并且在不影响性能的前提下可以被频繁地执行。</p>
+</div>
+<div id="img-post-refresh" class="imageblock">
+<div class="content">
+<img src="images/elas_1105.png" alt="The buffer contents have been written to a segment, which is searchable, but is not yet commited">
+</div>
+<div class="title">Figure 5. 缓冲区的内容已经被写入一个可被搜索的段中，但还没有进行提交</div>
+</div>
+<div class="sect3">
+<h4 id="refresh-api">refresh API</h4>
+<div class="paragraph">
+<p>在 Elasticsearch 中，写入和打开一个新段的轻量的过程叫做 <em>refresh</em> 。
+默认情况下每个分片会每秒自动刷新一次。这就是为什么我们说 Elasticsearch 是 <em>近</em> 实时搜索:
+文档的变化并不是立即对搜索可见，但会在一秒之内变为可见。</p>
+</div>
+<div class="paragraph">
+<p>这些行为可能会对新用户造成困惑: 他们索引了一个文档然后尝试搜索它，但却没有搜到。这个问题的解决办法是用 <code>refresh</code> API 执行一次手动刷新:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /_refresh <b class="conum">(1)</b>
+POST /blogs/_refresh <b class="conum">(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>刷新（Refresh）所有的索引。</p>
+</li>
+<li>
+<p>只刷新（Refresh） <code>blogs</code> 索引。</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>尽管刷新是比提交轻量很多的操作，它还是会有性能开销。当写测试的时候，
+手动刷新很有用，但是不要在生产环境下每次索引一个文档都去手动刷新。
+相反，你的应用需要意识到 Elasticsearch 的近实时的性质，并接受它的不足。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>并不是所有的情况都需要每秒刷新。可能你正在使用 Elasticsearch 索引大量的日志文件， 你可能想优化索引速度而不是近实时搜索，
+可以通过设置 <code>refresh_interval</code> ， 降低每个索引的刷新频率：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_logs
+{
+  "settings": {
+    "refresh_interval": "30s" <b class="conum">(1)</b>
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>每30秒刷新 <code>my_logs</code> 索引。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>refresh_interval</code> 可以在既存索引上进行动态更新。
+在生产环境中，当你正在建立一个大的新索引时，可以先关闭自动刷新，待开始使用该索引时，再把它们调回来：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_logs/_settings
+{ "refresh_interval": -1 } <b class="conum">(1)</b>
+
+PUT /my_logs/_settings
+{ "refresh_interval": "1s" } <b class="conum">(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>关闭自动刷新。</p>
+</li>
+<li>
+<p>每秒自动刷新。</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<code>refresh_interval</code> 需要一个 <em>持续时间</em> 值， 例如 <code>1s</code> （1 秒） 或 <code>2m</code> （2 分钟）。
+一个绝对值 <em>1</em> 表示的是 <em>1毫秒</em> --无疑会使你的集群陷入瘫痪。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="translog">持久化变更</h3>
+<div class="paragraph">
+<p>如果没有用 <code>fsync</code> 把数据从文件系统缓存刷（flush）到硬盘，我们不能保证数据在断电甚至是程序正常退出之后依然存在。为了保证 Elasticsearch 的可靠性，需要确保数据变化被持久化到磁盘。</p>
+</div>
+<div class="paragraph">
+<p>在 <a href="#dynamic-indices">动态更新索引</a>，我们说一次完整的提交会将段刷到磁盘，并写入一个包含所有段列表的提交点。Elasticsearch 在启动或重新打开一个索引的过程中使用这个提交点来判断哪些段隶属于当前分片。</p>
+</div>
+<div class="paragraph">
+<p>即使通过每秒刷新（refresh）实现了近实时搜索，我们仍然需要经常进行完整提交来确保能从失败中恢复。但在两次提交之间发生变化的文档怎么办？我们也不希望丢失掉这些数据。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 增加了一个 <em>translog</em> ，或者叫事务日志，在每一次对 Elasticsearch 进行操作时均进行了日志记录。通过 translog ，整个流程看起来是下面这样：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>一个文档被索引之后，就会被添加到内存缓冲区，<em>并且</em> 追加到了 translog ，正如 <a href="#img-xlog-pre-refresh">新的文档被添加到内存缓冲区并且被追加到了事务日志</a> 描述的一样。</p>
+<div id="img-xlog-pre-refresh" class="imageblock">
+<div class="content">
+<img src="images/elas_1106.png" alt="New documents are added to the in-memory buffer and appended to the transaction log">
+</div>
+<div class="title">Figure 6. 新的文档被添加到内存缓冲区并且被追加到了事务日志</div>
+</div>
+</li>
+<li>
+<p>刷新（refresh）使分片处于 <a href="#img-xlog-post-refresh">刷新（refresh）完成后, 缓存被清空但是事务日志不会</a> 描述的状态，分片每秒被刷新（refresh）一次：</p>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>这些在内存缓冲区的文档被写入到一个新的段中，且没有进行 <code>fsync</code> 操作。</p>
+</li>
+<li>
+<p>这个段被打开，使其可被搜索。</p>
+</li>
+<li>
+<p>内存缓冲区被清空。</p>
+</li>
+</ul>
+</div>
+<div id="img-xlog-post-refresh" class="imageblock">
+<div class="content">
+<img src="images/elas_1107.png" alt="After a refresh, the buffer is cleared but the transaction log is not">
+</div>
+<div class="title">Figure 7. 刷新（refresh）完成后, 缓存被清空但是事务日志不会</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>这个进程继续工作，更多的文档被添加到内存缓冲区和追加到事务日志（见 <a href="#img-xlog-pre-flush">事务日志不断积累文档</a> ）。</p>
+<div id="img-xlog-pre-flush" class="imageblock">
+<div class="content">
+<img src="images/elas_1108.png" alt="The transaction log keeps accumulating documents">
+</div>
+<div class="title">Figure 8. 事务日志不断积累文档</div>
+</div>
+</li>
+<li>
+<p>每隔一段时间&#8212;&#8203;例如 translog 变得越来越大&#8212;&#8203;索引被刷新（flush）；一个新的 translog 被创建，并且一个全量提交被执行（见 <a href="#img-xlog-post-flush">在刷新（flush）之后，段被全量提交，并且事务日志被清空</a> ）：</p>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>所有在内存缓冲区的文档都被写入一个新的段。</p>
+</li>
+<li>
+<p>缓冲区被清空。</p>
+</li>
+<li>
+<p>一个提交点被写入硬盘。</p>
+</li>
+<li>
+<p>文件系统缓存通过 <code>fsync</code> 被刷新（flush）。</p>
+</li>
+<li>
+<p>老的 translog 被删除。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>translog 提供所有还没有被刷到磁盘的操作的一个持久化纪录。当 Elasticsearch 启动的时候，
+它会从磁盘中使用最后一个提交点去恢复已知的段，并且会重放 translog 中所有在最后一次提交后发生的变更操作。</p>
+</div>
+<div class="paragraph">
+<p>translog 也被用来提供实时 CRUD 。当你试着通过ID查询、更新、删除一个文档，它会在尝试从相应的段中检索之前，
+首先检查 translog 任何最近的变更。这意味着它总是能够实时地获取到文档的最新版本。</p>
+</div>
+<div id="img-xlog-post-flush" class="imageblock">
+<div class="content">
+<img src="images/elas_1109.png" alt="After a flush, the segments are fully commited and the transaction log is cleared">
+</div>
+<div class="title">Figure 9. 在刷新（flush）之后，段被全量提交，并且事务日志被清空</div>
+</div>
+<div class="sect3">
+<h4 id="flush-api">flush API</h4>
+<div class="paragraph">
+<p>这个执行一个提交并且截断 translog 的行为在 Elasticsearch 被称作一次 <em>flush</em> 。
+分片每30分钟被自动刷新（flush），或者在 translog 太大的时候也会刷新。请查看
+ <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.4/index-modules-translog.html#_translog_settings"><code>translog</code> 文档</a> 来设置，它可以用来
+ 控制这些阈值：</p>
+</div>
+<div class="paragraph">
+<p>{ref}/indices-flush.html[<code>flush</code> API] 可以被用来执行一个手工的刷新（flush）:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /blogs/_flush <b class="conum">(1)</b>
+
+POST /_flush?wait_for_ongoing <b class="conum">(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>刷新（flush） <code>blogs</code> 索引。</p>
+</li>
+<li>
+<p>刷新（flush）所有的索引并且并且等待所有刷新在返回前完成。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>你很少需要自己手动执行一个的 <code>flush</code> 操作；通常情况下，自动刷新就足够了。</p>
+</div>
+<div class="paragraph">
+<p>这就是说，在重启节点或关闭索引之前执行 <a href="#flush-api">flush</a> 有益于你的索引。当 Elasticsearch 尝试恢复或重新打开一个索引，
+它需要重放 translog 中所有的操作，所以如果日志越短，恢复越快。</p>
+</div>
+<div id="how-safe-is-the-translog" class="sidebarblock">
+<div class="content">
+<div class="title">Translog 有多安全?</div>
+<div class="paragraph">
+<p>translog 的目的是保证操作不会丢失。这引出了这个问题： Translog 有多安全？</p>
+</div>
+<div class="paragraph">
+<p>在文件被 fsync 到磁盘前，被写入的文件在重启之后就会丢失。默认 translog 是每 5 秒被 fsync 刷新到硬盘，
+或者在每次写请求完成之后执行(e.g. index, delete, update, bulk)。这个过程在主分片和复制分片都会发生。最终，
+基本上，这意味着在整个请求被 fsync 到主分片和复制分片的translog之前，你的客户端不会得到一个 200 OK 响应。</p>
+</div>
+<div class="paragraph">
+<p>在每次请求后都执行一个 fsync 会带来一些性能损失，尽管实践表明这种损失相对较小（特别是bulk导入，它在一次请求中平摊了大量文档的开销）。</p>
+</div>
+<div class="paragraph">
+<p>但是对于一些大容量的偶尔丢失几秒数据问题也并不严重的集群，使用异步的 fsync 还是比较有益的。比如，写入的数据被缓存到内存中，再每5秒执行一次 fsync 。</p>
+</div>
+<div class="paragraph">
+<p>这个行为可以通过设置 <code>durability</code> 参数为 <code>async</code> 来启用：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">PUT /my_index/_settings
+{
+    "index.translog.durability": "async",
+    "index.translog.sync_interval": "5s"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个选项可以针对索引单独设置，并且可以动态进行修改。如果你决定使用异步 translog 的话，你需要 <em>保证</em> 在发生crash时，丢失掉 <code>sync_interval</code> 时间段的数据也无所谓。请在决定前知晓这个特性。</p>
+</div>
+<div class="paragraph">
+<p>如果你不确定这个行为的后果，最好是使用默认的参数（ <code>"index.translog.durability": "request"</code> ）来避免数据丢失。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="merge-process">段合并</h3>
+<div class="paragraph">
+<p>由于自动刷新流程每秒会创建一个新的段  ，这样会导致短时间内的段数量暴增。而段数目太多会带来较大的麻烦。
+每一个段都会消耗文件句柄、内存和cpu运行周期。更重要的是，每个搜索请求都必须轮流检查每个段；所以段越多，搜索也就越慢。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch通过在后台进行段合并来解决这个问题。小的段被合并到大的段，然后这些大的段再被合并到更大的段。</p>
+</div>
+<div class="paragraph">
+<p>段合并的时候会将那些旧的已删除文档从文件系统中清除。被删除的文档（或被更新文档的旧版本）不会被拷贝到新的大段中。</p>
+</div>
+<div class="paragraph">
+<p>启动段合并不需要你做任何事。进行索引和搜索时会自动进行。这个流程像在 <a href="#img-merge">两个提交了的段和一个未提交的段正在被合并到一个更大的段</a> 中提到的一样工作：</p>
+</div>
+<div class="paragraph">
+<p>1、 当索引的时候，刷新（refresh）操作会创建新的段并将段打开以供搜索使用。</p>
+</div>
+<div class="paragraph">
+<p>2、 合并进程选择一小部分大小相似的段，并且在后台将它们合并到更大的段中。这并不会中断索引和搜索。</p>
+</div>
+<div id="img-merge" class="imageblock">
+<div class="content">
+<img src="images/elas_1110.png" alt="Two commited segments and one uncommited segment in the process of being merged into a bigger segment">
+</div>
+<div class="title">Figure 10. 两个提交了的段和一个未提交的段正在被合并到一个更大的段</div>
+</div>
+<div class="paragraph">
+<p>3、 <a href="#img-post-merge">一旦合并结束，老的段被删除</a> 说明合并完成时的活动：</p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>新的段被刷新（flush）到了磁盘。
+   ** 写入一个包含新段且排除旧的和较小的段的新提交点。</p>
+</li>
+<li>
+<p>新的段被打开用来搜索。</p>
+</li>
+<li>
+<p>老的段被删除。</p>
+</li>
+</ul>
+</div>
+<div id="img-post-merge" class="imageblock">
+<div class="content">
+<img src="images/elas_1111.png" alt="一旦合并结束，老的段被删除">
+</div>
+<div class="title">Figure 11. 一旦合并结束，老的段被删除</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>合并大的段需要消耗大量的I/O和CPU资源，如果任其发展会影响搜索性能。Elasticsearch在默认情况下会对合并流程进行资源限制，所以搜索仍然
+有足够的资源很好地执行。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+查看 <a href="#segments-and-merging">[segments-and-merging]</a> 来为你的实例获取关于合并调整的建议。
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="optimize-api">optimize API</h4>
+<div class="paragraph">
+<p><code>optimize</code> API大可看做是 <em>强制合并</em> API。它会将一个分片强制合并到 <code>max_num_segments</code> 参数指定大小的段数目。
+这样做的意图是减少段的数量（通常减少到一个），来提升搜索性能。</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<code>optimize</code> API <em>不应该</em> 被用在一个动态索引————一个正在被活跃更新的索引。后台合并流程已经可以很好地完成工作。
+optimizing 会阻碍这个进程。不要干扰它！
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在特定情况下，使用 <code>optimize</code> API 颇有益处。例如在日志这种用例下，每天、每周、每月的日志被存储在一个索引中。
+老的索引实质上是只读的；它们也并不太可能会发生变化。</p>
+</div>
+<div class="paragraph">
+<p>在这种情况下，使用optimize优化老的索引，将每一个分片合并为一个单独的段就很有用了；这样既可以节省资源，也可以使搜索更加快速：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /logstash-2014-10/_optimize?max_num_segments=1 <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>合并索引中的每个分片为一个单独的段</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>请注意，使用 <code>optimize</code> API 触发段合并的操作一点也不会受到任何资源上的限制。这可能会消耗掉你节点上全部的I/O资源, 使其没有余裕来处理搜索请求，从而有可能使集群失去响应。
+如果你想要对索引执行 <code>optimize</code>，你需要先使用分片分配（查看 <a href="#migrate-indices">[migrate-indices]</a>）把索引移到一个安全的节点，再执行。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-05-17 22:26:24 CST
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,3828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.2">
+<title>placeholder6</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+audio,canvas,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+[hidden],template{display:none}
+script{display:none!important}
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+a{background:transparent}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
+p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:none}
+p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #ddddd8;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
+abbr{text-transform:none}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
+blockquote cite:before{content:"\2014 \0020"}
+blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media only screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table thead,table tfoot{background:#f7f8f7;font-weight:bold}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
+.clearfix:after,.float-group:after{clear:both}
+*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+*:not(pre)>code.nobreak{word-wrap:normal}
+*:not(pre)>code.nowrap{white-space:nowrap}
+pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
+b.button:before{content:"[";padding:0 3px 0 2px}
+b.button:after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header:before,#header:after,#content:before,#content:after,#footnotes:before,#footnotes:after,#footer:before,#footer:after{content:" ";display:table}
+#header:after,#content:after,#footnotes:after,#footer:after{clear:both}
+#content{margin-top:1.25em}
+#content:before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #ddddd8}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #ddddd8;padding-bottom:8px}
+#header .details{border-bottom:1px solid #ddddd8;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span:before{content:"\00a0\2013\00a0"}
+#header .details br+span.author:before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark:before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber:after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #ddddd8;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #efefed;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media only screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+.sect1{padding-bottom:.625em}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
+.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{color:rgba(0,0,0,.85)}
+table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:initial}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
+.sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
+.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
+.literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]:before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:#999}
+.listingblock:hover code[data-lang]:before{display:block}
+.listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
+.listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
+table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
+table.pyhltable td.code{padding-left:.75em;padding-right:0}
+pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
+pre.pygments .lineno{display:inline-block;margin-right:.25em}
+table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock blockquote p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote:before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.5em;margin-right:.5ex;text-align:right}
+.quoteblock .quoteblock{margin-left:0;margin-right:0;padding:.5em 0;border-left:3px solid rgba(0,0,0,.6)}
+.quoteblock .quoteblock blockquote{padding:0 0 0 .75em}
+.quoteblock .quoteblock blockquote:before{display:none}
+.verseblock{margin:0 1em 1.25em 1em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract{margin:0 0 1.25em 0;display:block}
+.quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
+.quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
+table.tableblock{max-width:100%;border-collapse:separate}
+table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
+table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
+table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
+table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px 0}
+table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0 0}
+table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
+table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
+table.frame-all{border-width:1px}
+table.frame-sides{border-width:0 1px}
+table.frame-topbot{border-width:1px 0}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+td>div.verse{white-space:pre}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
+ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
+ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
+ul.inline>li>*{display:block}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist>table tr>td:first-of-type{padding:.4em .75em 0 .75em;line-height:1;vertical-align:top}
+.colist>table tr>td:first-of-type img{max-width:initial}
+.colist>table tr>td:last-of-type{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
+.imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
+.imageblock.right,.imageblock[style*="float: right"]{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background-color:#00fafa}
+.black{color:#000}
+.black-background{background-color:#000}
+.blue{color:#0000bf}
+.blue-background{background-color:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background-color:#fa00fa}
+.gray{color:#606060}
+.gray-background{background-color:#7d7d7d}
+.green{color:#006000}
+.green-background{background-color:#007d00}
+.lime{color:#00bf00}
+.lime-background{background-color:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background-color:#7d0000}
+.navy{color:#000060}
+.navy-background{background-color:#00007d}
+.olive{color:#606000}
+.olive-background{background-color:#7d7d00}
+.purple{color:#600060}
+.purple-background{background-color:#7d007d}
+.red{color:#bf0000}
+.red-background{background-color:#fa0000}
+.silver{color:#909090}
+.silver-background{background-color:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background-color:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background-color:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background-color:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]:after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@media print{@page{margin:1.25cm .75cm}
+*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]:after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #ddddd8!important;padding-bottom:0!important}
+.sect1{padding-bottom:0!important}
+.sect1+.sect1{border:0!important}
+#header>h1:first-child{margin-top:1.25rem}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em 0}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span:before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]:before{display:block}
+#footer{background:none!important;padding:0 .9375em}
+#footer-text{color:rgba(0,0,0,.6)!important;font-size:.9em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+</style>
+</head>
+<body class="article">
+<div id="header">
+<h1>placeholder6</h1>
+</div>
+<div id="content">
+<h1 id="modeling-your-data" class="sect0">数据建模</h1>
+
+<div class="sect1">
+<h2 id="relations">关联关系处理</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>现实世界有很多重要的关联关系：博客帖子有一些评论，银行账户有多次交易记录，客户有多个银行账户，订单有多个订单明细，文件目录有多个文件和子目录。</p>
+</div>
+<div class="paragraph">
+<p>关系型数据库被明确设计&#8212;&#8203;毫不意外&#8212;&#8203;用来进行关联关系管理：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>每个实体（或 <em>行</em> ，在关系世界中）可以被 <em>主键</em> 唯一标识。</p>
+</li>
+<li>
+<p>实体 <em>规范化</em> （范式）。唯一实体的数据只存储一次，而相关实体只存储它的主键。只能在一个具体位置修改这个实体的数据。</p>
+</li>
+<li>
+<p>实体可以进行关联查询，可以跨实体搜索。</p>
+</li>
+<li>
+<p>单个实体的变化是 <em>原子的</em> ，  <em>一致的</em> ， <em>隔离的</em> ， 和
+<em>持久的</em> 。 （可以在 <a href="http://en.wikipedia.org/wiki/ACID_transactions"><em>ACID Transactions</em></a>
+中查看更多细节。）</p>
+</li>
+<li>
+<p>大多数关系数据库支持跨多个实体的 ACID 事务。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>但是关系型数据库有其局限性，包括对全文检索有限的支持能力。
+实体关联查询时间消耗是很昂贵的，关联的越多，消耗就越昂贵。特别是跨服务器进行实体关联时成本极其昂贵，基本不可用。
+但单个的服务器上又存在数据量的限制。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch ，和大多数 NoSQL 数据库类似，是扁平化的。索引是独立文档的集合体。
+ 文档是否匹配搜索请求取决于它是否包含所有的所需信息。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 中单个文档的数据变更是 <a href="http://en.wikipedia.org/wiki/ACID_transactions">ACIDic</a> 的，
+而涉及多个文档的事务则不是。当一个事务部分失败时，无法回滚索引数据到前一个状态。</p>
+</div>
+<div class="paragraph">
+<p>扁平化有以下优势：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>索引过程是快速和无锁的。</p>
+</li>
+<li>
+<p>搜索过程是快速和无锁的。</p>
+</li>
+<li>
+<p>因为每个文档相互都是独立的，大规模数据可以在多个节点上进行分布。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>但关联关系仍然非常重要。某些时候，我们需要缩小扁平化和现实世界关系模型的差异。以下四种常用的方法，用来在 Elasticsearch 中进行关系型数据的管理：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#application-joins">Application-side joins</a></p>
+</li>
+<li>
+<p><a href="#denormalization">Data denormalization</a></p>
+</li>
+<li>
+<p><a href="#nested-objects">Nested objects</a></p>
+</li>
+<li>
+<p><a href="#parent-child">Parent/child relationships</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>通常都需要结合其中的某几个方法来得到最终的解决方案。</p>
+</div>
+<div class="sect2">
+<h3 id="application-joins">应用层联接</h3>
+<div class="paragraph">
+<p>我们通过在我们的应用程序中实现联接可以（部分）模拟关系数据库。
+例如，比方说我们正在对用户和他们的博客文章进行索引。在关系世界中，我们会这样来操作：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index/user/1 <b class="conum">(1)</b>
+{
+  "name":     "John Smith",
+  "email":    "john@smith.com",
+  "dob":      "1970/10/24"
+}
+
+PUT /my_index/blogpost/2 <b class="conum">(1)</b>
+{
+  "title":    "Relationships",
+  "body":     "It's complicated...",
+  "user":     1 <b class="conum">(2)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>每个文档的 <code>index</code>, <code>type</code>, 和 <code>id</code> 一起构造成主键。</p>
+</li>
+<li>
+<p><code>blogpost</code> 通过用户的 <code>id</code> 链接到用户。<code>index</code> 和 <code>type</code> 并不需要因为在我们的应用程序中已经硬编码。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>通过用户的 ID <code>1</code> 可以很容易的找到博客帖子。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /my_index/blogpost/_search
+{
+  "query": {
+    "filtered": {
+      "filter": {
+        "term": { "user": 1 }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了找到用户叫做 John 的博客帖子，我们需要运行两次查询：
+第一次会查找所有叫做 John 的用户从而获取他们的 ID 集合，接着第二次会将这些 ID 集合放到类似于前面一个例子的查询：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /my_index/user/_search
+{
+  "query": {
+    "match": {
+      "name": "John"
+    }
+  }
+}
+
+GET /my_index/blogpost/_search
+{
+  "query": {
+    "filtered": {
+      "filter": {
+        "terms": { "user": [1] }  <b class="conum">(1)</b>
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>执行第一个查询得到的结果将填充到 <code>terms</code> 过滤器中。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>应用层联接的主要优点是可以对数据进行标准化处理。只能在 <code>user</code> 文档中修改用户的名称。缺点是，为了在搜索时联接文档，必须运行额外的查询。</p>
+</div>
+<div class="paragraph">
+<p>在这个例子中，只有一个用户匹配我们的第一个查询，但在现实世界中，我们可以很轻易的遇到数以百万计的叫做 John 的用户。
+包含所有这些用户的 IDs 会产生一个非常大的查询，这是一个数百万词项的查找。</p>
+</div>
+<div class="paragraph">
+<p>这种方法适用于第一个实体（例如，在这个例子中 <code>user</code> ）只有少量的文档记录的情况，并且最好它们很少改变。这将允许应用程序对结果进行缓存，并避免经常运行第一次查询。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="denormalization">非规范化你的数据</h3>
+<div class="paragraph">
+<p>使用 Elasticsearch 得到最好的搜索性能的方法是有目的的通过在索引时进行非规范化 
+<a href="http://en.wikipedia.org/wiki/Denormalization">denormalizing</a>。对每个文档保持一定数量的冗余副本可以在需要访问时避免进行关联。</p>
+</div>
+<div class="paragraph">
+<p>如果我们希望能够通过某个用户姓名找到他写的博客文章，可以在博客文档中包含这个用户的姓名：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index/user/1
+{
+  "name":     "John Smith",
+  "email":    "john@smith.com",
+  "dob":      "1970/10/24"
+}
+
+PUT /my_index/blogpost/2
+{
+  "title":    "Relationships",
+  "body":     "It's complicated...",
+  "user":     {
+    "id":       1,
+    "name":     "John Smith" <b class="conum">(1)</b>
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>这部分用户的字段数据已被冗余到 <code>blogpost</code> 文档中。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>现在，我们通过单次查询就能够通过 <code>relationships</code> 找到用户 <code>John</code> 的博客文章。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /my_index/blogpost/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "title":     "relationships" }},
+        { "match": { "user.name": "John"          }}
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>数据非规范化的优点是速度快。因为每个文档都包含了所需的所有信息，当这些信息需要在查询进行匹配时，并不需要进行昂贵的联接操作。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="top-hits">字段折叠</h3>
+<div class="paragraph">
+<p>一个普遍的需求是需要通过特定字段进行分组。例如我们需要按照用户名称 <em>分组</em> 返回最相关的博客文章。
+按照用户名分组意味着进行 <code>terms</code> 聚合。
+为能够按照用户 <em>整体</em> 名称进行分组，名称字段应保持 <code>not_analyzed</code> 的形式，
+具体说明参考 <a href="#aggregations-and-analysis">[aggregations-and-analysis]</a>：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index/_mapping/blogpost
+{
+  "properties": {
+    "user": {
+      "properties": {
+        "name": { <b class="conum">(1)</b>
+          "type": "string",
+          "fields": {
+            "raw": { <b class="conum">(2)</b>
+              "type":  "string",
+              "index": "not_analyzed"
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>user.name</code> 字段将用来进行全文检索。</p>
+</li>
+<li>
+<p><code>user.name.raw</code> 字段将用来通过 <code>terms</code> 聚合进行分组。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>然后添加一些数据:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index/user/1
+{
+  "name": "John Smith",
+  "email": "john@smith.com",
+  "dob": "1970/10/24"
+}
+
+PUT /my_index/blogpost/2
+{
+  "title": "Relationships",
+  "body": "It's complicated...",
+  "user": {
+    "id": 1,
+    "name": "John Smith"
+  }
+}
+
+PUT /my_index/user/3
+{
+  "name": "Alice John",
+  "email": "alice@john.com",
+  "dob": "1979/01/04"
+}
+
+PUT /my_index/blogpost/4
+{
+  "title": "Relationships are cool",
+  "body": "It's not complicated at all...",
+  "user": {
+    "id": 3,
+    "name": "Alice John"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在我们来查询标题包含 <code>relationships</code> 并且作者名包含 <code>John</code> 的博客，查询结果再按作者名分组，感谢 {ref}/search-aggregations-metrics-top-hits-aggregation.html[<code>top_hits</code> aggregation]
+提供了按照用户进行分组的功能：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /my_index/blogpost/_search
+{
+  "size" : 0, <b class="conum">(1)</b>
+  "query": { <b class="conum">(2)</b>
+    "bool": {
+      "must": [
+        { "match": { "title":     "relationships" }},
+        { "match": { "user.name": "John"          }}
+      ]
+    }
+  },
+  "aggs": {
+    "users": {
+      "terms": {
+        "field":   "user.name.raw",      <b class="conum">(3)</b>
+        "order": { "top_score": "desc" } <b class="conum">(4)</b>
+      },
+      "aggs": {
+        "top_score": { "max":      { "script":  "_score"           }}, <b class="conum">(4)</b>
+        "blogposts": { "top_hits": { "_source": "title", "size": 5 }}  <b class="conum">(5)</b>
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>我们感兴趣的博客文章是通过 <code>blogposts</code> 聚合返回的，所以我们可以通过将 <code>size</code> 设置成 0 来禁止 <code>hits</code> 常规搜索。</p>
+</li>
+<li>
+<p><code>query</code> 返回通过 <code>relationships</code> 查找名称为 <code>John</code> 的用户的博客文章。</p>
+</li>
+<li>
+<p><code>terms</code> 聚合为每一个 <code>user.name.raw</code> 创建一个桶。</p>
+</li>
+<li>
+<p><code>top_score</code> 聚合对通过 <code>users</code> 聚合得到的每一个桶按照文档评分对词项进行排序。</p>
+</li>
+<li>
+<p><code>top_hits</code> 聚合仅为每个用户返回五个最相关的博客文章的 <code>title</code> 字段。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>这里显示简短响应结果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">...
+"hits": {
+  "total":     2,
+  "max_score": 0,
+  "hits":      [] <b class="conum">(1)</b>
+},
+"aggregations": {
+  "users": {
+     "buckets": [
+        {
+           "key":       "John Smith", <b class="conum">(2)</b>
+           "doc_count": 1,
+           "blogposts": {
+              "hits": { <b class="conum">(3)</b>
+                 "total":     1,
+                 "max_score": 0.35258877,
+                 "hits": [
+                    {
+                       "_index": "my_index",
+                       "_type":  "blogpost",
+                       "_id":    "2",
+                       "_score": 0.35258877,
+                       "_source": {
+                          "title": "Relationships"
+                       }
+                    }
+                 ]
+              }
+           },
+           "top_score": { <b class="conum">(4)</b>
+              "value": 0.3525887727737427
+           }
+        },
+...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>因为我们设置 <code>size</code> 为 0 ，所以 <code>hits</code> 数组是空的。</p>
+</li>
+<li>
+<p>在顶层查询结果中出现的每一个用户都会有一个对应的桶。</p>
+</li>
+<li>
+<p>在每个用户桶下面都会有一个 <code>blogposts.hits</code> 数组包含针对这个用户的顶层查询结果。</p>
+</li>
+<li>
+<p>用户桶按照每个用户最相关的博客文章进行排序。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>使用 <code>top_hits</code> 聚合等效执行一个查询返回这些用户的名字和他们最相关的博客文章，然后为每一个用户执行相同的查询，以获得最好的博客。但前者的效率要好很多。</p>
+</div>
+<div class="paragraph">
+<p>每一个桶返回的顶层查询命中结果是基于最初主查询进行的一个轻量 <em>迷你查询</em> 结果集。这个迷你查询提供了一些你期望的常用特性，例如高亮显示以及分页功能。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="denormalization-concurrency">非规范化和并发</h3>
+<div class="paragraph">
+<p>当然，数据非规范化也有弊端。
+第一个缺点是索引会更大因为每个博客文章文档的 <code>_source</code> 将会更大，并且这里有很多的索引字段。这通常不是一个大问题。数据写到磁盘将会被高度压缩，而且磁盘已经很廉价了。Elasticsearch 可以愉快地应付这些额外的数据。</p>
+</div>
+<div class="paragraph">
+<p>更重要的问题是，如果用户改变了他的名字，他所有的博客文章也需要更新了。幸运的是，用户不经常更改名称。即使他们做了，
+用户也不可能写超过几千篇博客文章，所以更新博客文章通过 <a href="#scroll"><code>scroll</code></a> 和 <a href="#bulk"><code>bulk</code></a> APIs 大概耗费不到一秒。</p>
+</div>
+<div class="paragraph">
+<p>然而，让我们考虑一个更复杂的场景，其中的变化很常见，影响深远，而且非常重要，并发。</p>
+</div>
+<div class="paragraph">
+<p>在这个例子中，我们将在 Elasticsearch 模拟一个文件系统的目录树，非常类似 Linux 文件系统：根目录是 <code>/</code> ，每个目录可以包含文件和子目录。</p>
+</div>
+<div class="paragraph">
+<p>我们希望能够搜索到一个特定目录下的文件，等效于：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>grep "some text" /clinton/projects/elasticsearch/*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这就要求我们索引文件所在目录的路径：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /fs/file/1
+{
+  "name":     "README.txt", <b class="conum">(1)</b>
+  "path":     "/clinton/projects/elasticsearch", <b class="conum">(2)</b>
+  "contents": "Starting a new Elasticsearch project is easy..."
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>文件名</p>
+</li>
+<li>
+<p>文件所在目录的全路径</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>事实上，我们也应当索引 <code>directory</code> 文档，如此我们可以在目录内列出所有的文件和子目录，但为了简洁，我们将忽略这个需求。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们也希望能够搜索到一个特定目录下的目录树包含的的任何文件，相当于此：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>grep -r "some text" /clinton</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了支持这一点，我们需要对路径层次结构进行索引：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/clinton</code></p>
+</li>
+<li>
+<p><code>/clinton/projects</code></p>
+</li>
+<li>
+<p><code>/clinton/projects/elasticsearch</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>这种层次结构能够通过 <code>path</code> 字段使用 {ref}/analysis-pathhierarchy-tokenizer.html[<code>path_hierarchy</code> tokenizer] 自动生成：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /fs
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "paths": { <b class="conum">(1)</b>
+          "tokenizer": "path_hierarchy"
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>自定义的 <code>paths</code> 分析器在默认设置中使用 {ref}/analysis-pathhierarchy-tokenizer.html[<code>path_hierarchy</code> tokenizer]。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>file</code> 类型的映射看起来如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /fs/_mapping/file
+{
+  "properties": {
+    "name": { <b class="conum">(1)</b>
+      "type":  "string",
+      "index": "not_analyzed"
+    },
+    "path": { <b class="conum">(2)</b>
+      "type":  "string",
+      "index": "not_analyzed",
+      "fields": {
+        "tree": { <b class="conum">(2)</b>
+          "type":     "string",
+          "analyzer": "paths"
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>name</code> 字段将包含确切名称。</p>
+</li>
+<li>
+<p><code>path</code> 字段将包含确切的目录名称，而 <code>path.tree</code> 字段将包含路径层次结构。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>一旦索引建立并且文件已被编入索引，我们可以执行一个搜索，在 <code>/clinton/projects/elasticsearch</code> 目录中包含 <code>elasticsearch</code> 的文件，如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /fs/file/_search
+{
+  "query": {
+    "filtered": {
+      "query": {
+        "match": {
+          "contents": "elasticsearch"
+        }
+      },
+      "filter": {
+        "term": { <b class="conum">(1)</b>
+          "path": "/clinton/projects/elasticsearch"
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>仅在该目录中查找文件。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>所有在 <code>/clinton</code> 下面的任何子目录存放的文件将在 <code>path.tree</code> 字段中包含 <code>/clinton</code> 词项。所以我们能够搜索 <code>/clinton</code> 的任何子目录中的所有文件，如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /fs/file/_search
+{
+  "query": {
+    "filtered": {
+      "query": {
+        "match": {
+          "contents": "elasticsearch"
+        }
+      },
+      "filter": {
+        "term": { <b class="conum">(1)</b>
+          "path.tree": "/clinton"
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>在这个目录或其下任何子目录中查找文件。</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="_重命名文件和目录">重命名文件和目录</h4>
+<div class="paragraph">
+<p>到目前为止一切顺利。 重命名一个文件很容易&#8212;&#8203;所需要的只是一个简单的 <code>update</code> 或 <code>index</code> 请求。
+你甚至可以使用 <a href="#optimistic-concurrency-control">optimistic concurrency control</a> 确保你的变化不会与其他用户的变化发生冲突：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /fs/file/1?version=2 <b class="conum">(1)</b>
+{
+  "name":     "README.asciidoc",
+  "path":     "/clinton/projects/elasticsearch",
+  "contents": "Starting a new Elasticsearch project is easy..."
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>version</code> 编号确保该更改仅应用于该索引中具有此相同的版本号的文档。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>我们甚至可以重命名一个目录，但这意味着更新所有存在于该目录下路径层次结构中的所有文件。
+这可能快速或缓慢，取决于有多少文件需要更新。我们所需要做的就是使用  <a href="#scroll"><code>scroll</code></a> 来检索所有的文件，
+以及 <a href="#bulk"><code>bulk</code> API</a> 来更新它们。这个过程不是原子的，但是所有的文件将会迅速转移到他们的新存放位置。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="concurrency-solutions">解决并发问题</h3>
+<div class="paragraph">
+<p>当我们允许多个人 <em>同时</em> 重命名文件或目录时，问题就来了。
+设想一下，你正在对一个包含了成百上千文件的目录 <code>/clinton</code> 进行重命名操作。
+同时，另一个用户对这个目录下的单个文件 <code>/clinton/projects/elasticsearch/README.txt</code> 进行重命名操作。
+这个用户的修改操作，尽管在你的操作后开始，但可能会更快的完成。</p>
+</div>
+<div class="paragraph">
+<p>以下有两种情况可能出现：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>你决定使用 <code>version</code> （版本）号，在这种情况下，当与 <code>README.txt</code> 文件重命名的版本号产生冲突时，你的批量重命名操作将会失败。</p>
+</li>
+<li>
+<p>你没有使用版本控制，你的变更将覆盖其他用户的变更。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>问题的原因是 Elasticsearch 不支持 <a href="http://en.wikipedia.org/wiki/ACID_transactions">ACID 事务</a>。
+ 对单个文件的变更是 ACIDic 的，但包含多个文档的变更不支持。</p>
+</div>
+<div class="paragraph">
+<p>如果你的主要数据存储是关系数据库，并且 Elasticsearch 仅仅作为一个搜索引擎
+或一种提升性能的方法，可以首先在数据库中执行变更动作，然后在完成后将这些变更复制到 Elasticsearch。
+通过这种方式，你将受益于数据库 ACID 事务支持，并且在 Elasticsearch 中以正确的顺序产生变更。
+并发在关系数据库中得到了处理。</p>
+</div>
+<div class="paragraph">
+<p>如果你不使用关系型存储，这些并发问题就需要在 Elasticsearch 的事务水准进行处理。
+以下是三个切实可行的使用 Elasticsearch 的解决方案，它们都涉及某种形式的锁：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>全局锁</p>
+</li>
+<li>
+<p>文档锁</p>
+</li>
+<li>
+<p>树锁</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>当使用一个外部系统替代 Elasticsearch 时，本节中所描述的解决方案可以通过相同的原则来实现。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="global-lock">全局锁</h4>
+<div class="paragraph">
+<p>通过在任何时间只允许一个进程来进行变更动作，我们可以完全避免并发问题。
+大多数的变更只涉及少量文件，会很快完成。一个顶级目录的重命名操作会对其他变更造成较长时间的阻塞，但可能很少这样做。</p>
+</div>
+<div class="paragraph">
+<p>因为在 Elasticsearch 文档级别的变更支持 ACIDic，我们可以使用一个文档是否存在的状态作为一个全局锁。
+为了请求得到锁，我们尝试 <code>create</code> 全局锁文档：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /fs/lock/global/_create
+{}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果这个 <code>create</code> 请求因冲突异常而失败，说明另一个进程已被授予全局锁，我们将不得不稍后再试。
+如果请求成功了，我们自豪的成为全局锁的主人，然后可以继续完成我们的变更。一旦完成，我们就必须通过删除全局锁文档来释放锁：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">DELETE /fs/lock/global</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>根据变更的频繁程度以及时间消耗，一个全局锁能对系统造成大幅度的性能限制。
+我们可以通过让我们的锁更细粒度的方式来增加并行度。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="document-locking">文档锁</h4>
+<div class="paragraph">
+<p>我们可以使用前面描述相同的方法技术来锁定个体文档，而不是锁定整个文件系统。
+
+我们可以使用 <a href="#scroll">scrolled search</a> 检索所有的文档，这些文档会被变更影响因此每一个文档都创建了一个锁文件：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /fs/lock/_bulk
+{ "create": { "_id": 1}} <b class="conum">(1)</b>
+{ "process_id": 123    } <b class="conum">(2)</b>
+{ "create": { "_id": 2}}
+{ "process_id": 123    }</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>lock</code> 文档的 ID 将与应被锁定的文件的 ID 相同。</p>
+</li>
+<li>
+<p><code>process_id</code> 代表要执行变更进程的唯一 ID。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>如果一些文件已被锁定，部分的 <code>bulk</code> 请求将失败，我们将不得不再次尝试。</p>
+</div>
+<div class="paragraph">
+<p>当然，如果我们试图再次锁定 <em>所有</em> 的文件， 我们前面使用的 <code>create</code> 语句将会失败，因为所有文件都已被我们锁定！
+我们需要一个 <code>update</code> 请求带 <code>upsert</code> 参数以及下面这个 <code>script</code> ，而不是一个简单的 <code>create</code> 语句：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">if ( ctx._source.process_id != process_id ) { <b class="conum">(1)</b>
+  assert false;  <b class="conum">(2)</b>
+}
+ctx.op = 'noop'; <b class="conum">(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>process_id</code> 是传递到脚本的一个参数。</p>
+</li>
+<li>
+<p><code>assert false</code> 将引发异常，导致更新失败。</p>
+</li>
+<li>
+<p>将 <code>op</code> 从 <code>update</code> 更新到 <code>noop</code> 防止更新请求作出任何改变，但仍返回成功。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>完整的 <code>update</code> 请求如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /fs/lock/1/_update
+{
+  "upsert": { "process_id": 123 },
+  "script": "if ( ctx._source.process_id != process_id )
+  { assert false }; ctx.op = 'noop';"
+  "params": {
+    "process_id": 123
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果文档并不存在， <code>upsert</code> 文档将会被插入&#8212;&#8203;和前面 <code>create</code> 请求相同。
+但是，如果该文件 <em>确实</em> 存在，该脚本会查看存储在文档上的 <code>process_id</code> 。
+如果 <code>process_id</code> 匹配，更新不会执行（ <code>noop</code> ）但脚本会返回成功。
+如果两者并不匹配， <code>assert false</code> 抛出一个异常，你也知道了获取锁的尝试已经失败。</p>
+</div>
+<div class="paragraph">
+<p>一旦所有锁已成功创建，你就可以继续进行你的变更。</p>
+</div>
+<div class="paragraph">
+<p>之后，你必须释放所有的锁，通过检索所有的锁文档并进行批量删除，可以完成锁的释放：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /fs/_refresh <b class="conum">(1)</b>
+
+GET /fs/lock/_search?scroll=1m <b class="conum">(2)</b>
+{
+    "sort" : ["_doc"],
+    "query": {
+        "match" : {
+            "process_id" : 123
+        }
+    }
+}
+
+PUT /fs/lock/_bulk
+{ "delete": { "_id": 1}}
+{ "delete": { "_id": 2}}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>refresh</code> 调用确保所有 <code>lock</code> 文档对搜索请求可见。</p>
+</li>
+<li>
+<p>当你需要在单次搜索请求返回大量的检索结果集时，你可以使用 <a href="#scroll"><code>scroll</code></a> 查询。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>文档级锁可以实现细粒度的访问控制，但是为数百万文档创建锁文件开销也很大。
+在某些情况下，你可以用少得多的工作量实现细粒度的锁定，如以下目录树场景中所示。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="tree-locking">树锁</h4>
+<div class="paragraph">
+<p>在前面的例子中，我们可以锁定的目录树的一部分，而不是锁定每一个涉及的文档。
+我们将需要独占访问我们要重命名的文件或目录，它可以通过 <em>独占锁</em> 文档来实现：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{ "lock_type": "exclusive" }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>同时我们需要共享锁定所有的父目录，通过 <em>共享锁</em> 文档：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "lock_type":  "shared",
+  "lock_count": 1 <b class="conum">(1)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>lock_count</code> 记录持有共享锁进程的数量。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>对 <code>/clinton/projects/elasticsearch/README.txt</code> 进行重命名的进程需要在这个文件上有 <em>独占锁</em> ，
+以及在 <code>/clinton</code> 、 <code>/clinton/projects</code> 和 <code>/clinton/projects/elasticsearch</code> 目录有 <em>共享锁</em> 。</p>
+</div>
+<div class="paragraph">
+<p>一个简单的 <code>create</code> 请求将满足独占锁的要求，但共享锁需要脚本的更新来实现一些额外的逻辑：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">if (ctx._source.lock_type == 'exclusive') {
+  assert false; <b class="conum">(1)</b>
+}
+ctx._source.lock_count++ <b class="conum">(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>如果 <code>lock_type</code> 是 <code>exclusive</code> （独占）的，<code>assert</code> 语句将抛出一个异常，导致更新请求失败。</p>
+</li>
+<li>
+<p>否则，我们对 <code>lock_count</code> 进行增量处理。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>这个脚本处理了 <code>lock</code> 文档已经存在的情况，但我们还需要一个用来处理的文档还不存在情况的 <code>upsert</code> 文档。
+完整的更新请求如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /fs/lock/%2Fclinton/_update <b class="conum">(1)</b>
+{
+  "upsert": { <b class="conum">(2)</b>
+    "lock_type":  "shared",
+    "lock_count": 1
+  },
+  "script": "if (ctx._source.lock_type == 'exclusive')
+  { assert false }; ctx._source.lock_count++"
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>文档的 ID 是 <code>/clinton</code> ，经过URL编码后成为 <code>%2fclinton</code> 。</p>
+</li>
+<li>
+<p><code>upsert</code> 文档如果不存在，则会被插入。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>一旦我们成功地在所有的父目录中获得一个共享锁，我们尝试在文件本身 <code>create</code> 一个独占锁：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /fs/lock/%2Fclinton%2fprojects%2felasticsearch%2fREADME.txt/_create
+{ "lock_type": "exclusive" }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，如果有其他人想要重新命名 <code>/clinton</code> 目录，他们将不得不在这条路径上获得一个独占锁：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /fs/lock/%2Fclinton/_create
+{ "lock_type": "exclusive" }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个请求将失败，因为一个具有相同 ID 的 <code>lock</code> 文档已经存在。
+另一个用户将不得不等待我们的操作完成以及释放我们的锁。独占锁只能这样被删除：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">DELETE /fs/lock/%2Fclinton%2fprojects%2felasticsearch%2fREADME.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>共享锁需要另一个脚本对 <code>lock_count</code> 递减，如果计数下降到零，删除 <code>lock</code> 文档：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">if (--ctx._source.lock_count == 0) {
+  ctx.op = 'delete' <b class="conum">(1)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>一旦 <code>lock_count</code> 达到0， <code>ctx.op</code> 会从 <code>update</code> 被修改成  <code>delete</code> 。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>此更新请求将为每级父目录由下至上的执行，从最长路径到最短路径：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /fs/lock/%2Fclinton%2fprojects%2felasticsearch/_update
+{
+  "script": "if (--ctx._source.lock_count == 0) { ctx.op = 'delete' } "
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>树锁用最小的代价提供了细粒度的并发控制。当然，它不适用于所有的情况&#8212;&#8203;数据模型必须有类似于目录树的顺序访问路径才能使用。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>这三个方案&#8212;&#8203;全局、文档或树锁&#8212;&#8203;都没有处理锁最棘手的问题：如果持有锁的进程死了怎么办？</p>
+</div>
+<div class="paragraph">
+<p>一个进程的意外死亡给我们留下了2个问题：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>我们如何知道我们可以释放的死亡进程中所持有的锁？</p>
+</li>
+<li>
+<p>我们如何清理死去的进程没有完成的变更？</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>这些主题超出了本书的范围，但是如果你决定使用锁，你需要给对他们进行一些思考。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当非规范化成为很多项目的一个很好的选择，采用锁方案的需求会带来复杂的实现逻辑。
+作为替代方案，Elasticsearch 提供两个模型帮助我们处理相关联的实体： <em>嵌套的对象</em> 和 <em>父子关系</em> 。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="nested-objects">嵌套对象</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>由于在 Elasticsearch 中单个文档的增删改都是原子性操作,那么将相关实体数据都存储在同一文档中也就理所当然。 比如说,我们可以将订单及其明细数据存储在一个文档中。又比如,我们可以将一篇博客文章的评论以一个 <code>comments</code> 数组的形式和博客文章放在一起：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index/blogpost/1
+{
+  "title": "Nest eggs",
+  "body":  "Making your money work...",
+  "tags":  [ "cash", "shares" ],
+  "comments": [ <b class="conum">(1)</b>
+    {
+      "name":    "John Smith",
+      "comment": "Great article",
+      "age":     28,
+      "stars":   4,
+      "date":    "2014-09-01"
+    },
+    {
+      "name":    "Alice White",
+      "comment": "More like this please",
+      "age":     31,
+      "stars":   5,
+      "date":    "2014-10-22"
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>如果我们依赖<a href="#dynamic-mapping">字段自动映射</a>,那么 <code>comments</code> 字段会自动映射为 <code>object</code> 类型。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>由于所有的信息都在一个文档中,当我们查询时就没有必要去联合文章和评论文档,查询效率就很高。</p>
+</div>
+<div class="paragraph">
+<p>但是当我们使用如下查询时,上面的文档也会被当做是符合条件的结果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "name": "Alice" }},
+        { "match": { "age":  28      }} <b class="conum">(1)</b>
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Alice实际是31岁,不是28!</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>正如我们在 <a href="#object-arrays">对象数组</a> 中讨论的一样,出现上面这种问题的原因是 JSON 格式的文档被处理成如下的扁平式键值对的结构。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "title":            [ eggs, nest ],
+  "body":             [ making, money, work, your ],
+  "tags":             [ cash, shares ],
+  "comments.name":    [ alice, john, smith, white ],
+  "comments.comment": [ article, great, like, more, please, this ],
+  "comments.age":     [ 28, 31 ],
+  "comments.stars":   [ 4, 5 ],
+  "comments.date":    [ 2014-09-01, 2014-10-22 ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Alice</code> 和 31 、 <code>John</code> 和 <code>2014-09-01</code> 之间的相关性信息不再存在。虽然 <code>object</code> 类型 (参见 <a href="#inner-objects">内部对象</a>) 在存储 <em>单一对象</em> 时非常有用,但对于对象数组的搜索而言,毫无用处。</p>
+</div>
+<div class="paragraph">
+<p><em>嵌套对象</em> 就是来解决这个问题的。将 <code>comments</code> 字段类型设置为 <code>nested</code> 而不是 <code>object</code> 后,每一个嵌套对象都会被索引为一个 <em>隐藏的独立文档</em> ,举例如下:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{ <b class="conum">(1)</b>
+  "comments.name":    [ john, smith ],
+  "comments.comment": [ article, great ],
+  "comments.age":     [ 28 ],
+  "comments.stars":   [ 4 ],
+  "comments.date":    [ 2014-09-01 ]
+}
+{ <b class="conum">(2)</b>
+  "comments.name":    [ alice, white ],
+  "comments.comment": [ like, more, please, this ],
+  "comments.age":     [ 31 ],
+  "comments.stars":   [ 5 ],
+  "comments.date":    [ 2014-10-22 ]
+}
+{ <b class="conum">(3)</b>
+  "title":            [ eggs, nest ],
+  "body":             [ making, money, work, your ],
+  "tags":             [ cash, shares ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>第一个 <code>嵌套文档</code></p>
+</li>
+<li>
+<p>第二个 <code>嵌套文档</code></p>
+</li>
+<li>
+<p><em>根文档</em> 或者也可称为父文档</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>在独立索引每一个嵌套对象后,对象中每个字段的相关性得以保留。我们查询时,也仅仅返回那些真正符合条件的文档。</p>
+</div>
+<div class="paragraph">
+<p>不仅如此,由于嵌套文档直接存储在文档内部,查询时嵌套文档和根文档联合成本很低,速度和单独存储几乎一样。</p>
+</div>
+<div class="paragraph">
+<p>嵌套文档是隐藏存储的,我们不能直接获取。如果要增删改一个嵌套对象,我们必须把整个文档重新索引才可以。值得注意的是,查询的时候返回的是整个文档,而不是嵌套文档本身。</p>
+</div>
+<div class="sect2">
+<h3 id="nested-mapping">嵌套对象映射</h3>
+<div class="paragraph">
+<p>设置一个字段为 <code>nested</code> 很简单&#8201;&#8212;&#8201; 你只需要将字段类型 <code>object</code> 替换为 <code>nested</code> 即可：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index
+{
+  "mappings": {
+    "blogpost": {
+      "properties": {
+        "comments": {
+          "type": "nested", <b class="conum">(1)</b>
+          "properties": {
+            "name":    { "type": "string"  },
+            "comment": { "type": "string"  },
+            "age":     { "type": "short"   },
+            "stars":   { "type": "short"   },
+            "date":    { "type": "date"    }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>nested</code> 字段类型的设置参数与 <code>object</code> 相同。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>这就是需要设置的一切。至此，所有 <code>comments</code> 对象会被索引在独立的嵌套文档中。可以查看 {ref}/nested.html[<code>nested</code> 类型参考文档] 获取更多详细信息。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="nested-query">嵌套对象查询</h3>
+<div class="paragraph">
+<p>由于嵌套对象  被索引在独立隐藏的文档中，我们无法直接查询它们。  相应地，我们必须使用 {ref}/query-dsl-nested-query.html[ <code>nested</code> 查询] 去获取它们：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /my_index/blogpost/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "title": "eggs" <b class="conum">(1)</b>
+          }
+        },
+        {
+          "nested": {
+            "path": "comments", <b class="conum">(2)</b>
+            "query": {
+              "bool": {
+                "must": [ <b class="conum">(3)</b>
+                  {
+                    "match": {
+                      "comments.name": "john"
+                    }
+                  },
+                  {
+                    "match": {
+                      "comments.age": 28
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+}}}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>title</code> 子句是查询根文档的。</p>
+</li>
+<li>
+<p><code>nested</code> 子句作用于嵌套字段 <code>comments</code> 。在此查询中，既不能查询根文档字段，也不能查询其他嵌套文档。</p>
+</li>
+<li>
+<p><code>comments.name</code> 和 <code>comments.age</code> 子句操作在同一个嵌套文档中。</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>nested</code> 字段可以包含其他的 <code>nested</code> 字段。同样地，<code>nested</code> 查询也可以包含其他的 <code>nested</code> 查询。而嵌套的层次会按照你所期待的被应用。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>nested</code> 查询肯定可以匹配到多个嵌套的文档。每一个匹配的嵌套文档都有自己的相关度得分，但是这众多的分数最终需要汇聚为可供根文档使用的一个分数。</p>
+</div>
+<div class="paragraph">
+<p>默认情况下，根文档的分数是这些嵌套文档分数的平均值。可以通过设置 score_mode 参数来控制这个得分策略，相关策略有 <code>avg</code> (平均值), <code>max</code> (最大值), <code>sum</code> (加和) 和 <code>none</code> (直接返回 <code>1.0</code> 常数值分数)。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /my_index/blogpost/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "title": "eggs"
+          }
+        },
+        {
+          "nested": {
+            "path": "comments",
+            "score_mode": "max", <b class="conum">(1)</b>
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "match": {
+                      "comments.name": "john"
+                    }
+                  },
+                  {
+                    "match": {
+                      "comments.age": 28
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>返回最优匹配嵌套文档的 <code>_score</code> 给根文档使用。</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>如果 <code>nested</code> 查询放在一个布尔查询的 <code>filter</code> 子句中，其表现就像一个 <code>nested</code> 查询，只是 <code>score_mode</code> 参数不再生效。因为它被用于不打分的查询中&#8201;&#8212;&#8201;只是符合或不符合条件，不必打分&#8201;&#8212;&#8201;那么 <code>score_mode</code> 就没有任何意义，因为根本就没有要打分的地方。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="nested-sorting">使用嵌套字段排序</h3>
+<div class="paragraph">
+<p>尽管嵌套字段的值存储于独立的嵌套文档中，但依然有方法按照嵌套字段的值排序。  让我们添加另一个记录，以使得结果更有意思：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index/blogpost/2
+{
+  "title": "Investment secrets",
+  "body":  "What they don't tell you ...",
+  "tags":  [ "shares", "equities" ],
+  "comments": [
+    {
+      "name":    "Mary Brown",
+      "comment": "Lies, lies, lies",
+      "age":     42,
+      "stars":   1,
+      "date":    "2014-10-18"
+    },
+    {
+      "name":    "John Smith",
+      "comment": "You're making it up!",
+      "age":     28,
+      "stars":   2,
+      "date":    "2014-10-16"
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>假如我们想要查询在10月份收到评论的博客文章，并且按照 <code>stars</code> 数的最小值来由小到大排序，那么查询语句如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /_search
+{
+  "query": {
+    "nested": { <b class="conum">(1)</b>
+      "path": "comments",
+      "filter": {
+        "range": {
+          "comments.date": {
+            "gte": "2014-10-01",
+            "lt":  "2014-11-01"
+          }
+        }
+      }
+    }
+  },
+  "sort": {
+    "comments.stars": { <b class="conum">(2)</b>
+      "order": "asc",   <b class="conum">(2)</b>
+      "mode":  "min",   <b class="conum">(2)</b>
+      "nested_path": "comments", <b class="conum">(3)</b>
+      "nested_filter": {
+        "range": {
+          "comments.date": {
+            "gte": "2014-10-01",
+            "lt":  "2014-11-01"
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>此处的 <code>nested</code> 查询将结果限定为在10月份收到过评论的博客文章。</p>
+</li>
+<li>
+<p>结果按照匹配的评论中 <code>comment.stars</code> 字段的最小值 (<code>min</code>) 来由小到大 (<code>asc</code>) 排序。</p>
+</li>
+<li>
+<p>排序子句中的 <code>nested_path</code> 和 <code>nested_filter</code> 和 <code>query</code> 子句中的 <code>nested</code> 查询相同，原因在下面有解释。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>我们为什么要用 nested_path 和 nested_filter 重复查询条件呢？原因在于，排序发生在查询执行之后。
+查询条件限定了在10月份收到评论的博客文档，但返回的是博客文档。如果我们不在排序子句中加入 <code>nested_filter</code> ，
+那么我们对博客文档的排序将基于博客文档的所有评论，而不是仅仅在10月份接收到的评论。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="nested-aggregation">嵌套聚合</h3>
+<div class="paragraph">
+<p>在查询的时候，我们使用 <code>nested</code> 查询  就可以获取嵌套对象的信息。同理， <code>nested</code> 聚合允许我们对嵌套对象里的字段进行聚合操作。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /my_index/blogpost/_search
+{
+  "size" : 0,
+  "aggs": {
+    "comments": { <b class="conum">(1)</b>
+      "nested": {
+        "path": "comments"
+      },
+      "aggs": {
+        "by_month": {
+          "date_histogram": { <b class="conum">(2)</b>
+            "field":    "comments.date",
+            "interval": "month",
+            "format":   "yyyy-MM"
+          },
+          "aggs": {
+            "avg_stars": {
+              "avg": { <b class="conum">(3)</b>
+                "field": "comments.stars"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>nested</code> 聚合 <code>`进入'' 嵌套的 `comments</code> 对象。</p>
+</li>
+<li>
+<p>comment对象根据 comments.date 字段的月份值被分到不同的桶。</p>
+</li>
+<li>
+<p>计算每个桶内star的平均数量。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>从下面的结果可以看出聚合是在嵌套文档层面进行的：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">...
+"aggregations": {
+  "comments": {
+     "doc_count": 4, <b class="conum">(1)</b>
+     "by_month": {
+        "buckets": [
+           {
+              "key_as_string": "2014-09",
+              "key": 1409529600000,
+              "doc_count": 1, <b class="conum">(1)</b>
+              "avg_stars": {
+                 "value": 4
+              }
+           },
+           {
+              "key_as_string": "2014-10",
+              "key": 1412121600000,
+              "doc_count": 3, <b class="conum">(1)</b>
+              "avg_stars": {
+                 "value": 2.6666666666666665
+              }
+           }
+        ]
+     }
+  }
+}
+...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>总共有4个 <code>comments</code> 对象 ：1个对象在9月的桶里，3个对象在10月的桶里。</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="reverse-nested-aggregation">逆向嵌套聚合</h4>
+<div class="paragraph">
+<p><code>nested</code> 聚合  只能对嵌套文档的字段进行操作。
+根文档或者其他嵌套文档的字段对它是不可见的。
+然而，通过 <code>reverse_nested</code> 聚合，我们可以 <em>走出</em> 嵌套层级，回到父级文档进行操作。</p>
+</div>
+<div class="paragraph">
+<p>例如，我们要基于评论者的年龄找出评论者感兴趣 <code>tags</code> 的分布。 <code>comment.age</code> 是一个嵌套字段，但 <code>tags</code> 在根文档中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /my_index/blogpost/_search
+{
+  "size" : 0,
+  "aggs": {
+    "comments": {
+      "nested": { <b class="conum">(1)</b>
+        "path": "comments"
+      },
+      "aggs": {
+        "age_group": {
+          "histogram": { <b class="conum">(2)</b>
+            "field":    "comments.age",
+            "interval": 10
+          },
+          "aggs": {
+            "blogposts": {
+              "reverse_nested": {}, <b class="conum">(3)</b>
+              "aggs": {
+                "tags": {
+                  "terms": { <b class="conum">(4)</b>
+                    "field": "tags"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>nested</code> 聚合进入 <code>comments</code> 对象。</p>
+</li>
+<li>
+<p><code>histogram</code> 聚合基于 <code>comments.age</code> 做分组，每10年一个分组。</p>
+</li>
+<li>
+<p><code>reverse_nested</code> 聚合退回根文档。</p>
+</li>
+<li>
+<p><code>terms</code> 聚合计算每个分组年龄段的评论者最常用的标签词。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>简略结果如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">..
+"aggregations": {
+  "comments": {
+     "doc_count": 4, <b class="conum">(1)</b>
+     "age_group": {
+        "buckets": [
+           {
+              "key": 20, <b class="conum">(2)</b>
+              "doc_count": 2, <b class="conum">(2)</b>
+              "blogposts": {
+                 "doc_count": 2, <b class="conum">(3)</b>
+                 "tags": {
+                    "doc_count_error_upper_bound": 0,
+                    "buckets": [ <b class="conum">(4)</b>
+                       { "key": "shares",   "doc_count": 2 },
+                       { "key": "cash",     "doc_count": 1 },
+                       { "key": "equities", "doc_count": 1 }
+                    ]
+                 }
+              }
+           },
+...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>一共有4条评论。</p>
+</li>
+<li>
+<p>在20岁到30岁之间总共有两条评论。</p>
+</li>
+<li>
+<p>这些评论包含在两篇博客文章中。</p>
+</li>
+<li>
+<p>在这些博客文章中最热门的标签是 <code>shares</code>、 <code>cash</code>、<code>equities</code>。</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_嵌套对象的使用时机">嵌套对象的使用时机</h4>
+<div class="paragraph">
+<p>嵌套对象  在只有一个主要实体时非常有用，这个主要实体包含有限个紧密关联但又不是很重要的实体，例如我们的 <code>blogpost</code> 对象包含评论对象。
+在基于评论的内容查找博客文章时， <code>nested</code> 查询有很大的用处，并且可以提供更快的查询效率。</p>
+</div>
+<div class="paragraph">
+<p>嵌套模型的缺点如下：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>当对嵌套文档做增加、修改或者删除时，整个文档都要重新被索引。嵌套文档越多，这带来的成本就越大。</p>
+</li>
+<li>
+<p>查询结果返回的是整个文档，而不仅仅是匹配的嵌套文档。尽管目前有计划支持只返回根文档中最佳匹配的嵌套文档，但目前还不支持。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>有时你需要在主文档和其关联实体之间做一个完整的隔离设计。这个隔离是由 <em>父子关联</em> 提供的。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="parent-child">父-子关系文档</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>父-子关系文档   在实质上类似于 <a href="#nested-objects">nested model</a> ：允许将一个对象实体和另外一个对象实体关联起来。而这两种类型的主要区别是：在 <a href="#nested-objects"><code>nested</code> objects</a> 文档中，所有对象都是在同一个文档中，而在父-子关系文档中，父对象和子对象都是完全独立的文档。</p>
+</div>
+<div class="paragraph">
+<p>父-子关系的主要作用是允许把一个 type 的文档和另外一个 type 的文档关联起来，构成一对多的关系：一个父文档可以对应多个子文档  。与 <a href="#nested-objects"><code>nested</code> objects</a> 相比，父-子关系的主要优势有：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>更新父文档时，不会重新索引子文档。</p>
+</li>
+<li>
+<p>创建，修改或删除子文档时，不会影响父文档或其他子文档。这一点在这种场景下尤其有用：子文档数量较多，并且子文档创建和修改的频率高时。</p>
+</li>
+<li>
+<p>子文档可以作为搜索结果独立返回。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 维护了一个父文档和子文档的映射关系，得益于这个映射，父-子文档关联查询操作非常快。但是这个映射也对父-子文档关系有个限制条件：父文档和其所有子文档，都必须要存储在同一个分片中。</p>
+</div>
+<div class="paragraph">
+<p>父-子文档ID映射存储在 <a href="#docvalues">[docvalues]</a> 中。当映射完全在内存中时， <a href="#docvalues">[docvalues]</a> 提供对映射的快速处理能力，另一方面当映射非常大时，可以通过溢出到磁盘提供足够的扩展能力</p>
+</div>
+<div class="sect2">
+<h3 id="parent-child-mapping">父-子关系文档映射</h3>
+<div class="paragraph">
+<p>建立父-子文档映射关系时只需要指定某一个文档 type 是另一个文档 type 的父亲。   该关系可以在如下两个时间点设置：1）创建索引时；2）在子文档 type 创建之前更新父文档的 mapping。</p>
+</div>
+<div class="paragraph">
+<p>举例说明，有一个公司在多个城市有分公司，并且每一个分公司下面都有很多员工。有这样的需求：按照分公司、员工的维度去搜索，并且把员工和他们工作的分公司联系起来。针对该需求，用嵌套模型是无法实现的。当然，如果使用 <a href="#application-joins">application-side-joins</a> 或者 <a href="#denormalization">data denormalization</a> 也是可以实现的，但是为了演示的目的，在这里我们使用父-子文档。</p>
+</div>
+<div class="paragraph">
+<p>我们需要告诉Elasticsearch，在创建员工 <code>employee</code> 文档 type 时，指定分公司 <code>branch</code> 的文档 type 为其父亲。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /company
+{
+  "mappings": {
+    "branch": {},
+    "employee": {
+      "_parent": {
+        "type": "branch" <b class="conum">(1)</b>
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>employee</code> 文档 是 <code>branch</code> 文档的子文档。</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="indexing-parent-child">构建父-子文档索引</h3>
+<div class="paragraph">
+<p>为父文档创建索引与为普通文档创建索引没有区别。父文档并不需要知道它有哪些子文档。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /company/branch/_bulk
+{ "index": { "_id": "london" }}
+{ "name": "London Westminster", "city": "London", "country": "UK" }
+{ "index": { "_id": "liverpool" }}
+{ "name": "Liverpool Central", "city": "Liverpool", "country": "UK" }
+{ "index": { "_id": "paris" }}
+{ "name": "Champs Élysées", "city": "Paris", "country": "France" }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>创建子文档时，用户必须要通过 <code>parent</code> 参数来指定该子文档的父文档 ID：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /company/employee/1?parent=london <b class="conum">(1)</b>
+{
+  "name":  "Alice Smith",
+  "dob":   "1970-10-24",
+  "hobby": "hiking"
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>当前 <code>employee</code> 文档的父文档 ID 是 <code>london</code> 。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>父文档 ID 有两个作用：创建了父文档和子文档之间的关系，并且保证了父文档和子文档都在同一个分片上。</p>
+</div>
+<div class="paragraph">
+<p>在 <a href="#routing-value">[routing-value]</a> 中，我们解释了 Elasticsearch 如何通过路由值来决定该文档属于哪一个分片，路由值默认为该文档的 <code>_id</code> 。分片路由的计算公式如下：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>shard = hash(routing) % number_of_primary_shards</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果指定了父文档的 ID，那么就会使用父文档的 ID 进行路由，而不会使用当前文档 <code>_id</code> 。也就是说，如果父文档和子文档都使用相同的值进行路由，那么父文档和子文档都会确定分布在同一个分片上。</p>
+</div>
+<div class="paragraph">
+<p>在执行单文档的请求时需要指定父文档的 ID，单文档请求包括：通过 <code>GET</code> 请求获取一个子文档；创建、更新或删除一个子文档。而执行搜索请求时是不需要指定父文档的ID，这是因为搜索请求是向一个索引中的所有分片发起请求，而单文档的操作是只会向存储该文档的分片发送请求。因此，如果操作单个子文档时不指定父文档的 ID，那么很有可能会把请求发送到错误的分片上。</p>
+</div>
+<div class="paragraph">
+<p>父文档的 ID 应该在 <code>bulk</code> API 中指定</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /company/employee/_bulk
+{ "index": { "_id": 2, "parent": "london" }}
+{ "name": "Mark Thomas", "dob": "1982-05-16", "hobby": "diving" }
+{ "index": { "_id": 3, "parent": "liverpool" }}
+{ "name": "Barry Smith", "dob": "1979-04-01", "hobby": "hiking" }
+{ "index": { "_id": 4, "parent": "paris" }}
+{ "name": "Adrien Grand", "dob": "1987-05-11", "hobby": "horses" }</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+如果你想要改变一个子文档的 <code>parent</code> 值，仅通过更新这个子文档是不够的，因为新的父文档有可能在另外一个分片上。因此，你必须要先把子文档删除，然后再重新索引这个子文档。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="has-child">通过子文档查询父文档</h3>
+<div class="paragraph">
+<p><code>has_child</code> 的查询和过滤可以通过子文档的内容来查询父文档。例如，我们根据如下查询，可查出所有80后员工所在的分公司：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /company/branch/_search
+{
+  "query": {
+    "has_child": {
+      "type": "employee",
+      "query": {
+        "range": {
+          "dob": {
+            "gte": "1980-01-01"
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>类似于 <a href="#nested-query"><code>nested</code> query</a> ，<code>has_child</code> 查询可以匹配多个子文档，并且每一个子文档的评分都不同。但是由于每一个子文档都带有评分，这些评分如何规约成父文档的总得分取决于 <code>score_mode</code> 这个参数。该参数有多种取值策略：默认为 <code>none</code> ，会忽略子文档的评分，并且会给父文档评分设置为 <code>1.0</code> ；
+除此以外还可以设置成 <code>avg</code> 、 <code>min</code> 、 <code>max</code> 和 <code>sum</code> 。</p>
+</div>
+<div class="paragraph">
+<p>下面的查询将会同时返回 <code>london</code> 和 <code>liverpool</code> ，不过由于 <code>Alice Smith</code> 要比 <code>Barry Smith</code> 更加匹配查询条件，因此 <code>london</code> 会得到一个更高的评分。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /company/branch/_search
+{
+  "query": {
+    "has_child": {
+      "type":       "employee",
+      "score_mode": "max",
+      "query": {
+        "match": {
+          "name": "Alice Smith"
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<code>score_mode</code> 为默认的 <code>none</code> 时，会显著地比其模式要快，这是因为Elasticsearch不需要计算每一个子文档的评分。只有当你真正需要关心评分结果时，才需要为 <code>score_mode</code> 设值，例如设成 <code>avg</code> 、 <code>min</code> 、 <code>max</code> 或 <code>sum</code> 。
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="min-max-children">min_children 和 max_children</h4>
+<div class="paragraph">
+<p><code>has_child</code> 的查询和过滤都可以接受这两个参数：<code>min_children</code> 和 <code>max_children</code> 。  使用这两个参数时，只有当子文档数量在指定范围内时，才会返回父文档。</p>
+</div>
+<div class="paragraph">
+<p>如下查询只会返回至少有两个雇员的分公司：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /company/branch/_search
+{
+  "query": {
+    "has_child": {
+      "type":         "employee",
+      "min_children": 2, <b class="conum">(1)</b>
+      "query": {
+        "match_all": {}
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>至少有两个雇员的分公司才会符合查询条件。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>带有 <code>min_children</code> 和 <code>max_children</code> 参数的 <code>has_child</code> 查询或过滤，和允许评分的 <code>has_child</code> 查询的性能非常接近。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">has_child Filter</div>
+<div class="paragraph">
+<p><code>has_child</code> 查询和过滤在运行机制上类似，区别是 <code>has_child</code> 过滤不支持 <code>score_mode</code> 参数。<code>has_child</code> 过滤仅用于筛选内容&#8212;&#8203;如内部的一个 <code>filtered</code> 查询&#8212;&#8203;和其他过滤行为类似：包含或者排除，但没有进行评分。</p>
+</div>
+<div class="paragraph">
+<p><code>has_child</code> 过滤的结果没有被缓存，但是 <code>has_child</code> 过滤内部的过滤方法适用于通常的缓存规则。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="has-parent">通过父文档查询子文档</h3>
+<div class="paragraph">
+<p>虽然 <code>nested</code> 查询只能返回最顶层的文档 ，但是父文档和子文档本身是彼此独立并且可被单独查询的。我们使用 <code>has_child</code> 语句可以基于子文档来查询父文档，使用 <code>has_parent</code> 语句可以基于父文档来查询子文档。 </p>
+</div>
+<div class="paragraph">
+<p><code>has_parent</code> 和 <code>has_child</code> 非常相似，下面的查询将会返回所有在 UK 工作的雇员：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /company/employee/_search
+{
+  "query": {
+    "has_parent": {
+      "type": "branch", <b class="conum">(1)</b>
+      "query": {
+        "match": {
+          "country": "UK"
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>返回父文档 <code>type</code> 是 <code>branch</code> 的所有子文档</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>has_parent</code> 查询也支持 <code>score_mode</code> 这个参数，但是该参数只支持两种值： <code>none</code> （默认）和 <code>score</code> 。每个子文档都只有一个父文档，因此这里不存在将多个评分规约为一个的情况， <code>score_mode</code> 的取值仅为 <code>score</code> 和 <code>none</code> 。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">不带评分的 has_parent 查询</div>
+<div class="paragraph">
+<p>当 <code>has_parent</code> 查询用于非评分模式（比如 filter 查询语句）时， <code>score_mode</code> 参数就不再起作用了。因为这种模式只是简单地包含或排除文档，没有评分，那么 <code>score_mode</code> 参数也就没有意义了。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="children-agg">子文档聚合</h3>
+<div class="paragraph">
+<p>在父-子文档中支持
+<a href="http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-children-aggregation.html">子文档聚合</a>，这一点和 <a href="#nested-aggregation">嵌套聚合</a> 类似。但是，对于父文档的聚合查询是不支持的（和 <code>reverse_nested</code> 类似）。</p>
+</div>
+<div class="paragraph">
+<p>我们通过下面的例子来演示按照国家维度查看最受雇员欢迎的业余爱好：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /company/branch/_search
+{
+  "size" : 0,
+  "aggs": {
+    "country": {
+      "terms": { <b class="conum">(1)</b>
+        "field": "country"
+      },
+      "aggs": {
+        "employees": {
+          "children": { <b class="conum">(2)</b>
+            "type": "employee"
+          },
+          "aggs": {
+            "hobby": {
+              "terms": { <b class="conum">(3)</b>
+                "field": "hobby"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>country</code> 是 <code>branch</code> 文档的一个字段。</p>
+</li>
+<li>
+<p>子文档聚合查询通过 <code>employee</code> type 的子文档将其父文档聚合在一起。</p>
+</li>
+<li>
+<p><code>hobby</code> 是 <code>employee</code> 子文档的一个字段。</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="grandparents">祖辈与孙辈关系</h3>
+<div class="paragraph">
+<p>父子关系可以延展到更多代关系，比如生活中孙辈与祖辈的关系 &#x2014; 唯一的要求是满足这些关系的文档必须在同一个分片上被索引。</p>
+</div>
+<div class="paragraph">
+<p>让我们把上一个例子中的 <code>country</code> 类型设定为 <code>branch</code> 类型的父辈：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /company
+{
+  "mappings": {
+    "country": {},
+    "branch": {
+      "_parent": {
+        "type": "country" <b class="conum">(1)</b>
+      }
+    },
+    "employee": {
+      "_parent": {
+        "type": "branch" <b class="conum">(2)</b>
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>branch</code> 是 <code>country</code> 的子辈。</p>
+</li>
+<li>
+<p><code>employee</code> 是 <code>branch</code> 的子辈。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>country 和 branch 之间是一层简单的父子关系，所以我们的 <a href="#indexing-parent-child">操作步骤</a> 与之前保持一致：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /company/country/_bulk
+{ "index": { "_id": "uk" }}
+{ "name": "UK" }
+{ "index": { "_id": "france" }}
+{ "name": "France" }
+
+POST /company/branch/_bulk
+{ "index": { "_id": "london", "parent": "uk" }}
+{ "name": "London Westmintster" }
+{ "index": { "_id": "liverpool", "parent": "uk" }}
+{ "name": "Liverpool Central" }
+{ "index": { "_id": "paris", "parent": "france" }}
+{ "name": "Champs Élysées" }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>parent</code> ID 使得每一个 <code>branch</code> 文档被路由到与其父文档 <code>country</code> 相同的分片上进行操作。然而，当我们使用相同的方法来操作 <code>employee</code> 这个孙辈文档时，会发生什么呢？</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /company/employee/1?parent=london
+{
+  "name":  "Alice Smith",
+  "dob":   "1970-10-24",
+  "hobby": "hiking"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>employee 文档的路由依赖其父文档 ID &#x2014; 也就是 <code>london</code> &#x2014; 但是 <code>london</code> 文档的路由却依赖 <em>其本身的</em> 父文档 ID &#x2014; 也就是 <code>uk</code> 。此种情况下，孙辈文档很有可能最终和父辈、祖辈文档不在同一分片上，导致不满足祖辈和孙辈文档必须在同一个分片上被索引的要求。</p>
+</div>
+<div class="paragraph">
+<p>解决方案是添加一个额外的 <code>routing</code> 参数，将其设置为祖辈的文档 ID ，以此来保证三代文档路由到同一个分片上。索引请求如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /company/employee/1?parent=london&amp;routing=uk <b class="conum">(1)</b>
+{
+  "name":  "Alice Smith",
+  "dob":   "1970-10-24",
+  "hobby": "hiking"
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>routing</code> 的值会取代 <code>parent</code> 的值作为路由选择。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>parent</code> 参数的值仍然可以标识 employee 文档与其父文档的关系，但是 <code>routing</code> 参数保证该文档被存储到其父辈和祖辈的分片上。<code>routing</code> 值在所有的文档请求中都要添加。</p>
+</div>
+<div class="paragraph">
+<p>联合多代文档进行查询和聚合是可行的，只需要一代代的进行设定即可。例如，我们要找到哪些国家的雇员喜欢远足旅行，此时只需要联合 country 和 branch，以及 branch 和 employee：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /company/country/_search
+{
+  "query": {
+    "has_child": {
+      "type": "branch",
+      "query": {
+        "has_child": {
+          "type": "employee",
+          "query": {
+            "match": {
+              "hobby": "hiking"
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="parent-child-performance">实际使用中的一些建议</h3>
+<div class="paragraph">
+<p>当文档索引性能远比查询性能重要的时候，父子关系是非常有用的，但是它也是有巨大代价的。其查询速度会比同等的嵌套查询慢5到10倍!</p>
+</div>
+<div class="sect3">
+<h4 id="_全局序号和延迟">全局序号和延迟</h4>
+<div class="paragraph">
+<p>父子关系使用了<a href="#global-ordinals">全局序数</a>  来加速文档间的联合。不管父子关系映射是否使用了内存缓存或基于硬盘的 doc values，当索引变更时，全局序数要重建。</p>
+</div>
+<div class="paragraph">
+<p>一个分片中父文档越多，那么全局序数的重建就需要更多的时间。父子关系更适合于父文档少、子文档多的情况。</p>
+</div>
+<div class="paragraph">
+<p>全局序数默认情况下是延迟构建的：在refresh后的第一个父子查询会触发全局序数的构建。而这个构建会导致用户使用时感受到明显的迟缓。你可以使用<a href="#eager-global-ordinals">全局序数预加载</a>  来将全局序数构建的开销由query阶段转移到refresh阶段，设置如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /company
+{
+  "mappings": {
+    "branch": {},
+    "employee": {
+      "_parent": {
+        "type": "branch",
+        "fielddata": {
+          "loading": "eager_global_ordinals" <b class="conum">(1)</b>
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>在一个新的段可搜索前，<code>_parent</code> 字段的全局序数会被构建。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>当父文档过多时，全局序数的构建会耗费很多时间。此时可以通过增加 <code>refresh_interval</code>  来减少 refresh 的次数，延长全局序数的有效时间，这也很大程度上减小了全局序数每秒重建的cpu消耗。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_多代使用和结语">多代使用和结语</h4>
+<div class="paragraph">
+<p>多代文档的联合查询(查看 <a href="#grandparents">祖辈与孙辈关系</a>)虽然看起来很吸引人，但必须考虑如下的代价：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>联合越多，性能越差。</p>
+</li>
+<li>
+<p>每一代的父文档都要将其字符串类型的 <code>_id</code> 字段存储在内存中，这会占用大量内存。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>当你考虑父子关系是否适合你现有关系模型时，请考虑下面这些建议：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>尽量少地使用父子关系，仅在子文档远多于父文档时使用。</p>
+</li>
+<li>
+<p>避免在一个查询中使用多个父子联合语句。</p>
+</li>
+<li>
+<p>在 has_child 查询中使用 filter 上下文，或者设置 score_mode 为 none 来避免计算文档得分。</p>
+</li>
+<li>
+<p>保证父 IDs 尽量短，以便在 doc values 中更好地压缩，被临时载入时占用更少的内存。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><em>最重要的是:</em> 先考虑下我们之前讨论过的其他方式来达到父子关系的效果。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="scale">扩容设计</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>一些公司每天使用 Elasticsearch 索引检索 PB 级数据，
+但我们中的大多数都起步于规模稍逊的项目。即使我们立志成为下一个 Facebook，我们的银行卡余额却也跟不上梦想的脚步。
+我们需要为今日所需而构建，但也要允许我们可以灵活而又快速地进行水平扩展。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 为了可扩展性而生。它可以良好地运行于你的笔记本电脑又或者一个拥有数百节点的集群，同时用户体验基本相同。
+由小规模集群增长为大规模集群的过程几乎完全自动化并且无痛。由大规模集群增长为超大规模集群需要一些规划和设计，但还是相对地无痛。</p>
+</div>
+<div class="paragraph">
+<p>当然这一切并不是魔法。Elasticsearch 也有它的局限性。如果你了解这些局限性并能够与之相处，集群扩容的过程将会是愉快的。
+如果你对 Elasticsearch 处理不当，那么你将处于一个充满痛苦的世界。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 的默认设置会伴你走过很长的一段路，但为了发挥它最大的效用，你需要考虑数据是如何流经你的系统的。
+我们将讨论两种常见的数据流：时序数据（时间驱动相关性，例如日志或社交网络数据流），以及基于用户的数据（拥有很大的文档集但可以按用户或客户细分）。</p>
+</div>
+<div class="paragraph">
+<p>这一章将帮助你在遇到不愉快之前做出正确的选择。</p>
+</div>
+<div class="sect2">
+<h3 id="shard-scale">扩容的单元</h3>
+<div class="paragraph">
+<p>在 <a href="#dynamic-indices">[dynamic-indices]</a>，我们介绍了一个分片即一个 <em>Lucene 索引</em> ，一个 Elasticsearch 索引即一系列分片的集合。
+你的应用程序与索引进行交互，Elasticsearch 帮助你将请求路由至相应的分片。</p>
+</div>
+<div class="paragraph">
+<p>一个分片即为 <em>扩容的单元</em> 。一个最小的索引拥有一个分片。
+这可能已经完全满足你的需求了&#8201;&#8212;&#8201;单个分片即可存储大量的数据&#8201;&#8212;&#8201;但这限制了你的可扩展性。</p>
+</div>
+<div class="paragraph">
+<p>想象一下我们的集群由一个节点组成，在集群内我们拥有一个索引，这个索引只含一个分片：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index
+{
+  "settings": {
+    "number_of_shards":   1, <b class="conum">(1)</b>
+    "number_of_replicas": 0
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>创建一个拥有 1 主分片 0 个副本分片的索引.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>这个设置值也许很小，但它满足我们当前的需求而且运行代价低。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>当前我们只讨论 <em>主</em> 分片。我们将在 <a href="#replica-shards">副本分片</a> 讨论 <em>副本</em> 分片。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在美好的一天，互联网发现了我们，一个节点再也承受不了我们的流量。
+我们决定根据 <a href="#img-one-shard">一个只有一个分片的索引无扩容因子</a> 添加一个节点。这将会发生什么呢？</p>
+</div>
+<div id="img-one-shard" class="imageblock">
+<div class="content">
+<img src="images/elas_4401.png" alt="一个只有一个分片的索引无扩容因子">
+</div>
+<div class="title">Figure 1. 一个只有一个分片的索引无扩容因子</div>
+</div>
+<div class="paragraph">
+<p>答案是：什么都不会发生。因为我们只有一个分片，已经没有什么可以放在第二个节点上的了。
+我们不能增加索引的分片数因为它是 <a href="#routing-value">route documents to shards</a> 算法中的重要元素：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>shard = hash(routing) % number_of_primary_shards</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们当前的选择只有一个就是将数据重新索引至一个拥有更多分片的一个更大的索引，但这样做将消耗的时间是我们无法提供的。
+通过事先规划，我们可以使用 <em>预分配</em> 的方式来完全避免这个问题。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="overallocation">分片预分配</h3>
+<div class="paragraph">
+<p>一个分片存在于单个节点，但一个节点可以持有多个分片。想象一下我们创建拥有两个主分片的索引而不是一个：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index
+{
+  "settings": {
+    "number_of_shards":   2, <b class="conum">(1)</b>
+    "number_of_replicas": 0
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>创建拥有两个主分片无副本分片的索引。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>当只有一个节点时，两个分片都将被分配至相同的节点。
+从我们应用程序的角度来看，一切都和之前一样运作着。应用程序和索引进行通讯，而不是分片，现在还是只有一个索引。</p>
+</div>
+<div class="paragraph">
+<p>这时，我们加入第二个节点，Elasticsearch 会自动将其中一个分片移动至第二个节点，如 <a href="#img-two-shard">一个拥有两个分片的索引可以利用第二个节点</a> 描绘的那样，
+当重新分配完成后，每个分片都将接近至两倍于之前的计算能力。</p>
+</div>
+<div id="img-two-shard" class="imageblock">
+<div class="content">
+<img src="images/elas_4402.png" alt="一个拥有两个分片的索引可以利用第二个节点">
+</div>
+<div class="title">Figure 2. 一个拥有两个分片的索引可以利用第二个节点</div>
+</div>
+<div class="paragraph">
+<p>我们已经可以通过简单地将一个分片通过网络复制到一个新的节点来加倍我们的处理能力。
+最棒的是，我们零停机地做到了这一点。在分片移动过程中，所有的索引搜索请求均在正常运行。</p>
+</div>
+<div class="paragraph">
+<p>在 Elasticsearch 中新添加的索引默认被指定了五个主分片。
+这意味着我们最多可以将那个索引分散到五个节点上，每个节点一个分片。
+它具有很高的处理能力，还未等你去思考这一切就已经做到了！</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">分片分裂</div>
+<div class="paragraph">
+<p>用户经常在问，为什么 Elasticsearch 不支持 <em>分片分裂（shard-splitting）</em>&#x2014; 将每个分片分裂为两个或更多部分的能力。
+原因就是分片分裂是一个糟糕的想法：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>分裂一个分片几乎等于重新索引你的数据。它是一个比仅仅将分片从一个节点复制到另一个节点更重量级的操作。</p>
+</li>
+<li>
+<p>分裂是指数的。起初你你有一个分片，然后分裂为两个，然后四个，八个，十六个，等等。分裂并不会刚好地把你的处理能力提升 50%。</p>
+</li>
+<li>
+<p>分片分裂需要你拥有足够的能力支撑另一份索引的拷贝。通常来说，当你意识到你需要横向扩展时，你已经没有足够的剩余空间来做分裂了。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 通过另一种方式来支持分片分裂。你总是可以把你的数据重新索引至一个拥有适当分片个数的新索引（参阅 <a href="#reindex">[reindex]</a>）。
+和移动分片比起来这依然是一个更加密集的操作，依然需要足够的剩余空间来完成，但至少你可以控制新索引的分片个数了。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="kagillion-shards">海量分片</h3>
+<div class="paragraph">
+<p>当新手们在了解过 <a href="#overallocation">分片预分配</a> 之后做的第一件事就是对自己说：</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph alignmeright">
+<p>我不知道这个索引将来会变得多大，并且过后我也不能更改索引的大小，所以为了保险起见，还是给它设为 1000 个分片吧&#8230;&#8203;</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; 一个新手的话
+</div>
+</div>
+<div class="paragraph">
+<p>一千个分片——当真？在你买来 <em>一千个节点</em> 之前，你不觉得你可能需要再三思考你的数据模型然后将它们重新索引吗？</p>
+</div>
+<div class="paragraph">
+<p>一个分片并不是没有代价的。记住：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>一个分片的底层即为一个 Lucene 索引，会消耗一定文件句柄、内存、以及 CPU 运转。</p>
+</li>
+<li>
+<p>每一个搜索请求都需要命中索引中的每一个分片，如果每一个分片都处于不同的节点还好，
+但如果多个分片都需要在同一个节点上竞争使用相同的资源就有些糟糕了。</p>
+</li>
+<li>
+<p>用于计算相关度的词项统计信息是基于分片的。如果有许多分片，每一个都只有很少的数据会导致很低的相关度。</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>适当的预分配是好的。但上千个分片就有些糟糕。我们很难去定义分片是否过多了，这取决于它们的大小以及如何去使用它们。
+一百个分片但很少使用还好，两个分片但非常频繁地使用有可能就有点多了。
+监控你的节点保证它们留有足够的空闲资源来处理一些特殊情况。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>横向扩展应当分阶段进行。为下一阶段准备好足够的资源。
+只有当你进入到下一个阶段，你才有时间思考需要作出哪些改变来达到这个阶段。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="capacity-planning">容量规划</h3>
+<div class="paragraph">
+<p>如果一个分片太少而 1000 个又太多，那么我怎么知道我需要多少分片呢？
+一般情况下这是一个无法回答的问题。因为实在有太多相关的因素了：你使用的硬件、文档的大小和复杂度、文档的索引分析方式、运行的查询类型、执行的聚合以及你的数据模型等等。</p>
+</div>
+<div class="paragraph">
+<p>幸运的是，在特定场景下这是一个容易回答的问题，尤其是你自己的场景：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>基于你准备用于生产环境的硬件创建一个拥有单个节点的集群。</p>
+</li>
+<li>
+<p>创建一个和你准备用于生产环境相同配置和分析器的索引，但让它只有一个主分片无副本分片。</p>
+</li>
+<li>
+<p>索引实际的文档（或者尽可能接近实际）。</p>
+</li>
+<li>
+<p>运行实际的查询和聚合（或者尽可能接近实际）。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>基本来说，你需要复制真实环境的使用方式并将它们全部压缩到单个分片上直到它``挂掉。''
+实际上 <em>挂掉</em> 的定义也取决于你：一些用户需要所有响应在 50 毫秒内返回；另一些则乐于等上 5 秒钟。</p>
+</div>
+<div class="paragraph">
+<p>一旦你定义好了单个分片的容量，很容易就可以推算出整个索引的分片数。
+用你需要索引的数据总数加上一部分预期的增长，除以单个分片的容量，结果就是你需要的主分片个数。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>容量规划不应当作为你的第一步。</p>
+</div>
+<div class="paragraph">
+<p>先看看有没有办法优化你对 Elasticsearch 的使用方式。也许你有低效的查询，缺少足够的内存，又或者你开启了 swap？</p>
+</div>
+<div class="paragraph">
+<p>我们见过一些新手对于初始性能感到沮丧，立即就着手调优垃圾回收又或者是线程数，而不是处理简单问题例如去掉通配符查询。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="replica-shards">副本分片</h3>
+<div class="paragraph">
+<p>目前为止我们只讨论过主分片，但我们身边还有另一个工具：副本分片。
+副本分片的主要目的就是为了故障转移，正如在 <a href="#distributed-cluster">[distributed-cluster]</a> 中讨论的：如果持有主分片的节点挂掉了，一个副本分片就会晋升为主分片的角色。</p>
+</div>
+<div class="paragraph">
+<p>在索引写入时，副本分片做着与主分片相同的工作。新文档首先被索引进主分片然后再同步到其它所有的副本分片。增加副本数并不会增加索引容量。</p>
+</div>
+<div class="paragraph">
+<p>无论如何，副本分片可以服务于读请求，如果你的索引也如常见的那样是偏向查询使用的，那你可以通过增加副本的数目来提升查询性能，但也要为此 <em>增加额外的硬件资源</em>。</p>
+</div>
+<div class="paragraph">
+<p>让我们回到那个有着两个主分片索引的例子。我通过增加第二个节点来提升索引容量。
+增加额外的节点不会帮助我们提升索引写入能力，但我们可以通过增加副本数在搜索时利用额外的硬件：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index/_settings
+{
+  "number_of_replicas": 1
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>拥有两个主分片，加上每个主分片的一个副本，总共给予我们四个分片：每个节点一个，如图所示 <a href="#img-four-nodes">一个拥有两个主分片一份副本的索引可以在四个节点中横向扩展</a>。</p>
+</div>
+<div id="img-four-nodes" class="imageblock">
+<div class="content">
+<img src="images/elas_4403.png" alt="一个拥有两个主分片一份副本的索引可以在四个节点中横向扩展">
+</div>
+<div class="title">Figure 3. 一个拥有两个主分片一份副本的索引可以在四个节点中横向扩展</div>
+</div>
+<div class="sect3">
+<h4 id="_通过副本进行负载均衡">通过副本进行负载均衡</h4>
+<div class="paragraph">
+<p>搜索性能取决于最慢的节点的响应时间，所以尝试均衡所有节点的负载是一个好想法。
+如果我们只是增加一个节点而不是两个，最终我们会有两个节点各持有一个分片，而另一个持有两个分片做着两倍的工作。</p>
+</div>
+<div class="paragraph">
+<p>我们可以通过调整副本数量来平衡这些。通过分配两份副本而不是一个，最终我们会拥有六个分片，刚好可以平均分给三个节点，如图所示 <a href="#img-three-nodes">通过调整副本数来均衡节点负载</a>：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index/_settings
+{
+  "number_of_replicas": 2
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>作为奖励，我们同时提升了我们的可用性。我们可以容忍丢失两个节点而仍然保持一份完整数据的拷贝。</p>
+</div>
+<div id="img-three-nodes" class="imageblock">
+<div class="content">
+<img src="images/elas_4404.png" alt="通过调整副本数来均衡节点负载">
+</div>
+<div class="title">Figure 4. 通过调整副本数来均衡节点负载</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+事实上节点 3 持有两个副本分片，然而没有主分片并不重要。副本分片与主分片做着相同的工作；它们只是扮演着略微不同的角色。没有必要确保主分片均匀地分布在所有节点中。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="multiple-indices">多索引</h3>
+<div class="paragraph">
+<p>最后，记住没有任何规则限制你的应用程序只使用一个索引。
+当我们发起一个搜索请求时，它被转发至索引中每个分片的一份拷贝（一个主分片或一个副本分片），如果我们向多个索引发出同样的请求，会发生完全相同的事情——只不过会涉及更多的分片。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+搜索 1 个有着 50 个分片的索引与搜索 50 个每个都有 1 个分片的索引完全等价：搜索请求均命中 50 个分片。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当你需要在不停服务的情况下增加容量时，下面有一些有用的建议。相较于将数据迁移到更大的索引中，你可以仅仅做下面这些操作：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>创建一个新的索引来存储新的数据。</p>
+</li>
+<li>
+<p>同时搜索两个索引来获取新数据和旧数据。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>实际上，通过一点预先计划，添加一个新索引可以通过一种完全透明的方式完成，你的应用程序根本不会察觉到任何的改变。</p>
+</div>
+<div class="paragraph">
+<p>在 <a href="#index-aliases">[index-aliases]</a>，我们提到过使用索引别名来指向当前版本的索引。
+举例来说，给你的索引命名为 <code>tweets_v1</code> 而不是 <code>tweets</code> 。你的应用程序会与 <code>tweets</code> 进行交互，但事实上它是一个指向 <code>tweets_v1</code> 的别名。
+这允许你将别名切换至一个更新版本的索引而保持服务运转。</p>
+</div>
+<div class="paragraph">
+<p>我们可以使用一个类似的技术通过增加一个新索引来扩展容量。这需要一点点规划，因为你需要两个别名：一个用于搜索另一个用于索引数据：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /tweets_1/_alias/tweets_search <b class="conum">(1)</b>
+PUT /tweets_1/_alias/tweets_index <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>tweets_search</code> 与 <code>tweets_index</code> 这两个别名都指向索引 <code>tweets_1</code> 。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>新文档应当索引至 <code>tweets_index</code> ，同时，搜索请求应当对别名 <code>tweets_search</code> 发出。目前，这两个别名指向同一个索引。</p>
+</div>
+<div class="paragraph">
+<p>当我们需要额外容量时，我们可以创建一个名为 <code>tweets_2</code> 的索引，并且像这样更新别名：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /_aliases
+{
+  "actions": [
+    { "add":    { "index": "tweets_2", "alias": "tweets_search" }}, <b class="conum">(1)</b>
+    { "remove": { "index": "tweets_1", "alias": "tweets_index"  }}, <b class="conum">(2)</b>
+    { "add":    { "index": "tweets_2", "alias": "tweets_index"  }}  <b class="conum">(2)</b>
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>添加索引 <code>tweets_2</code> 到别名 <code>tweets_search</code> 。</p>
+</li>
+<li>
+<p>将别名 <code>tweets_index</code> 由 <code>tweets_1</code> 切换至 <code>tweets_2</code> 。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>一个搜索请求可以以多个索引为目标，所以将搜索别名指向 <code>tweets_1</code> 以及 <code>tweets_2</code> 是完全有效的。
+然而，索引写入请求只能以单个索引为目标。因此，我们必须将索引写入的别名只指向新的索引。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>一个文档 <code>GET</code> 请求，像一个索引写入请求那样，只能以单个索引为目标。
+这导致在通过ID获取文档这样的场景下有一点复杂。作为代替，你可以对 <code>tweets_1</code> 以及 <code>tweets_2</code> 运行一个 {ref}/query-dsl-ids-query.html[<code>ids</code> 查询] 搜索请求，
+或者 {ref}/docs-multi-get.html[<code>multi-get</code>] 请求。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在服务运行中使用多索引来扩展索引容量对于一些使用场景有着特别的好处，像我们将在下一节中讨论的基于时间的数据例如日志或社交事件流。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="time-based">基于时间的数据</h3>
+<div class="paragraph">
+<p>Elasticsearch 的常用案例之一便是日志记录，
+它实在太常见了以至于 Elasticsearch 提供了一个集成的日志平台叫做 <em>ELK stack</em>&#x2014; Elasticsearch，Logstash，以及 Kibana ——来让这项工作变得简单。</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.elastic.co/guide/en/logstash/current/index.html">Logstash</a> 采集、解析日志并在将它们写入Elasticsearch之前格式化。
+Elasticsearch 扮演了一个集中式的日志服务角色，
+<a href="https://www.elastic.co/guide/en/kibana/current/index.html">Kibana</a> 是一个  图形化前端可以很容易地实时查询以及可视化你的网络变化。</p>
+</div>
+<div class="paragraph">
+<p>搜索引擎中大多数使用场景都是增长缓慢相对稳定的文档集合。搜索查找最相关的文档，而不关心它是何时创建的。</p>
+</div>
+<div class="paragraph">
+<p>日志——以及其他基于时间的数据流例如社交网络活动——实际上有很大不同。 索引中文档数量迅速增长，通常随时间加速。
+文档几乎不会更新，基本以最近文档为搜索目标。随着时间推移，文档逐渐失去价值。</p>
+</div>
+<div class="paragraph">
+<p>我们需要调整索引设计使其能够工作于这种基于时间的数据流。</p>
+</div>
+<div class="sect3">
+<h4 id="index-per-timeframe">按时间范围索引</h4>
+<div class="paragraph">
+<p>如果我们为此种类型的文档建立一个超大索引，我们可能会很快耗尽存储空间。日志事件会不断的进来，不会停顿也不会中断。
+我们可以使用 <a href="#scroll"><code>scroll</code></a> 查询和批量删除来删除旧的事件。但这种方法 <em>非常低效</em> 。当你删除一个文档，它只会被 <em>标记</em> 为被删除（参见 <a href="#deletes-and-updates">[deletes-and-updates]</a>）。
+在包含它的段被合并之前不会被物理删除。</p>
+</div>
+<div class="paragraph">
+<p>替代方案是，我们使用一个 <em>时间范围索引</em>。你可以着手于一个按年的索引 (<code>logs_2014</code>) 或按月的索引 (<code>logs_2014-10</code>) 。
+也许当你的网页变得十分繁忙时，你需要切换到一个按天的索引 (<code>logs_2014-10-24</code>) 。删除旧数据十分简单：只需要删除旧的索引。</p>
+</div>
+<div class="paragraph">
+<p>这种方法有这样的优点，允许你在需要的时候进行扩容。你不需要预先做任何艰难的决定。每天都是一个新的机会来调整你的索引时间范围来适应当前需求。
+应用相同的逻辑到决定每个索引的大小上。起初也许你需要的仅仅是每周一个主分片。过一阵子，也许你需要每天五个主分片。这都不重要——任何时间你都可以调整到新的环境。</p>
+</div>
+<div class="paragraph">
+<p>别名可以帮助我们更加透明地在索引间切换。 当创建索引时，你可以将 <code>logs_current</code> 指向当前索引来接收新的日志事件，
+当检索时，更新 <code>last_3_months</code> 来指向所有最近三个月的索引：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /_aliases
+{
+  "actions": [
+    { "add":    { "alias": "logs_current",  "index": "logs_2014-10" }}, <b class="conum">(1)</b>
+    { "remove": { "alias": "logs_current",  "index": "logs_2014-09" }}, <b class="conum">(1)</b>
+    { "add":    { "alias": "last_3_months", "index": "logs_2014-10" }}, <b class="conum">(2)</b>
+    { "remove": { "alias": "last_3_months", "index": "logs_2014-07" }}  <b class="conum">(2)</b>
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>将 <code>logs_current</code> 由九月切换至十月。</p>
+</li>
+<li>
+<p>将十月添加到 <code>last_3_months</code> 并且删掉七月。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="index-templates">索引模板</h3>
+<div class="paragraph">
+<p>Elasticsearch 不要求你在使用一个索引前创建它。
+对于日志记录类应用，依赖于自动创建索引比手动创建要更加方便。</p>
+</div>
+<div class="paragraph">
+<p>Logstash 使用事件中的时间戳来生成索引名。
+默认每天被索引至不同的索引中，因此一个 <code>@timestamp</code> 为 <code>2014-10-01 00:00:01</code> 的事件将被发送至索引 <code>logstash-2014.10.01</code> 中。
+如果那个索引不存在，它将被自动创建。</p>
+</div>
+<div class="paragraph">
+<p>通常我们想要控制一些新建索引的设置（settings）和映射（mappings）。也许我们想要限制分片数为 <code>1</code> ，并且禁用 <code>_all</code> 域。
+索引模板可以用于控制何种设置（settings）应当被应用于新创建的索引：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /_template/my_logs <b class="conum">(1)</b>
+{
+  "template": "logstash-*", <b class="conum">(2)</b>
+  "order":    1, <b class="conum">(3)</b>
+  "settings": {
+    "number_of_shards": 1 <b class="conum">(4)</b>
+  },
+  "mappings": {
+    "_default_": { <b class="conum">(5)</b>
+      "_all": {
+        "enabled": false
+      }
+    }
+  },
+  "aliases": {
+    "last_3_months": {} <b class="conum">(6)</b>
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>创建一个名为 <code>my_logs</code> 的模板。</p>
+</li>
+<li>
+<p>将这个模板应用于所有以 <code>logstash-</code> 为起始的索引。</p>
+</li>
+<li>
+<p>这个模板将会覆盖默认的 <code>logstash</code> 模板，因为默认模板的 <code>order</code> 更低。</p>
+</li>
+<li>
+<p>限制主分片数量为 <code>1</code> 。</p>
+</li>
+<li>
+<p>为所有类型禁用 <code>_all</code> 域。</p>
+</li>
+<li>
+<p>添加这个索引至 <code>last_3_months</code> 别名中。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>这个模板指定了所有名字以 <code>logstash-</code> 为起始的索引的默认设置，不论它是手动还是自动创建的。
+如果我们认为明天的索引需要比今天更大的容量，我们可以更新这个索引以使用更多的分片。</p>
+</div>
+<div class="paragraph">
+<p>这个模板还将新建索引添加至了 <code>last_3_months</code> 别名中，然而从那个别名中删除旧的索引则需要手动执行。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="retiring-data">数据过期</h3>
+<div class="paragraph">
+<p>随着时间推移，基于时间数据的相关度逐渐降低。
+有可能我们会想要查看上周、上个月甚至上一年度发生了什么，但是大多数情况，我们只关心当前发生的。</p>
+</div>
+<div class="paragraph">
+<p>按时间范围索引带来的一个好处是可以方便地删除旧数据：只需要删除那些变得不重要的索引就可以了。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">DELETE /logs_2013*</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>删除整个索引比删除单个文档要更加高效：Elasticsearch 只需要删除整个文件夹。</p>
+</div>
+<div class="paragraph">
+<p>但是删除索引是 <em>终极手段</em> 。在我们决定完全删除它之前还有一些事情可以做来帮助数据更加优雅地过期。</p>
+</div>
+<div class="sect3">
+<h4 id="migrate-indices">迁移旧索引</h4>
+<div class="paragraph">
+<p>随着数据被记录，很有可能存在一个 <em>热点</em> 索引——今日的索引。
+所有新文档都会被加到那个索引，几乎所有查询都以它为目标。那个索引应当使用你最好的硬件。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 是如何得知哪台是你最好的服务器呢？你可以通过给每台服务器指定任意的标签来告诉它。
+例如，你可以像这样启动一个节点：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./bin/elasticsearch --node.box_type strong</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>box_type</code> 参数是完全随意的——你可以将它随意命名只要你喜欢——但你可以用这些任意的值来告诉 Elasticsearch 将一个索引分配至何处。</p>
+</div>
+<div class="paragraph">
+<p>我们可以通过按以下配置创建今日的索引来确保它被分配到我们最好的服务器上：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /logs_2014-10-01
+{
+  "settings": {
+    "index.routing.allocation.include.box_type" : "strong"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>昨日的索引不再需要我们最好的服务器了，我们可以通过更新索引设置将它移动到标记为 <code>medium</code> 的节点上：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /logs_2014-09-30/_settings
+{
+  "index.routing.allocation.include.box_type" : "medium"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="optimize-indices">索引优化（Optimize）</h4>
+<div class="paragraph">
+<p>昨日的索引不大可能会改变。
+日志事件是静态的：已经发生的过往不会再改变了。如果我们将每个分片合并至一个段（Segment），它会占用更少的资源更快地响应查询。
+我们可以通过<a href="#optimize-api">[optimize-api]</a>来做到。</p>
+</div>
+<div class="paragraph">
+<p>对还分配在 <code>strong</code> 主机上的索引进行优化（Optimize）操作将会是一个糟糕的想法，
+因为优化操作将消耗节点上大量 I/O 并对索引今日日志造成冲击。但是 <code>medium</code> 的节点没有做太多类似的工作，我们可以安全地在上面进行优化。</p>
+</div>
+<div class="paragraph">
+<p>昨日的索引有可能拥有副本分片。如果我们下发一个优化（Optimize）请求，
+它会优化主分片和副本分片，这有些浪费。然而，我们可以临时移除副本分片，进行优化，然后再恢复副本分片：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /logs_2014-09-30/_settings
+{ "number_of_replicas": 0 }
+
+POST /logs_2014-09-30/_optimize?max_num_segments=1
+
+POST /logs_2014-09-30/_settings
+{ "number_of_replicas": 1 }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当然，没有副本我们将面临磁盘故障而导致丢失数据的风险。你可能想要先通过{ref}/modules-snapshots.html[<code>snapshot-restore</code> API]备份数据。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="close-indices">关闭旧索引</h4>
+<div class="paragraph">
+<p>当索引变得更“老”，它们到达一个几乎不会再被访问的时间点。
+我们可以在这个阶段删除它们，但也许你想将它们留在这里以防万一有人在半年后还想要访问它们。</p>
+</div>
+<div class="paragraph">
+<p>这些索引可以被关闭。它们还会存在于集群中，但它们不会消耗磁盘空间以外的资源。重新打开一个索引要比从备份中恢复快得多。</p>
+</div>
+<div class="paragraph">
+<p>在关闭之前，值得我们去刷写索引来确保没有事务残留在事务日志中。一个空白的事务日志会使得索引在重新打开时恢复得更快：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /logs_2014-01-*/_flush <b class="conum">(1)</b>
+POST /logs_2014-01-*/_close <b class="conum">(2)</b>
+POST /logs_2014-01-*/_open <b class="conum">(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>刷写（Flush）所有一月的索引来清空事务日志。</p>
+</li>
+<li>
+<p>关闭所有一月的索引.</p>
+</li>
+<li>
+<p>当你需要再次访问它们时，使用 <code>open</code> API 来重新打开它们。</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="archive-indices">归档旧索引</h4>
+<div class="paragraph">
+<p>最后，非常旧的索引可以通过{ref}/modules-snapshots.html[<code>snapshot-restore</code> API]归档至长期存储例如共享磁盘或者 Amazon S3，以防日后你可能需要访问它们。
+当存在备份时我们就可以将索引从集群中删除了。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="user-based">基于用户的数据</h3>
+<div class="paragraph">
+<p>通常来说，用户使用 Elasticsearch 的原因是他们需要添加全文检索或者需要分析一个已经存在的应用。
+他们创建一个索引来存储所有文档。公司里的其他人也逐渐发现了 Elasticsearch 带来的好处，也想把他们的数据添加到 Elasticsearch 中去。</p>
+</div>
+<div class="paragraph">
+<p>幸运的是，Elasticsearch 支持http://en.wikipedia.org/wiki/Multitenancy[多租户]所以每个用户可以在相同的集群中拥有自己的索引。
+有人偶尔会想要搜索所有用户的文档，这种情况可以通过搜索所有索引实现，但大多数情况下用户只关心它们自己的文档。</p>
+</div>
+<div class="paragraph">
+<p>一些用户有着比其他人更多的文档，一些用户可能有比其他人更多的搜索次数，
+所以这种对指定每个索引主分片和副本分片数量能力的需要应该很适合使用“一个用户一个索引”的模式。
+类似地，较为繁忙的索引可以通过分片分配过滤指定到高配的节点。（参见 <a href="#migrate-indices">迁移旧索引</a>。）</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+不要为每个索引都使用默认的主分片数。想想看它需要存储多少数据。有可能你仅需要一个分片——再多的都只是浪费资源。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>大多数 Elasticsearch 的用户读到这里就已经够了。简单的“一个用户一个索引”对大多数场景都可以满足了。</p>
+</div>
+<div class="paragraph">
+<p>对于例外的场景，你可能会发现需要支持很大数量的用户，都是相似的需求。一个例子可能是为一个拥有几千个邮箱账户的论坛提供搜索服务。
+一些论坛可能有巨大的流量，但大多数都很小。将一个有着单个分片的索引用于一个小规模论坛已经是足够的了——一个分片可以承载很多个论坛的数据。</p>
+</div>
+<div class="paragraph">
+<p>我们需要的是一种可以在用户间共享资源的方法，给每个用户他们拥有自己的索引这种印象，而不在小用户上浪费资源。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="shared-index">共享索引</h3>
+<div class="paragraph">
+<p>我们可以为许多的小论坛使用一个大的共享的索引，
+将论坛标识索引进一个字段并且将它用作一个过滤器：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /forums
+{
+  "settings": {
+    "number_of_shards": 10 <b class="conum">(1)</b>
+  },
+  "mappings": {
+    "post": {
+      "properties": {
+        "forum_id": { <b class="conum">(2)</b>
+          "type":  "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  }
+}
+
+PUT /forums/post/1
+{
+  "forum_id": "baking", <b class="conum">(2)</b>
+  "title":    "Easy recipe for ginger nuts",
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>创建一个足够大的索引来存储数千个小论坛的数据。</p>
+</li>
+<li>
+<p>每个帖子都必须包含一个 <code>forum_id</code> 来标识它属于哪个论坛。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>我们可以把 <code>forum_id</code> 用作一个过滤器来针对单个论坛进行搜索。这个过滤器可以排除索引中绝大部分的数据（属于其它论坛的数据），缓存会保证快速的响应：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /forums/post/_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match": {
+          "title": "ginger nuts"
+        }
+      },
+      "filter": {
+        "term": {
+          "forum_id": {
+            "baking"
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个办法行得通，但我们可以做得更好。
+来自于同一个论坛的帖子可以简单地容纳于单个分片，但它们现在被打散到了这个索引的所有十个分片中。
+这意味着每个搜索请求都必须被转发至所有十个分片的一个主分片或者副本分片。
+如果能够保证所有来自于同一个论坛的所有帖子都被存储于同一个分片可能会是个好想法。</p>
+</div>
+<div class="paragraph">
+<p>在 <a href="#routing-value">[routing-value]</a>，我们说过一个文档将通过使用如下公式来分配到一个指定分片：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>shard = hash(routing) % number_of_primary_shards</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>routing</code> 的值默认为文档的 <code>_id</code> ，但我们可以覆盖它并且提供我们自己自定义的路由值，例如 <code>forum_id</code> 。
+所有有着相同 <code>routing</code> 值的文档都将被存储于相同的分片：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /forums/post/1?routing=baking <b class="conum">(1)</b>
+{
+  "forum_id": "baking", <b class="conum">(1)</b>
+  "title":    "Easy recipe for ginger nuts",
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>将 <code>forum_id</code> 用于路由值保证所有来自相同论坛的帖子都存储于相同的分片。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>当我们搜索一个指定论坛的帖子时，我们可以传递相同的 <code>routing</code> 值来保证搜索请求仅在存有我们文档的分片上执行：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /forums/post/_search?routing=baking <b class="conum">(1)</b>
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match": {
+          "title": "ginger nuts"
+        }
+      },
+      "filter": {
+        "term": { <b class="conum">(2)</b>
+          "forum_id": {
+            "baking"
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>查询请求仅在对应于 <code>routing</code> 值的分片上执行。</p>
+</li>
+<li>
+<p>我们还是需要过滤（Filter）查询，因为一个分片可以存储来自于很多论坛的帖子。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>多个论坛可以通过传递一个逗号分隔的列表来指定 <code>routing</code> 值，然后将每个 <code>forum_id</code> 包含于一个 <code>terms</code> 查询：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /forums/post/_search?routing=baking,cooking,recipes
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match": {
+          "title": "ginger nuts"
+        }
+      },
+      "filter": {
+        "terms": {
+          "forum_id": {
+            [ "baking", "cooking", "recipes" ]
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这种方式从技术上来说比较高效，由于要为每一个查询或者索引请求指定 <code>routing</code> 和 <code>terms</code> 的值看起来有一点的笨拙。
+索引别名可以帮你解决这些！</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="faking-it">利用别名实现一个用户一个索引</h3>
+<div class="paragraph">
+<p>为了保持设计的简洁，我们想让我们的应用认为我们为每个用户都有一个专门的索引——或者按照我们的例子每个论坛一个——尽管实际上我们用的是一个大的<a href="#shared-index">shared index</a>。
+因此，我们需要一种方式将 <code>routing</code> 值及过滤器隐含于 <code>forum_id</code> 中。</p>
+</div>
+<div class="paragraph">
+<p>索引别名可以帮你做到这些。当你将一个别名与一个索引关联起来，你可以指定一个过滤器和一个路由值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /forums/_alias/baking
+{
+  "routing": "baking",
+  "filter": {
+    "term": {
+      "forum_id": "baking"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在我们可以将 <code>baking</code> 别名视为一个单独的索引。索引至 <code>baking</code> 别名的文档会自动地应用我们自定义的路由值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /baking/post/1 <b class="conum">(1)</b>
+{
+  "forum_id": "baking", <b class="conum">(1)</b>
+  "title":    "Easy recipe for ginger nuts",
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>我们还是需要为过滤器指定 <code>forumn_id</code> 字段，但自定义路由值已经是隐含的了。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>对 <code>baking</code> 别名上的查询只会在自定义路由值关联的分片上运行，并且结果也自动按照我们指定的过滤器进行了过滤：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /baking/post/_search
+{
+  "query": {
+    "match": {
+      "title": "ginger nuts"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当对多个论坛进行搜索时可以指定多个别名：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /baking,recipes/post/_search <b class="conum">(1)</b>
+{
+  "query": {
+    "match": {
+      "title": "ginger nuts"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>两个 <code>routing</code> 的值都会应用，返回对结果会匹配任意一个过滤器。</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="one-big-user">一个大的用户</h3>
+<div class="paragraph">
+<p>大规模流行论坛都是从小论坛起步的。
+有一天我们会发现我们共享索引中的一个分片要比其它分片更加繁忙，因为这个分片中一个论坛的文档变得更加热门。
+这时，那个论坛需要属于它自己的索引。</p>
+</div>
+<div class="paragraph">
+<p>我们用来提供一个用户一个索引的索引别名给了我们一个简洁的迁移论坛方式。</p>
+</div>
+<div class="paragraph">
+<p>第一步就是为那个论坛创建一个新的索引，并为其分配合理的分片数，可以满足一定预期的数据增长：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /baking_v1
+{
+  "settings": {
+    "number_of_shards": 3
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第二步就是将共享的索引中的数据迁移到专用的索引中，可以通过<a href="#scroll"><code>scroll</code></a>查询和<a href="#bulk"><code>bulk</code> API</a>来实现。
+当迁移完成时，可以更新索引别名指向那个新的索引：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /_aliases
+{
+  "actions": [
+    { "remove": { "alias": "baking", "index": "forums"    }},
+    { "add":    { "alias": "baking", "index": "baking_v1" }}
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>更新索引别名的操作是原子性的；就像在拨动一个开关。你的应用程序还是在与 <code>baking</code> API 交互并且对于它已经指向一个专用的索引毫无感知。</p>
+</div>
+<div class="paragraph">
+<p>专用的索引不再需要过滤器或者自定义的路由值了。我们可以依赖于 Elasticsearch 默认使用的 <code>_id</code> 字段来做分区。</p>
+</div>
+<div class="paragraph">
+<p>最后一步是从共享的索引中删除旧的文档，可以通过搜索之前的路由值以及论坛 ID 然后进行批量删除操作来实现。</p>
+</div>
+<div class="paragraph">
+<p>一个用户一个索引模型的优雅之处在于它允许你减少资源消耗，保持快速的响应时间，同时拥有在需要时零宕机时间扩容的能力。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finite-scale">扩容并不是无限的</h3>
+<div class="paragraph">
+<p>贯彻整个章节我们讨论了多种 Elasticsearch 可以做到的扩容方式。
+大多数的扩容问题可以通过添加节点来解决。但有一种资源是有限制的，因此值得我们认真对待：集群状态。</p>
+</div>
+<div class="paragraph">
+<p><em>集群状态</em> 是一种数据结构，贮存下列集群级别的信息：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>集群级别的设置</p>
+</li>
+<li>
+<p>集群中的节点</p>
+</li>
+<li>
+<p>索引以及它们的设置、映射、分析器、预热器（Warmers）和别名</p>
+</li>
+<li>
+<p>与每个索引关联的分片以及它们分配到的节点</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>你可以通过如下请求查看当前的集群状态：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /_cluster/state</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>集群状态存在于集群中的每个节点，包括客户端节点。
+这就是为什么任何一个节点都可以将请求直接转发至被请求数据的节点——每个节点都知道每个文档应该在哪里。</p>
+</div>
+<div class="paragraph">
+<p>只有主节点被允许更新集群状态。想象一下一个索引请求引入了一个之前未知的字段。持有那个文档的主分片所在的节点必须将新的映射转发到主节点上。
+主节点把更改合并到集群状态中，然后向所有集群中的所有节点发布一个新的版本。</p>
+</div>
+<div class="paragraph">
+<p>搜索请求 <em>使用</em> 集群状态，但它们不会产生修改。同样，文档级别的增删改查请求也不会对集群状态产生修改。当然，除非它们引入了一个需要更新映射的新的字段了。
+总的来说，集群状态是静态的不会成为瓶颈。</p>
+</div>
+<div class="paragraph">
+<p>然而，需要记住的是相同的数据结构需要在每个节点的内存中保存，并且当它发生更改时必须发布到每一个节点。
+集群状态的数据量越大，这个操作就会越久。</p>
+</div>
+<div class="paragraph">
+<p>我们见过最常见的集群状态问题就是引入了太多的字段。一个用户可能会决定为每一个 IP 地址或者每个 referer URL 使用一个单独的字段。
+下面这个例子通过为每一个唯一的 referer 使用一个不同的字段名来保持对页面浏览量的计数：</p>
+</div>
+<div class="listingblock pagebreak-before">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /counters/pageview/home_page/_update
+{
+  "script": "ctx._source[referer]++",
+  "params": {
+    "referer": "http://www.foo.com/links?bar=baz"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这种方式十分的糟糕！它会生成数百万个字段，这些都需要被存储在集群状态中。
+每当见到一个新的 referer ，都有一个新的字段需要加入那个已经膨胀的集群状态中，这都需要被发布到集群的每个节点中去。</p>
+</div>
+<div class="paragraph">
+<p>更好的方式是使用<a href="#nested-objects">nested objects</a>，
+它使用一个字段作为参数名&#x2014;`referer`&#x2014;另一个字段作为关联的值&#x2014;`count` ：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">    "counters": [
+      { "referer": "http://www.foo.com/links?bar=baz",  "count": 2 },
+      { "referer": "http://www.linkbait.com/article_3", "count": 10 },
+      ...
+    ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这种嵌套的方式有可能会增加文档数量，但 Elasticsearch 生来就是为了解决它的。重要的是保持集群状态小而敏捷。</p>
+</div>
+<div class="paragraph">
+<p>最终，不管你的初衷有多好，你可能会发现集群节点数量、索引、映射对于一个集群来说还是太大了。
+此时，可能有必要将这个问题拆分到多个集群中了。感谢{ref}/modules-tribe.html[<code>tribe</code> nodes]，
+你甚至可以向多个集群发出搜索请求，就好像我们有一个巨大的集群那样。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-05-17 22:26:24 CST
+</div>
+</div>
+</body>
+</html>

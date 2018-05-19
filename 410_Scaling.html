@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.2">
+<title>扩容设计</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+audio,canvas,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+[hidden],template{display:none}
+script{display:none!important}
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+a{background:transparent}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
+p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:none}
+p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #ddddd8;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
+abbr{text-transform:none}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
+blockquote cite:before{content:"\2014 \0020"}
+blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media only screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table thead,table tfoot{background:#f7f8f7;font-weight:bold}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
+.clearfix:after,.float-group:after{clear:both}
+*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+*:not(pre)>code.nobreak{word-wrap:normal}
+*:not(pre)>code.nowrap{white-space:nowrap}
+pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
+b.button:before{content:"[";padding:0 3px 0 2px}
+b.button:after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header:before,#header:after,#content:before,#content:after,#footnotes:before,#footnotes:after,#footer:before,#footer:after{content:" ";display:table}
+#header:after,#content:after,#footnotes:after,#footer:after{clear:both}
+#content{margin-top:1.25em}
+#content:before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #ddddd8}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #ddddd8;padding-bottom:8px}
+#header .details{border-bottom:1px solid #ddddd8;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span:before{content:"\00a0\2013\00a0"}
+#header .details br+span.author:before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark:before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber:after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #ddddd8;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #efefed;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media only screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+.sect1{padding-bottom:.625em}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
+.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{color:rgba(0,0,0,.85)}
+table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:initial}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
+.sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
+.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
+.literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]:before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:#999}
+.listingblock:hover code[data-lang]:before{display:block}
+.listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
+.listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
+table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
+table.pyhltable td.code{padding-left:.75em;padding-right:0}
+pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
+pre.pygments .lineno{display:inline-block;margin-right:.25em}
+table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock blockquote p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote:before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.5em;margin-right:.5ex;text-align:right}
+.quoteblock .quoteblock{margin-left:0;margin-right:0;padding:.5em 0;border-left:3px solid rgba(0,0,0,.6)}
+.quoteblock .quoteblock blockquote{padding:0 0 0 .75em}
+.quoteblock .quoteblock blockquote:before{display:none}
+.verseblock{margin:0 1em 1.25em 1em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract{margin:0 0 1.25em 0;display:block}
+.quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
+.quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
+table.tableblock{max-width:100%;border-collapse:separate}
+table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
+table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
+table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
+table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px 0}
+table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0 0}
+table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
+table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
+table.frame-all{border-width:1px}
+table.frame-sides{border-width:0 1px}
+table.frame-topbot{border-width:1px 0}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+td>div.verse{white-space:pre}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
+ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
+ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
+ul.inline>li>*{display:block}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist>table tr>td:first-of-type{padding:.4em .75em 0 .75em;line-height:1;vertical-align:top}
+.colist>table tr>td:first-of-type img{max-width:initial}
+.colist>table tr>td:last-of-type{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
+.imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
+.imageblock.right,.imageblock[style*="float: right"]{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background-color:#00fafa}
+.black{color:#000}
+.black-background{background-color:#000}
+.blue{color:#0000bf}
+.blue-background{background-color:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background-color:#fa00fa}
+.gray{color:#606060}
+.gray-background{background-color:#7d7d7d}
+.green{color:#006000}
+.green-background{background-color:#007d00}
+.lime{color:#00bf00}
+.lime-background{background-color:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background-color:#7d0000}
+.navy{color:#000060}
+.navy-background{background-color:#00007d}
+.olive{color:#606000}
+.olive-background{background-color:#7d7d00}
+.purple{color:#600060}
+.purple-background{background-color:#7d007d}
+.red{color:#bf0000}
+.red-background{background-color:#fa0000}
+.silver{color:#909090}
+.silver-background{background-color:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background-color:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background-color:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background-color:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]:after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@media print{@page{margin:1.25cm .75cm}
+*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]:after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #ddddd8!important;padding-bottom:0!important}
+.sect1{padding-bottom:0!important}
+.sect1+.sect1{border:0!important}
+#header>h1:first-child{margin-top:1.25rem}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em 0}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span:before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]:before{display:block}
+#footer{background:none!important;padding:0 .9375em}
+#footer-text{color:rgba(0,0,0,.6)!important;font-size:.9em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+</style>
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="scale">扩容设计</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>一些公司每天使用 Elasticsearch 索引检索 PB 级数据，
+但我们中的大多数都起步于规模稍逊的项目。即使我们立志成为下一个 Facebook，我们的银行卡余额却也跟不上梦想的脚步。
+我们需要为今日所需而构建，但也要允许我们可以灵活而又快速地进行水平扩展。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 为了可扩展性而生。它可以良好地运行于你的笔记本电脑又或者一个拥有数百节点的集群，同时用户体验基本相同。
+由小规模集群增长为大规模集群的过程几乎完全自动化并且无痛。由大规模集群增长为超大规模集群需要一些规划和设计，但还是相对地无痛。</p>
+</div>
+<div class="paragraph">
+<p>当然这一切并不是魔法。Elasticsearch 也有它的局限性。如果你了解这些局限性并能够与之相处，集群扩容的过程将会是愉快的。
+如果你对 Elasticsearch 处理不当，那么你将处于一个充满痛苦的世界。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 的默认设置会伴你走过很长的一段路，但为了发挥它最大的效用，你需要考虑数据是如何流经你的系统的。
+我们将讨论两种常见的数据流：时序数据（时间驱动相关性，例如日志或社交网络数据流），以及基于用户的数据（拥有很大的文档集但可以按用户或客户细分）。</p>
+</div>
+<div class="paragraph">
+<p>这一章将帮助你在遇到不愉快之前做出正确的选择。</p>
+</div>
+<div class="sect2">
+<h3 id="shard-scale">扩容的单元</h3>
+<div class="paragraph">
+<p>在 <a href="#dynamic-indices">[dynamic-indices]</a>，我们介绍了一个分片即一个 <em>Lucene 索引</em> ，一个 Elasticsearch 索引即一系列分片的集合。
+你的应用程序与索引进行交互，Elasticsearch 帮助你将请求路由至相应的分片。</p>
+</div>
+<div class="paragraph">
+<p>一个分片即为 <em>扩容的单元</em> 。一个最小的索引拥有一个分片。
+这可能已经完全满足你的需求了&#8201;&#8212;&#8201;单个分片即可存储大量的数据&#8201;&#8212;&#8201;但这限制了你的可扩展性。</p>
+</div>
+<div class="paragraph">
+<p>想象一下我们的集群由一个节点组成，在集群内我们拥有一个索引，这个索引只含一个分片：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index
+{
+  "settings": {
+    "number_of_shards":   1, <b class="conum">(1)</b>
+    "number_of_replicas": 0
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>创建一个拥有 1 主分片 0 个副本分片的索引.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>这个设置值也许很小，但它满足我们当前的需求而且运行代价低。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>当前我们只讨论 <em>主</em> 分片。我们将在 <a href="#replica-shards">副本分片</a> 讨论 <em>副本</em> 分片。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在美好的一天，互联网发现了我们，一个节点再也承受不了我们的流量。
+我们决定根据 <a href="#img-one-shard">一个只有一个分片的索引无扩容因子</a> 添加一个节点。这将会发生什么呢？</p>
+</div>
+<div id="img-one-shard" class="imageblock">
+<div class="content">
+<img src="images/elas_4401.png" alt="一个只有一个分片的索引无扩容因子">
+</div>
+<div class="title">Figure 1. 一个只有一个分片的索引无扩容因子</div>
+</div>
+<div class="paragraph">
+<p>答案是：什么都不会发生。因为我们只有一个分片，已经没有什么可以放在第二个节点上的了。
+我们不能增加索引的分片数因为它是 <a href="#routing-value">route documents to shards</a> 算法中的重要元素：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>shard = hash(routing) % number_of_primary_shards</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们当前的选择只有一个就是将数据重新索引至一个拥有更多分片的一个更大的索引，但这样做将消耗的时间是我们无法提供的。
+通过事先规划，我们可以使用 <em>预分配</em> 的方式来完全避免这个问题。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="overallocation">分片预分配</h3>
+<div class="paragraph">
+<p>一个分片存在于单个节点，但一个节点可以持有多个分片。想象一下我们创建拥有两个主分片的索引而不是一个：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index
+{
+  "settings": {
+    "number_of_shards":   2, <b class="conum">(1)</b>
+    "number_of_replicas": 0
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>创建拥有两个主分片无副本分片的索引。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>当只有一个节点时，两个分片都将被分配至相同的节点。
+从我们应用程序的角度来看，一切都和之前一样运作着。应用程序和索引进行通讯，而不是分片，现在还是只有一个索引。</p>
+</div>
+<div class="paragraph">
+<p>这时，我们加入第二个节点，Elasticsearch 会自动将其中一个分片移动至第二个节点，如 <a href="#img-two-shard">一个拥有两个分片的索引可以利用第二个节点</a> 描绘的那样，
+当重新分配完成后，每个分片都将接近至两倍于之前的计算能力。</p>
+</div>
+<div id="img-two-shard" class="imageblock">
+<div class="content">
+<img src="images/elas_4402.png" alt="一个拥有两个分片的索引可以利用第二个节点">
+</div>
+<div class="title">Figure 2. 一个拥有两个分片的索引可以利用第二个节点</div>
+</div>
+<div class="paragraph">
+<p>我们已经可以通过简单地将一个分片通过网络复制到一个新的节点来加倍我们的处理能力。
+最棒的是，我们零停机地做到了这一点。在分片移动过程中，所有的索引搜索请求均在正常运行。</p>
+</div>
+<div class="paragraph">
+<p>在 Elasticsearch 中新添加的索引默认被指定了五个主分片。
+这意味着我们最多可以将那个索引分散到五个节点上，每个节点一个分片。
+它具有很高的处理能力，还未等你去思考这一切就已经做到了！</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">分片分裂</div>
+<div class="paragraph">
+<p>用户经常在问，为什么 Elasticsearch 不支持 <em>分片分裂（shard-splitting）</em>&#x2014; 将每个分片分裂为两个或更多部分的能力。
+原因就是分片分裂是一个糟糕的想法：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>分裂一个分片几乎等于重新索引你的数据。它是一个比仅仅将分片从一个节点复制到另一个节点更重量级的操作。</p>
+</li>
+<li>
+<p>分裂是指数的。起初你你有一个分片，然后分裂为两个，然后四个，八个，十六个，等等。分裂并不会刚好地把你的处理能力提升 50%。</p>
+</li>
+<li>
+<p>分片分裂需要你拥有足够的能力支撑另一份索引的拷贝。通常来说，当你意识到你需要横向扩展时，你已经没有足够的剩余空间来做分裂了。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 通过另一种方式来支持分片分裂。你总是可以把你的数据重新索引至一个拥有适当分片个数的新索引（参阅 <a href="#reindex">[reindex]</a>）。
+和移动分片比起来这依然是一个更加密集的操作，依然需要足够的剩余空间来完成，但至少你可以控制新索引的分片个数了。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="kagillion-shards">海量分片</h3>
+<div class="paragraph">
+<p>当新手们在了解过 <a href="#overallocation">分片预分配</a> 之后做的第一件事就是对自己说：</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph alignmeright">
+<p>我不知道这个索引将来会变得多大，并且过后我也不能更改索引的大小，所以为了保险起见，还是给它设为 1000 个分片吧&#8230;&#8203;</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; 一个新手的话
+</div>
+</div>
+<div class="paragraph">
+<p>一千个分片——当真？在你买来 <em>一千个节点</em> 之前，你不觉得你可能需要再三思考你的数据模型然后将它们重新索引吗？</p>
+</div>
+<div class="paragraph">
+<p>一个分片并不是没有代价的。记住：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>一个分片的底层即为一个 Lucene 索引，会消耗一定文件句柄、内存、以及 CPU 运转。</p>
+</li>
+<li>
+<p>每一个搜索请求都需要命中索引中的每一个分片，如果每一个分片都处于不同的节点还好，
+但如果多个分片都需要在同一个节点上竞争使用相同的资源就有些糟糕了。</p>
+</li>
+<li>
+<p>用于计算相关度的词项统计信息是基于分片的。如果有许多分片，每一个都只有很少的数据会导致很低的相关度。</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>适当的预分配是好的。但上千个分片就有些糟糕。我们很难去定义分片是否过多了，这取决于它们的大小以及如何去使用它们。
+一百个分片但很少使用还好，两个分片但非常频繁地使用有可能就有点多了。
+监控你的节点保证它们留有足够的空闲资源来处理一些特殊情况。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>横向扩展应当分阶段进行。为下一阶段准备好足够的资源。
+只有当你进入到下一个阶段，你才有时间思考需要作出哪些改变来达到这个阶段。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="capacity-planning">容量规划</h3>
+<div class="paragraph">
+<p>如果一个分片太少而 1000 个又太多，那么我怎么知道我需要多少分片呢？
+一般情况下这是一个无法回答的问题。因为实在有太多相关的因素了：你使用的硬件、文档的大小和复杂度、文档的索引分析方式、运行的查询类型、执行的聚合以及你的数据模型等等。</p>
+</div>
+<div class="paragraph">
+<p>幸运的是，在特定场景下这是一个容易回答的问题，尤其是你自己的场景：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>基于你准备用于生产环境的硬件创建一个拥有单个节点的集群。</p>
+</li>
+<li>
+<p>创建一个和你准备用于生产环境相同配置和分析器的索引，但让它只有一个主分片无副本分片。</p>
+</li>
+<li>
+<p>索引实际的文档（或者尽可能接近实际）。</p>
+</li>
+<li>
+<p>运行实际的查询和聚合（或者尽可能接近实际）。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>基本来说，你需要复制真实环境的使用方式并将它们全部压缩到单个分片上直到它``挂掉。''
+实际上 <em>挂掉</em> 的定义也取决于你：一些用户需要所有响应在 50 毫秒内返回；另一些则乐于等上 5 秒钟。</p>
+</div>
+<div class="paragraph">
+<p>一旦你定义好了单个分片的容量，很容易就可以推算出整个索引的分片数。
+用你需要索引的数据总数加上一部分预期的增长，除以单个分片的容量，结果就是你需要的主分片个数。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>容量规划不应当作为你的第一步。</p>
+</div>
+<div class="paragraph">
+<p>先看看有没有办法优化你对 Elasticsearch 的使用方式。也许你有低效的查询，缺少足够的内存，又或者你开启了 swap？</p>
+</div>
+<div class="paragraph">
+<p>我们见过一些新手对于初始性能感到沮丧，立即就着手调优垃圾回收又或者是线程数，而不是处理简单问题例如去掉通配符查询。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="replica-shards">副本分片</h3>
+<div class="paragraph">
+<p>目前为止我们只讨论过主分片，但我们身边还有另一个工具：副本分片。
+副本分片的主要目的就是为了故障转移，正如在 <a href="#distributed-cluster">[distributed-cluster]</a> 中讨论的：如果持有主分片的节点挂掉了，一个副本分片就会晋升为主分片的角色。</p>
+</div>
+<div class="paragraph">
+<p>在索引写入时，副本分片做着与主分片相同的工作。新文档首先被索引进主分片然后再同步到其它所有的副本分片。增加副本数并不会增加索引容量。</p>
+</div>
+<div class="paragraph">
+<p>无论如何，副本分片可以服务于读请求，如果你的索引也如常见的那样是偏向查询使用的，那你可以通过增加副本的数目来提升查询性能，但也要为此 <em>增加额外的硬件资源</em>。</p>
+</div>
+<div class="paragraph">
+<p>让我们回到那个有着两个主分片索引的例子。我通过增加第二个节点来提升索引容量。
+增加额外的节点不会帮助我们提升索引写入能力，但我们可以通过增加副本数在搜索时利用额外的硬件：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index/_settings
+{
+  "number_of_replicas": 1
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>拥有两个主分片，加上每个主分片的一个副本，总共给予我们四个分片：每个节点一个，如图所示 <a href="#img-four-nodes">一个拥有两个主分片一份副本的索引可以在四个节点中横向扩展</a>。</p>
+</div>
+<div id="img-four-nodes" class="imageblock">
+<div class="content">
+<img src="images/elas_4403.png" alt="一个拥有两个主分片一份副本的索引可以在四个节点中横向扩展">
+</div>
+<div class="title">Figure 3. 一个拥有两个主分片一份副本的索引可以在四个节点中横向扩展</div>
+</div>
+<div class="sect3">
+<h4 id="_通过副本进行负载均衡">通过副本进行负载均衡</h4>
+<div class="paragraph">
+<p>搜索性能取决于最慢的节点的响应时间，所以尝试均衡所有节点的负载是一个好想法。
+如果我们只是增加一个节点而不是两个，最终我们会有两个节点各持有一个分片，而另一个持有两个分片做着两倍的工作。</p>
+</div>
+<div class="paragraph">
+<p>我们可以通过调整副本数量来平衡这些。通过分配两份副本而不是一个，最终我们会拥有六个分片，刚好可以平均分给三个节点，如图所示 <a href="#img-three-nodes">通过调整副本数来均衡节点负载</a>：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /my_index/_settings
+{
+  "number_of_replicas": 2
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>作为奖励，我们同时提升了我们的可用性。我们可以容忍丢失两个节点而仍然保持一份完整数据的拷贝。</p>
+</div>
+<div id="img-three-nodes" class="imageblock">
+<div class="content">
+<img src="images/elas_4404.png" alt="通过调整副本数来均衡节点负载">
+</div>
+<div class="title">Figure 4. 通过调整副本数来均衡节点负载</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+事实上节点 3 持有两个副本分片，然而没有主分片并不重要。副本分片与主分片做着相同的工作；它们只是扮演着略微不同的角色。没有必要确保主分片均匀地分布在所有节点中。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="multiple-indices">多索引</h3>
+<div class="paragraph">
+<p>最后，记住没有任何规则限制你的应用程序只使用一个索引。
+当我们发起一个搜索请求时，它被转发至索引中每个分片的一份拷贝（一个主分片或一个副本分片），如果我们向多个索引发出同样的请求，会发生完全相同的事情——只不过会涉及更多的分片。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+搜索 1 个有着 50 个分片的索引与搜索 50 个每个都有 1 个分片的索引完全等价：搜索请求均命中 50 个分片。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当你需要在不停服务的情况下增加容量时，下面有一些有用的建议。相较于将数据迁移到更大的索引中，你可以仅仅做下面这些操作：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>创建一个新的索引来存储新的数据。</p>
+</li>
+<li>
+<p>同时搜索两个索引来获取新数据和旧数据。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>实际上，通过一点预先计划，添加一个新索引可以通过一种完全透明的方式完成，你的应用程序根本不会察觉到任何的改变。</p>
+</div>
+<div class="paragraph">
+<p>在 <a href="#index-aliases">[index-aliases]</a>，我们提到过使用索引别名来指向当前版本的索引。
+举例来说，给你的索引命名为 <code>tweets_v1</code> 而不是 <code>tweets</code> 。你的应用程序会与 <code>tweets</code> 进行交互，但事实上它是一个指向 <code>tweets_v1</code> 的别名。
+这允许你将别名切换至一个更新版本的索引而保持服务运转。</p>
+</div>
+<div class="paragraph">
+<p>我们可以使用一个类似的技术通过增加一个新索引来扩展容量。这需要一点点规划，因为你需要两个别名：一个用于搜索另一个用于索引数据：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /tweets_1/_alias/tweets_search <b class="conum">(1)</b>
+PUT /tweets_1/_alias/tweets_index <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>tweets_search</code> 与 <code>tweets_index</code> 这两个别名都指向索引 <code>tweets_1</code> 。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>新文档应当索引至 <code>tweets_index</code> ，同时，搜索请求应当对别名 <code>tweets_search</code> 发出。目前，这两个别名指向同一个索引。</p>
+</div>
+<div class="paragraph">
+<p>当我们需要额外容量时，我们可以创建一个名为 <code>tweets_2</code> 的索引，并且像这样更新别名：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /_aliases
+{
+  "actions": [
+    { "add":    { "index": "tweets_2", "alias": "tweets_search" }}, <b class="conum">(1)</b>
+    { "remove": { "index": "tweets_1", "alias": "tweets_index"  }}, <b class="conum">(2)</b>
+    { "add":    { "index": "tweets_2", "alias": "tweets_index"  }}  <b class="conum">(2)</b>
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>添加索引 <code>tweets_2</code> 到别名 <code>tweets_search</code> 。</p>
+</li>
+<li>
+<p>将别名 <code>tweets_index</code> 由 <code>tweets_1</code> 切换至 <code>tweets_2</code> 。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>一个搜索请求可以以多个索引为目标，所以将搜索别名指向 <code>tweets_1</code> 以及 <code>tweets_2</code> 是完全有效的。
+然而，索引写入请求只能以单个索引为目标。因此，我们必须将索引写入的别名只指向新的索引。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>一个文档 <code>GET</code> 请求，像一个索引写入请求那样，只能以单个索引为目标。
+这导致在通过ID获取文档这样的场景下有一点复杂。作为代替，你可以对 <code>tweets_1</code> 以及 <code>tweets_2</code> 运行一个 {ref}/query-dsl-ids-query.html[<code>ids</code> 查询] 搜索请求，
+或者 {ref}/docs-multi-get.html[<code>multi-get</code>] 请求。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在服务运行中使用多索引来扩展索引容量对于一些使用场景有着特别的好处，像我们将在下一节中讨论的基于时间的数据例如日志或社交事件流。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="time-based">基于时间的数据</h3>
+<div class="paragraph">
+<p>Elasticsearch 的常用案例之一便是日志记录，
+它实在太常见了以至于 Elasticsearch 提供了一个集成的日志平台叫做 <em>ELK stack</em>&#x2014; Elasticsearch，Logstash，以及 Kibana ——来让这项工作变得简单。</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.elastic.co/guide/en/logstash/current/index.html">Logstash</a> 采集、解析日志并在将它们写入Elasticsearch之前格式化。
+Elasticsearch 扮演了一个集中式的日志服务角色，
+<a href="https://www.elastic.co/guide/en/kibana/current/index.html">Kibana</a> 是一个  图形化前端可以很容易地实时查询以及可视化你的网络变化。</p>
+</div>
+<div class="paragraph">
+<p>搜索引擎中大多数使用场景都是增长缓慢相对稳定的文档集合。搜索查找最相关的文档，而不关心它是何时创建的。</p>
+</div>
+<div class="paragraph">
+<p>日志——以及其他基于时间的数据流例如社交网络活动——实际上有很大不同。 索引中文档数量迅速增长，通常随时间加速。
+文档几乎不会更新，基本以最近文档为搜索目标。随着时间推移，文档逐渐失去价值。</p>
+</div>
+<div class="paragraph">
+<p>我们需要调整索引设计使其能够工作于这种基于时间的数据流。</p>
+</div>
+<div class="sect3">
+<h4 id="index-per-timeframe">按时间范围索引</h4>
+<div class="paragraph">
+<p>如果我们为此种类型的文档建立一个超大索引，我们可能会很快耗尽存储空间。日志事件会不断的进来，不会停顿也不会中断。
+我们可以使用 <a href="#scroll"><code>scroll</code></a> 查询和批量删除来删除旧的事件。但这种方法 <em>非常低效</em> 。当你删除一个文档，它只会被 <em>标记</em> 为被删除（参见 <a href="#deletes-and-updates">[deletes-and-updates]</a>）。
+在包含它的段被合并之前不会被物理删除。</p>
+</div>
+<div class="paragraph">
+<p>替代方案是，我们使用一个 <em>时间范围索引</em>。你可以着手于一个按年的索引 (<code>logs_2014</code>) 或按月的索引 (<code>logs_2014-10</code>) 。
+也许当你的网页变得十分繁忙时，你需要切换到一个按天的索引 (<code>logs_2014-10-24</code>) 。删除旧数据十分简单：只需要删除旧的索引。</p>
+</div>
+<div class="paragraph">
+<p>这种方法有这样的优点，允许你在需要的时候进行扩容。你不需要预先做任何艰难的决定。每天都是一个新的机会来调整你的索引时间范围来适应当前需求。
+应用相同的逻辑到决定每个索引的大小上。起初也许你需要的仅仅是每周一个主分片。过一阵子，也许你需要每天五个主分片。这都不重要——任何时间你都可以调整到新的环境。</p>
+</div>
+<div class="paragraph">
+<p>别名可以帮助我们更加透明地在索引间切换。 当创建索引时，你可以将 <code>logs_current</code> 指向当前索引来接收新的日志事件，
+当检索时，更新 <code>last_3_months</code> 来指向所有最近三个月的索引：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /_aliases
+{
+  "actions": [
+    { "add":    { "alias": "logs_current",  "index": "logs_2014-10" }}, <b class="conum">(1)</b>
+    { "remove": { "alias": "logs_current",  "index": "logs_2014-09" }}, <b class="conum">(1)</b>
+    { "add":    { "alias": "last_3_months", "index": "logs_2014-10" }}, <b class="conum">(2)</b>
+    { "remove": { "alias": "last_3_months", "index": "logs_2014-07" }}  <b class="conum">(2)</b>
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>将 <code>logs_current</code> 由九月切换至十月。</p>
+</li>
+<li>
+<p>将十月添加到 <code>last_3_months</code> 并且删掉七月。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="index-templates">索引模板</h3>
+<div class="paragraph">
+<p>Elasticsearch 不要求你在使用一个索引前创建它。
+对于日志记录类应用，依赖于自动创建索引比手动创建要更加方便。</p>
+</div>
+<div class="paragraph">
+<p>Logstash 使用事件中的时间戳来生成索引名。
+默认每天被索引至不同的索引中，因此一个 <code>@timestamp</code> 为 <code>2014-10-01 00:00:01</code> 的事件将被发送至索引 <code>logstash-2014.10.01</code> 中。
+如果那个索引不存在，它将被自动创建。</p>
+</div>
+<div class="paragraph">
+<p>通常我们想要控制一些新建索引的设置（settings）和映射（mappings）。也许我们想要限制分片数为 <code>1</code> ，并且禁用 <code>_all</code> 域。
+索引模板可以用于控制何种设置（settings）应当被应用于新创建的索引：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /_template/my_logs <b class="conum">(1)</b>
+{
+  "template": "logstash-*", <b class="conum">(2)</b>
+  "order":    1, <b class="conum">(3)</b>
+  "settings": {
+    "number_of_shards": 1 <b class="conum">(4)</b>
+  },
+  "mappings": {
+    "_default_": { <b class="conum">(5)</b>
+      "_all": {
+        "enabled": false
+      }
+    }
+  },
+  "aliases": {
+    "last_3_months": {} <b class="conum">(6)</b>
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>创建一个名为 <code>my_logs</code> 的模板。</p>
+</li>
+<li>
+<p>将这个模板应用于所有以 <code>logstash-</code> 为起始的索引。</p>
+</li>
+<li>
+<p>这个模板将会覆盖默认的 <code>logstash</code> 模板，因为默认模板的 <code>order</code> 更低。</p>
+</li>
+<li>
+<p>限制主分片数量为 <code>1</code> 。</p>
+</li>
+<li>
+<p>为所有类型禁用 <code>_all</code> 域。</p>
+</li>
+<li>
+<p>添加这个索引至 <code>last_3_months</code> 别名中。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>这个模板指定了所有名字以 <code>logstash-</code> 为起始的索引的默认设置，不论它是手动还是自动创建的。
+如果我们认为明天的索引需要比今天更大的容量，我们可以更新这个索引以使用更多的分片。</p>
+</div>
+<div class="paragraph">
+<p>这个模板还将新建索引添加至了 <code>last_3_months</code> 别名中，然而从那个别名中删除旧的索引则需要手动执行。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="retiring-data">数据过期</h3>
+<div class="paragraph">
+<p>随着时间推移，基于时间数据的相关度逐渐降低。
+有可能我们会想要查看上周、上个月甚至上一年度发生了什么，但是大多数情况，我们只关心当前发生的。</p>
+</div>
+<div class="paragraph">
+<p>按时间范围索引带来的一个好处是可以方便地删除旧数据：只需要删除那些变得不重要的索引就可以了。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">DELETE /logs_2013*</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>删除整个索引比删除单个文档要更加高效：Elasticsearch 只需要删除整个文件夹。</p>
+</div>
+<div class="paragraph">
+<p>但是删除索引是 <em>终极手段</em> 。在我们决定完全删除它之前还有一些事情可以做来帮助数据更加优雅地过期。</p>
+</div>
+<div class="sect3">
+<h4 id="migrate-indices">迁移旧索引</h4>
+<div class="paragraph">
+<p>随着数据被记录，很有可能存在一个 <em>热点</em> 索引——今日的索引。
+所有新文档都会被加到那个索引，几乎所有查询都以它为目标。那个索引应当使用你最好的硬件。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 是如何得知哪台是你最好的服务器呢？你可以通过给每台服务器指定任意的标签来告诉它。
+例如，你可以像这样启动一个节点：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./bin/elasticsearch --node.box_type strong</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>box_type</code> 参数是完全随意的——你可以将它随意命名只要你喜欢——但你可以用这些任意的值来告诉 Elasticsearch 将一个索引分配至何处。</p>
+</div>
+<div class="paragraph">
+<p>我们可以通过按以下配置创建今日的索引来确保它被分配到我们最好的服务器上：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /logs_2014-10-01
+{
+  "settings": {
+    "index.routing.allocation.include.box_type" : "strong"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>昨日的索引不再需要我们最好的服务器了，我们可以通过更新索引设置将它移动到标记为 <code>medium</code> 的节点上：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /logs_2014-09-30/_settings
+{
+  "index.routing.allocation.include.box_type" : "medium"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="optimize-indices">索引优化（Optimize）</h4>
+<div class="paragraph">
+<p>昨日的索引不大可能会改变。
+日志事件是静态的：已经发生的过往不会再改变了。如果我们将每个分片合并至一个段（Segment），它会占用更少的资源更快地响应查询。
+我们可以通过<a href="#optimize-api">[optimize-api]</a>来做到。</p>
+</div>
+<div class="paragraph">
+<p>对还分配在 <code>strong</code> 主机上的索引进行优化（Optimize）操作将会是一个糟糕的想法，
+因为优化操作将消耗节点上大量 I/O 并对索引今日日志造成冲击。但是 <code>medium</code> 的节点没有做太多类似的工作，我们可以安全地在上面进行优化。</p>
+</div>
+<div class="paragraph">
+<p>昨日的索引有可能拥有副本分片。如果我们下发一个优化（Optimize）请求，
+它会优化主分片和副本分片，这有些浪费。然而，我们可以临时移除副本分片，进行优化，然后再恢复副本分片：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /logs_2014-09-30/_settings
+{ "number_of_replicas": 0 }
+
+POST /logs_2014-09-30/_optimize?max_num_segments=1
+
+POST /logs_2014-09-30/_settings
+{ "number_of_replicas": 1 }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当然，没有副本我们将面临磁盘故障而导致丢失数据的风险。你可能想要先通过{ref}/modules-snapshots.html[<code>snapshot-restore</code> API]备份数据。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="close-indices">关闭旧索引</h4>
+<div class="paragraph">
+<p>当索引变得更“老”，它们到达一个几乎不会再被访问的时间点。
+我们可以在这个阶段删除它们，但也许你想将它们留在这里以防万一有人在半年后还想要访问它们。</p>
+</div>
+<div class="paragraph">
+<p>这些索引可以被关闭。它们还会存在于集群中，但它们不会消耗磁盘空间以外的资源。重新打开一个索引要比从备份中恢复快得多。</p>
+</div>
+<div class="paragraph">
+<p>在关闭之前，值得我们去刷写索引来确保没有事务残留在事务日志中。一个空白的事务日志会使得索引在重新打开时恢复得更快：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /logs_2014-01-*/_flush <b class="conum">(1)</b>
+POST /logs_2014-01-*/_close <b class="conum">(2)</b>
+POST /logs_2014-01-*/_open <b class="conum">(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>刷写（Flush）所有一月的索引来清空事务日志。</p>
+</li>
+<li>
+<p>关闭所有一月的索引.</p>
+</li>
+<li>
+<p>当你需要再次访问它们时，使用 <code>open</code> API 来重新打开它们。</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="archive-indices">归档旧索引</h4>
+<div class="paragraph">
+<p>最后，非常旧的索引可以通过{ref}/modules-snapshots.html[<code>snapshot-restore</code> API]归档至长期存储例如共享磁盘或者 Amazon S3，以防日后你可能需要访问它们。
+当存在备份时我们就可以将索引从集群中删除了。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="user-based">基于用户的数据</h3>
+<div class="paragraph">
+<p>通常来说，用户使用 Elasticsearch 的原因是他们需要添加全文检索或者需要分析一个已经存在的应用。
+他们创建一个索引来存储所有文档。公司里的其他人也逐渐发现了 Elasticsearch 带来的好处，也想把他们的数据添加到 Elasticsearch 中去。</p>
+</div>
+<div class="paragraph">
+<p>幸运的是，Elasticsearch 支持http://en.wikipedia.org/wiki/Multitenancy[多租户]所以每个用户可以在相同的集群中拥有自己的索引。
+有人偶尔会想要搜索所有用户的文档，这种情况可以通过搜索所有索引实现，但大多数情况下用户只关心它们自己的文档。</p>
+</div>
+<div class="paragraph">
+<p>一些用户有着比其他人更多的文档，一些用户可能有比其他人更多的搜索次数，
+所以这种对指定每个索引主分片和副本分片数量能力的需要应该很适合使用“一个用户一个索引”的模式。
+类似地，较为繁忙的索引可以通过分片分配过滤指定到高配的节点。（参见 <a href="#migrate-indices">迁移旧索引</a>。）</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+不要为每个索引都使用默认的主分片数。想想看它需要存储多少数据。有可能你仅需要一个分片——再多的都只是浪费资源。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>大多数 Elasticsearch 的用户读到这里就已经够了。简单的“一个用户一个索引”对大多数场景都可以满足了。</p>
+</div>
+<div class="paragraph">
+<p>对于例外的场景，你可能会发现需要支持很大数量的用户，都是相似的需求。一个例子可能是为一个拥有几千个邮箱账户的论坛提供搜索服务。
+一些论坛可能有巨大的流量，但大多数都很小。将一个有着单个分片的索引用于一个小规模论坛已经是足够的了——一个分片可以承载很多个论坛的数据。</p>
+</div>
+<div class="paragraph">
+<p>我们需要的是一种可以在用户间共享资源的方法，给每个用户他们拥有自己的索引这种印象，而不在小用户上浪费资源。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="shared-index">共享索引</h3>
+<div class="paragraph">
+<p>我们可以为许多的小论坛使用一个大的共享的索引，
+将论坛标识索引进一个字段并且将它用作一个过滤器：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /forums
+{
+  "settings": {
+    "number_of_shards": 10 <b class="conum">(1)</b>
+  },
+  "mappings": {
+    "post": {
+      "properties": {
+        "forum_id": { <b class="conum">(2)</b>
+          "type":  "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  }
+}
+
+PUT /forums/post/1
+{
+  "forum_id": "baking", <b class="conum">(2)</b>
+  "title":    "Easy recipe for ginger nuts",
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>创建一个足够大的索引来存储数千个小论坛的数据。</p>
+</li>
+<li>
+<p>每个帖子都必须包含一个 <code>forum_id</code> 来标识它属于哪个论坛。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>我们可以把 <code>forum_id</code> 用作一个过滤器来针对单个论坛进行搜索。这个过滤器可以排除索引中绝大部分的数据（属于其它论坛的数据），缓存会保证快速的响应：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /forums/post/_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match": {
+          "title": "ginger nuts"
+        }
+      },
+      "filter": {
+        "term": {
+          "forum_id": {
+            "baking"
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个办法行得通，但我们可以做得更好。
+来自于同一个论坛的帖子可以简单地容纳于单个分片，但它们现在被打散到了这个索引的所有十个分片中。
+这意味着每个搜索请求都必须被转发至所有十个分片的一个主分片或者副本分片。
+如果能够保证所有来自于同一个论坛的所有帖子都被存储于同一个分片可能会是个好想法。</p>
+</div>
+<div class="paragraph">
+<p>在 <a href="#routing-value">[routing-value]</a>，我们说过一个文档将通过使用如下公式来分配到一个指定分片：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>shard = hash(routing) % number_of_primary_shards</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>routing</code> 的值默认为文档的 <code>_id</code> ，但我们可以覆盖它并且提供我们自己自定义的路由值，例如 <code>forum_id</code> 。
+所有有着相同 <code>routing</code> 值的文档都将被存储于相同的分片：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /forums/post/1?routing=baking <b class="conum">(1)</b>
+{
+  "forum_id": "baking", <b class="conum">(1)</b>
+  "title":    "Easy recipe for ginger nuts",
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>将 <code>forum_id</code> 用于路由值保证所有来自相同论坛的帖子都存储于相同的分片。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>当我们搜索一个指定论坛的帖子时，我们可以传递相同的 <code>routing</code> 值来保证搜索请求仅在存有我们文档的分片上执行：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /forums/post/_search?routing=baking <b class="conum">(1)</b>
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match": {
+          "title": "ginger nuts"
+        }
+      },
+      "filter": {
+        "term": { <b class="conum">(2)</b>
+          "forum_id": {
+            "baking"
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>查询请求仅在对应于 <code>routing</code> 值的分片上执行。</p>
+</li>
+<li>
+<p>我们还是需要过滤（Filter）查询，因为一个分片可以存储来自于很多论坛的帖子。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>多个论坛可以通过传递一个逗号分隔的列表来指定 <code>routing</code> 值，然后将每个 <code>forum_id</code> 包含于一个 <code>terms</code> 查询：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /forums/post/_search?routing=baking,cooking,recipes
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match": {
+          "title": "ginger nuts"
+        }
+      },
+      "filter": {
+        "terms": {
+          "forum_id": {
+            [ "baking", "cooking", "recipes" ]
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这种方式从技术上来说比较高效，由于要为每一个查询或者索引请求指定 <code>routing</code> 和 <code>terms</code> 的值看起来有一点的笨拙。
+索引别名可以帮你解决这些！</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="faking-it">利用别名实现一个用户一个索引</h3>
+<div class="paragraph">
+<p>为了保持设计的简洁，我们想让我们的应用认为我们为每个用户都有一个专门的索引——或者按照我们的例子每个论坛一个——尽管实际上我们用的是一个大的<a href="#shared-index">shared index</a>。
+因此，我们需要一种方式将 <code>routing</code> 值及过滤器隐含于 <code>forum_id</code> 中。</p>
+</div>
+<div class="paragraph">
+<p>索引别名可以帮你做到这些。当你将一个别名与一个索引关联起来，你可以指定一个过滤器和一个路由值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /forums/_alias/baking
+{
+  "routing": "baking",
+  "filter": {
+    "term": {
+      "forum_id": "baking"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在我们可以将 <code>baking</code> 别名视为一个单独的索引。索引至 <code>baking</code> 别名的文档会自动地应用我们自定义的路由值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /baking/post/1 <b class="conum">(1)</b>
+{
+  "forum_id": "baking", <b class="conum">(1)</b>
+  "title":    "Easy recipe for ginger nuts",
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>我们还是需要为过滤器指定 <code>forumn_id</code> 字段，但自定义路由值已经是隐含的了。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>对 <code>baking</code> 别名上的查询只会在自定义路由值关联的分片上运行，并且结果也自动按照我们指定的过滤器进行了过滤：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /baking/post/_search
+{
+  "query": {
+    "match": {
+      "title": "ginger nuts"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当对多个论坛进行搜索时可以指定多个别名：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /baking,recipes/post/_search <b class="conum">(1)</b>
+{
+  "query": {
+    "match": {
+      "title": "ginger nuts"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>两个 <code>routing</code> 的值都会应用，返回对结果会匹配任意一个过滤器。</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="one-big-user">一个大的用户</h3>
+<div class="paragraph">
+<p>大规模流行论坛都是从小论坛起步的。
+有一天我们会发现我们共享索引中的一个分片要比其它分片更加繁忙，因为这个分片中一个论坛的文档变得更加热门。
+这时，那个论坛需要属于它自己的索引。</p>
+</div>
+<div class="paragraph">
+<p>我们用来提供一个用户一个索引的索引别名给了我们一个简洁的迁移论坛方式。</p>
+</div>
+<div class="paragraph">
+<p>第一步就是为那个论坛创建一个新的索引，并为其分配合理的分片数，可以满足一定预期的数据增长：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT /baking_v1
+{
+  "settings": {
+    "number_of_shards": 3
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第二步就是将共享的索引中的数据迁移到专用的索引中，可以通过<a href="#scroll"><code>scroll</code></a>查询和<a href="#bulk"><code>bulk</code> API</a>来实现。
+当迁移完成时，可以更新索引别名指向那个新的索引：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /_aliases
+{
+  "actions": [
+    { "remove": { "alias": "baking", "index": "forums"    }},
+    { "add":    { "alias": "baking", "index": "baking_v1" }}
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>更新索引别名的操作是原子性的；就像在拨动一个开关。你的应用程序还是在与 <code>baking</code> API 交互并且对于它已经指向一个专用的索引毫无感知。</p>
+</div>
+<div class="paragraph">
+<p>专用的索引不再需要过滤器或者自定义的路由值了。我们可以依赖于 Elasticsearch 默认使用的 <code>_id</code> 字段来做分区。</p>
+</div>
+<div class="paragraph">
+<p>最后一步是从共享的索引中删除旧的文档，可以通过搜索之前的路由值以及论坛 ID 然后进行批量删除操作来实现。</p>
+</div>
+<div class="paragraph">
+<p>一个用户一个索引模型的优雅之处在于它允许你减少资源消耗，保持快速的响应时间，同时拥有在需要时零宕机时间扩容的能力。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finite-scale">扩容并不是无限的</h3>
+<div class="paragraph">
+<p>贯彻整个章节我们讨论了多种 Elasticsearch 可以做到的扩容方式。
+大多数的扩容问题可以通过添加节点来解决。但有一种资源是有限制的，因此值得我们认真对待：集群状态。</p>
+</div>
+<div class="paragraph">
+<p><em>集群状态</em> 是一种数据结构，贮存下列集群级别的信息：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>集群级别的设置</p>
+</li>
+<li>
+<p>集群中的节点</p>
+</li>
+<li>
+<p>索引以及它们的设置、映射、分析器、预热器（Warmers）和别名</p>
+</li>
+<li>
+<p>与每个索引关联的分片以及它们分配到的节点</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>你可以通过如下请求查看当前的集群状态：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /_cluster/state</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>集群状态存在于集群中的每个节点，包括客户端节点。
+这就是为什么任何一个节点都可以将请求直接转发至被请求数据的节点——每个节点都知道每个文档应该在哪里。</p>
+</div>
+<div class="paragraph">
+<p>只有主节点被允许更新集群状态。想象一下一个索引请求引入了一个之前未知的字段。持有那个文档的主分片所在的节点必须将新的映射转发到主节点上。
+主节点把更改合并到集群状态中，然后向所有集群中的所有节点发布一个新的版本。</p>
+</div>
+<div class="paragraph">
+<p>搜索请求 <em>使用</em> 集群状态，但它们不会产生修改。同样，文档级别的增删改查请求也不会对集群状态产生修改。当然，除非它们引入了一个需要更新映射的新的字段了。
+总的来说，集群状态是静态的不会成为瓶颈。</p>
+</div>
+<div class="paragraph">
+<p>然而，需要记住的是相同的数据结构需要在每个节点的内存中保存，并且当它发生更改时必须发布到每一个节点。
+集群状态的数据量越大，这个操作就会越久。</p>
+</div>
+<div class="paragraph">
+<p>我们见过最常见的集群状态问题就是引入了太多的字段。一个用户可能会决定为每一个 IP 地址或者每个 referer URL 使用一个单独的字段。
+下面这个例子通过为每一个唯一的 referer 使用一个不同的字段名来保持对页面浏览量的计数：</p>
+</div>
+<div class="listingblock pagebreak-before">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">POST /counters/pageview/home_page/_update
+{
+  "script": "ctx._source[referer]++",
+  "params": {
+    "referer": "http://www.foo.com/links?bar=baz"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这种方式十分的糟糕！它会生成数百万个字段，这些都需要被存储在集群状态中。
+每当见到一个新的 referer ，都有一个新的字段需要加入那个已经膨胀的集群状态中，这都需要被发布到集群的每个节点中去。</p>
+</div>
+<div class="paragraph">
+<p>更好的方式是使用<a href="#nested-objects">nested objects</a>，
+它使用一个字段作为参数名&#x2014;`referer`&#x2014;另一个字段作为关联的值&#x2014;`count` ：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">    "counters": [
+      { "referer": "http://www.foo.com/links?bar=baz",  "count": 2 },
+      { "referer": "http://www.linkbait.com/article_3", "count": 10 },
+      ...
+    ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这种嵌套的方式有可能会增加文档数量，但 Elasticsearch 生来就是为了解决它的。重要的是保持集群状态小而敏捷。</p>
+</div>
+<div class="paragraph">
+<p>最终，不管你的初衷有多好，你可能会发现集群节点数量、索引、映射对于一个集群来说还是太大了。
+此时，可能有必要将这个问题拆分到多个集群中了。感谢{ref}/modules-tribe.html[<code>tribe</code> nodes]，
+你甚至可以向多个集群发出搜索请求，就好像我们有一个巨大的集群那样。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-05-17 22:26:24 CST
+</div>
+</div>
+</body>
+</html>

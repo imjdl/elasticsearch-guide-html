@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.2">
+<title>Doc Values and Fielddata</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+audio,canvas,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+[hidden],template{display:none}
+script{display:none!important}
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+a{background:transparent}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
+p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:none}
+p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #ddddd8;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
+abbr{text-transform:none}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
+blockquote cite:before{content:"\2014 \0020"}
+blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media only screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table thead,table tfoot{background:#f7f8f7;font-weight:bold}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
+.clearfix:after,.float-group:after{clear:both}
+*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+*:not(pre)>code.nobreak{word-wrap:normal}
+*:not(pre)>code.nowrap{white-space:nowrap}
+pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
+b.button:before{content:"[";padding:0 3px 0 2px}
+b.button:after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header:before,#header:after,#content:before,#content:after,#footnotes:before,#footnotes:after,#footer:before,#footer:after{content:" ";display:table}
+#header:after,#content:after,#footnotes:after,#footer:after{clear:both}
+#content{margin-top:1.25em}
+#content:before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #ddddd8}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #ddddd8;padding-bottom:8px}
+#header .details{border-bottom:1px solid #ddddd8;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span:before{content:"\00a0\2013\00a0"}
+#header .details br+span.author:before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark:before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber:after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #ddddd8;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #efefed;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media only screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+.sect1{padding-bottom:.625em}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
+.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{color:rgba(0,0,0,.85)}
+table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:initial}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
+.sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
+.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
+.literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]:before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:#999}
+.listingblock:hover code[data-lang]:before{display:block}
+.listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
+.listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
+table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
+table.pyhltable td.code{padding-left:.75em;padding-right:0}
+pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
+pre.pygments .lineno{display:inline-block;margin-right:.25em}
+table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock blockquote p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote:before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.5em;margin-right:.5ex;text-align:right}
+.quoteblock .quoteblock{margin-left:0;margin-right:0;padding:.5em 0;border-left:3px solid rgba(0,0,0,.6)}
+.quoteblock .quoteblock blockquote{padding:0 0 0 .75em}
+.quoteblock .quoteblock blockquote:before{display:none}
+.verseblock{margin:0 1em 1.25em 1em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract{margin:0 0 1.25em 0;display:block}
+.quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
+.quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
+table.tableblock{max-width:100%;border-collapse:separate}
+table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
+table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
+table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
+table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px 0}
+table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0 0}
+table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
+table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
+table.frame-all{border-width:1px}
+table.frame-sides{border-width:0 1px}
+table.frame-topbot{border-width:1px 0}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+td>div.verse{white-space:pre}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
+ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
+ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
+ul.inline>li>*{display:block}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist>table tr>td:first-of-type{padding:.4em .75em 0 .75em;line-height:1;vertical-align:top}
+.colist>table tr>td:first-of-type img{max-width:initial}
+.colist>table tr>td:last-of-type{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
+.imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
+.imageblock.right,.imageblock[style*="float: right"]{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background-color:#00fafa}
+.black{color:#000}
+.black-background{background-color:#000}
+.blue{color:#0000bf}
+.blue-background{background-color:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background-color:#fa00fa}
+.gray{color:#606060}
+.gray-background{background-color:#7d7d7d}
+.green{color:#006000}
+.green-background{background-color:#007d00}
+.lime{color:#00bf00}
+.lime-background{background-color:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background-color:#7d0000}
+.navy{color:#000060}
+.navy-background{background-color:#00007d}
+.olive{color:#606000}
+.olive-background{background-color:#7d7d00}
+.purple{color:#600060}
+.purple-background{background-color:#7d007d}
+.red{color:#bf0000}
+.red-background{background-color:#fa0000}
+.silver{color:#909090}
+.silver-background{background-color:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background-color:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background-color:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background-color:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]:after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@media print{@page{margin:1.25cm .75cm}
+*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]:after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #ddddd8!important;padding-bottom:0!important}
+.sect1{padding-bottom:0!important}
+.sect1+.sect1{border:0!important}
+#header>h1:first-child{margin-top:1.25rem}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em 0}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span:before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]:before{display:block}
+#footer{background:none!important;padding:0 .9375em}
+#footer-text{color:rgba(0,0,0,.6)!important;font-size:.9em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+</style>
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="docvalues-and-fielddata">Doc Values and Fielddata</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="docvalues">Doc Values</h3>
+<div class="paragraph">
+<p>聚合使用一个叫 <em>doc values</em> 的数据结构（在 <a href="#docvalues-intro">[docvalues-intro]</a> 里简单介绍）。 Doc values 可以使聚合更快、更高效并且内存友好，所以理解它的工作方式十分有益。</p>
+</div>
+<div class="paragraph">
+<p>Doc values 的存在是因为倒排索引只对某些操作是高效的。
+倒排索引的优势  在于查找包含某个项的文档，而对于从另外一个方向的相反操作并不高效，即：确定哪些项是否存在单个文档里，聚合需要这种次级的访问模式。</p>
+</div>
+<div class="paragraph">
+<p>对于以下倒排索引：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Term      Doc_1   Doc_2   Doc_3
+------------------------------------
+brown   |   X   |   X   |
+dog     |   X   |       |   X
+dogs    |       |   X   |   X
+fox     |   X   |       |   X
+foxes   |       |   X   |
+in      |       |   X   |
+jumped  |   X   |       |   X
+lazy    |   X   |   X   |
+leap    |       |   X   |
+over    |   X   |   X   |   X
+quick   |   X   |   X   |   X
+summer  |       |   X   |
+the     |   X   |       |   X
+------------------------------------</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果我们想要获得所有包含 brown 的文档的词的完整列表，我们会创建如下查询：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">GET /my_index/_search
+{
+  "query" : {
+    "match" : {
+      "body" : "brown"
+    }
+  },
+  "aggs" : {
+    "popular_terms": {
+      "terms" : {
+        "field" : "body"
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>查询部分简单又高效。倒排索引是根据项来排序的，所以我们首先在词项列表中找到 brown ，然后扫描所有列，找到包含 brown 的文档。我们可以快速看到 <code>Doc_1</code> 和 <code>Doc_2</code> 包含 brown 这个 token。</p>
+</div>
+<div class="paragraph">
+<p>然后，对于聚合部分，我们需要找到 <code>Doc_1</code> 和 <code>Doc_2</code> 里所有唯一的词项。 用倒排索引做这件事情代价很高：
+我们会迭代索引里的每个词项并收集 <code>Doc_1</code> 和 <code>Doc_2</code> 列里面 token。这很慢而且难以扩展：随着词项和文档的数量增加，执行时间也会增加。</p>
+</div>
+<div class="paragraph">
+<p>Doc values 通过转置两者间的关系来解决这个问题。倒排索引将词项映射到包含它们的文档，doc values 将文档映射到它们包含的词项：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Doc      Terms
+-----------------------------------------------------------------
+Doc_1 | brown, dog, fox, jumped, lazy, over, quick, the
+Doc_2 | brown, dogs, foxes, in, lazy, leap, over, quick, summer
+Doc_3 | dog, dogs, fox, jumped, over, quick, the
+-----------------------------------------------------------------</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当数据被转置之后，想要收集到 <code>Doc_1</code> 和 <code>Doc_2</code> 的唯一 token 会非常容易。获得每个文档行，获取所有的词项，然后求两个集合的并集。</p>
+</div>
+<div class="paragraph">
+<p>因此，搜索和聚合是相互紧密缠绕的。搜索使用倒排索引查找文档，聚合操作收集和聚合 doc values 里的数据。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Doc values 不仅可以用于聚合。 任何需要查找某个文档包含的值的操作都必须使用它。
+除了聚合，还包括排序，访问字段值的脚本，父子关系处理（参见 <a href="#parent-child">[parent-child]</a> ）。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deep_dive_on_doc_values">深入理解 Doc Values</h3>
+<div class="paragraph">
+<p>在上一节一开头我们就说 <code>Doc Values</code> 是 <em>"快速、高效并且内存友好"</em> 。
+这个口号听不起来不错，不过话说回来 <code>Doc Values</code> 到底是如何工作的呢？</p>
+</div>
+<div class="paragraph">
+<p><code>Doc Values</code> 是在索引时与 <code>倒排索引</code> 同时生成。也就是说 <code>Doc Values</code> 和 <code>倒排索引</code> 一样，基于 <code>Segement</code> 生成并且是不可变的。同时 <code>Doc Values</code> 和 <code>倒排索引</code> 一样序列化到磁盘，这样对性能和扩展性有很大帮助。</p>
+</div>
+<div class="paragraph">
+<p><code>Doc Values</code> 通过序列化把数据结构持久化到磁盘，我们可以充分利用操作系统的内存，而不是 <code>JVM</code> 的 <code>Heap</code> 。
+当 <code>working set</code> 远小于系统的可用内存，系统会自动将 <code>Doc Values</code> 驻留在内存中，使得其读写十分快速；不过，当其远大于可用内存时，系统会根据需要从磁盘读取 <code>Doc Values</code>，然后选择性放到分页缓存中。很显然，这样性能会比在内存中差很多，但是它的大小就不再局限于服务器的内存了。如果是使用 <code>JVM</code> 的 <code>Heap</code> 来实现那么只能是因为 <code>OutOfMemory</code> 导致程序崩溃了。  </p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>因为 <code>Doc Values</code> 不是由 <code>JVM</code> 来管理，所以 <code>Elasticsearch</code> 实例可以配置一个很小的 <code>JVM Heap</code>，这样给系统留出来更多的内存。同时更小的  <code>Heap</code> 可以让 <code>JVM</code> 更加快速和高效的回收。</p>
+</div>
+<div class="paragraph">
+<p>之前，我们会建议分配机器内存的 <code>50%</code> 来给 <code>JVM Heap</code>。但是对于 <code>Doc Values</code>，这样可能不是最合适的方案了。
+以 <code>64gb</code> 内存的机器为例，可能给 <code>Heap</code> 分配 <code>4-16gb</code> 的内存更合适，而不是 <code>32gb</code>。</p>
+</div>
+<div class="paragraph">
+<p>有关更详细的讨论，查看 <a href="#heap-sizing">[heap-sizing]</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_列式存储的压缩">列式存储的压缩</h4>
+<div class="paragraph">
+<p>从广义来说，<code>Doc Values</code> 本质上是一个序列化的 <em>列式存储</em> 。
+正如我们上一节所讨论的，<em>列式存储</em> 适用于聚合、排序、脚本等操作。</p>
+</div>
+<div class="paragraph">
+<p>而且，这种存储方式也非常便于压缩，特别是数字类型。这样可以减少磁盘空间并且提高访问速度。现代 <code>CPU</code> 的处理速度要比磁盘快几个数量级（尽管即将到来的 NVMe 驱动器正在迅速缩小差距）。所以我们必须减少直接存磁盘读取数据的大小，尽管需要额外消耗 <code>CPU</code>  运算用来进行解压。</p>
+</div>
+<div class="paragraph">
+<p>要了解它如何压缩数据的，来看一组数字类型的 <code>Doc Values</code>：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Doc      Terms
+-----------------------------------------------------------------
+Doc_1 | 100
+Doc_2 | 1000
+Doc_3 | 1500
+Doc_4 | 1200
+Doc_5 | 300
+Doc_6 | 1900
+Doc_7 | 4200
+-----------------------------------------------------------------</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>按列布局意味着我们有一个连续的数据块： <code>[100,1000,1500,1200,300,1900,4200]</code> 。因为我们已经知道他们都是数字（而不是像文档或行中看到的异构集合），所以我们可以使用统一的偏移来将他们紧紧排列。</p>
+</div>
+<div class="paragraph">
+<p>而且，针对这样的数字有很多种压缩技巧。你会注意到这里每个数字都是 100 的倍数，<code>Doc Values</code> 会检测一个段里面的所有数值，并使用一个 <em>最大公约数</em> ，方便做进一步的数据压缩。</p>
+</div>
+<div class="paragraph">
+<p>如果我们保存 <code>100</code> 作为此段的除数，我们可以对每个数字都除以 100，然后得到：  <code>[1,10,15,12,3,19,42]</code> 。现在这些数字变小了，只需要很少的位就可以存储下，也减少了磁盘存放的大小。</p>
+</div>
+<div class="paragraph">
+<p><code>Doc Values</code> 在压缩过程中使用如下技巧。它会按依次检测以下压缩模式:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>如果所有的数值各不相同（或缺失），设置一个标记并记录这些值</p>
+</li>
+<li>
+<p>如果这些值小于 256，将使用一个简单的编码表</p>
+</li>
+<li>
+<p>如果这些值大于 256，检测是否存在一个最大公约数</p>
+</li>
+<li>
+<p>如果没有存在最大公约数，从最小的数值开始，统一计算偏移量进行编码</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>你会发现这些压缩模式不是传统的通用的压缩方式，比如 <code>DEFLATE</code> 或是 <code>LZ4</code>。
+因为列式存储的结构是严格且良好定义的，我们可以通过使用专门的模式来达到比通用压缩算法（如 LZ4 ）更高的压缩效果。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>你也许会想 <em>"好吧，貌似对数字很好，不知道字符串怎么样？"</em>
+通过借助顺序表（ordinal table），<code>String</code> 类型也是类似进行编码的。<code>String</code> 类型是去重之后存放到顺序表的，通过分配一个 <code>ID</code>，然后通过数字类型的 <code>ID</code> 构建 <code>Doc Values</code>。这样 <code>String</code> 类型和数值类型可以达到同样的压缩效果。</p>
+</div>
+<div class="paragraph">
+<p>顺序表本身也有很多压缩技巧，比如固定长度、变长或是前缀字符编码等等。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_禁用_doc_values">禁用 Doc Values</h4>
+<div class="paragraph">
+<p><code>Doc Values</code> 默认对所有字段启用，除了 <code>analyzed strings</code>。也就是说所有的数字、地理坐标、日期、IP 和不分析（ <code>not_analyzed</code> ）字符类型都会默认开启。</p>
+</div>
+<div class="paragraph">
+<p><code>analyzed strings</code> 暂时还不能使用 <code>Doc Values</code>。文本经过分析流程生成很多 <code>Token</code>，使得 <code>Doc Values</code> 不能高效运行。我们将在  <a href="#aggregations-and-analysis">聚合与分析</a> 讨论如何使用分析字符类型来做聚合。</p>
+</div>
+<div class="paragraph">
+<p>因为 <code>Doc Values</code> 默认启用，你可以选择对你数据集里面的大多数字段进行聚合和排序操作。但是如果你知道你永远也不会对某些字段进行聚合、排序或是使用脚本操作？
+尽管这并不常见，但是你可以通过禁用特定字段的 <code>Doc Values</code> 。这样不仅节省磁盘空间，也许会提升索引的速度。</p>
+</div>
+<div class="paragraph">
+<p>要禁用 <code>Doc Values</code> ，在字段的映射（mapping）设置 <code>doc_values: false</code> 即可。例如，这里我们创建了一个新的索引，字段 <code>"session_id"</code> 禁用了  <code>Doc Values</code>：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">PUT my_index
+{
+  "mappings": {
+    "my_type": {
+      "properties": {
+        "session_id": {
+          "type":       "string",
+          "index":      "not_analyzed",
+          "doc_values": false <b class="conum">(1)</b>
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>通过设置 <code>doc_values: false</code> ，这个字段将不能被用于聚合、排序以及脚本操作</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>反过来也是可以进行配置的：让一个字段可以被聚合，通过禁用倒排索引，使它不能被正常搜索，例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">PUT my_index
+{
+  "mappings": {
+    "my_type": {
+      "properties": {
+        "customer_token": {
+          "type":       "string",
+          "index":      "not_analyzed",
+          "doc_values": true, <b class="conum">(1)</b>
+          "index": "no" <b class="conum">(2)</b>
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>Doc Values</code> 被启用来允许聚合</p>
+</li>
+<li>
+<p>索引被禁用了，这让该字段不能被查询/搜索</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>通过设置 <code>doc_values: true</code> 和 <code>index: no</code> ，我们得到一个只能被用于聚合/排序/脚本的字段。无可否认，这是一个非常少见的情况，但有时很有用。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="aggregations-and-analysis">聚合与分析</h3>
+<div class="paragraph">
+<p>有些聚合，比如 <code>terms</code> 桶， 操作字符串字段。字符串字段可能是 <code>analyzed</code> 或者 <code>not_analyzed</code> ，
+那么问题来了，分析是怎么影响聚合的呢？</p>
+</div>
+<div class="paragraph">
+<p>答案是影响“很多”，有两个原因：分析影响聚合中使用的 tokens ，并且 doc values <em>不能使用于</em> 分析字符串。</p>
+</div>
+<div class="paragraph">
+<p>让我们解决第一个问题：分析 tokens 的产生如何影响聚合。首先索引一些代表美国各个州的文档：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">POST /agg_analysis/data/_bulk
+{ "index": {}}
+{ "state" : "New York" }
+{ "index": {}}
+{ "state" : "New Jersey" }
+{ "index": {}}
+{ "state" : "New Mexico" }
+{ "index": {}}
+{ "state" : "New York" }
+{ "index": {}}
+{ "state" : "New York" }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们希望创建一个数据集里各个州的唯一列表，并且计数。
+简单，让我们使用 <code>terms</code> 桶：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">GET /agg_analysis/data/_search
+{
+    "size" : 0,
+    "aggs" : {
+        "states" : {
+            "terms" : {
+                "field" : "state"
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>得到结果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">{
+...
+   "aggregations": {
+      "states": {
+         "buckets": [
+            {
+               "key": "new",
+               "doc_count": 5
+            },
+            {
+               "key": "york",
+               "doc_count": 3
+            },
+            {
+               "key": "jersey",
+               "doc_count": 1
+            },
+            {
+               "key": "mexico",
+               "doc_count": 1
+            }
+         ]
+      }
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>宝贝儿，这完全不是我们想要的！没有对州名计数，聚合计算了每个词的数目。背后的原因很简单：聚合是基于倒排索引创建的，倒排索引是 后置分析（ <em>post-analysis</em> ）的。</p>
+</div>
+<div class="paragraph">
+<p>当我们把这些文档加入到 Elasticsearch 中时，字符串 <code>"New York"</code> 被分析/分析成 <code>["new", "york"]</code> 。这些单独的 tokens ，都被用来填充聚合计数，所以我们最终看到 <code>new</code> 的数量而不是 <code>New York</code> 。</p>
+</div>
+<div class="paragraph">
+<p>这显然不是我们想要的行为，但幸运的是很容易修正它。</p>
+</div>
+<div class="paragraph">
+<p>我们需要为 state 定义 multifield 并且设置成 <code>not_analyzed</code> 。这样可以防止 <code>New York</code> 被分析，也意味着在聚合过程中它会以单个 token 的形式存在。让我们尝试完整的过程，但这次指定一个 <em>raw</em> multifield：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">DELETE /agg_analysis/
+PUT /agg_analysis
+{
+  "mappings": {
+    "data": {
+      "properties": {
+        "state" : {
+          "type": "string",
+          "fields": {
+            "raw" : {
+              "type": "string",
+              "index": "not_analyzed"<b class="conum">(1)</b>
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+POST /agg_analysis/data/_bulk
+{ "index": {}}
+{ "state" : "New York" }
+{ "index": {}}
+{ "state" : "New Jersey" }
+{ "index": {}}
+{ "state" : "New Mexico" }
+{ "index": {}}
+{ "state" : "New York" }
+{ "index": {}}
+{ "state" : "New York" }
+
+GET /agg_analysis/data/_search
+{
+  "size" : 0,
+  "aggs" : {
+    "states" : {
+        "terms" : {
+            "field" : "state.raw" <b class="conum">(2)</b>
+        }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>这次我们显式映射 state 字段并包括一个 <code>not_analyzed</code> 辅字段。</p>
+</li>
+<li>
+<p>聚合针对 state.raw 字段而不是 state 。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>现在运行聚合，我们得到了合理的结果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">{
+...
+   "aggregations": {
+      "states": {
+         "buckets": [
+            {
+               "key": "New York",
+               "doc_count": 3
+            },
+            {
+               "key": "New Jersey",
+               "doc_count": 1
+            },
+            {
+               "key": "New Mexico",
+               "doc_count": 1
+            }
+         ]
+      }
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在实际中，这样的问题很容易被察觉，我们的聚合会返回一些奇怪的桶，我们会记住分析的问题。
+总之，很少有在聚合中使用分析字段的实例。当我们疑惑时，只要增加一个 multifield 就能有两种选择。</p>
+</div>
+<div class="sect3">
+<h4 id="_分析字符串和_fielddata_analyzed_strings_and_fielddata">分析字符串和 Fielddata（Analyzed strings and Fielddata）</h4>
+<div class="paragraph">
+<p>当第一个问题涉及如何聚合数据并显示给用户，第二个问题主要是技术和幕后。</p>
+</div>
+<div class="paragraph">
+<p>Doc values 不支持 <code>analyzed</code> 字符串字段，因为它们不能很有效的表示多值字符串。 Doc values 最有效的是，当每个文档都有一个或几个 tokens 时，
+但不是无数的，分析字符串（想象一个 PDF ，可能有几兆字节并有数以千计的独特 tokens）。</p>
+</div>
+<div class="paragraph">
+<p>出于这个原因，doc values 不生成分析的字符串，然而，这些字段仍然可以使用聚合，那怎么可能呢？</p>
+</div>
+<div class="paragraph">
+<p>答案是一种被称为 <em>fielddata</em> 的数据结构。与 doc values 不同，fielddata 构建和管理 100% 在内存中，常驻于 JVM 内存堆。这意味着它本质上是不可扩展的，有很多边缘情况下要提防。
+本章的其余部分是解决在分析字符串上下文中 fielddata 的挑战。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+从历史上看，fielddata 是 <em>所有</em> 字段的默认设置。但是 Elasticsearch 已迁移到 doc values 以减少 OOM 的几率。分析的字符串是仍然使用 fielddata 的最后一块阵地。
+最终目标是建立一个序列化的数据结构类似于 doc values ，可以处理高维度的分析字符串，逐步淘汰 fielddata。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_高基数内存的影响_high_cardinality_memory_implications">高基数内存的影响（High-Cardinality Memory Implications）</h4>
+<div class="paragraph">
+<p>避免分析字段的另外一个原因就是：高基数字段在加载到 fielddata 时会消耗大量内存。 分析的过程会经常（尽管不总是这样）生成大量的 token，这些 token 大多都是唯一的。
+这会增加字段的整体基数并且带来更大的内存压力。</p>
+</div>
+<div class="paragraph">
+<p>有些类型的分析对于内存来说 <em>极度</em> 不友好，想想 n-gram 的分析过程， New York 会被 n-gram 分析成以下 token：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ne</code></p>
+</li>
+<li>
+<p><code>ew</code></p>
+</li>
+<li>
+<p>w{nbsp}</p>
+</li>
+<li>
+<p>{nbsp}y</p>
+</li>
+<li>
+<p><code>yo</code></p>
+</li>
+<li>
+<p><code>or</code></p>
+</li>
+<li>
+<p><code>rk</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>可以想象 n-gram 的过程是如何生成大量唯一 token 的，特别是在分析成段文本的时候。当这些数据加载到内存中，会轻而易举的将我们堆空间消耗殆尽。</p>
+</div>
+<div class="paragraph">
+<p>因此，在聚合字符串字段之前，请评估情况：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>这是一个 <code>not_analyzed</code> 字段吗？如果是，可以通过 doc values 节省内存 。</p>
+</li>
+<li>
+<p>否则，这是一个 <code>analyzed</code> 字段，它将使用 fielddata 并加载到内存中。这个字段因为 ngrams 有一个非常大的基数？如果是，这对于内存来说极度不友好。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_limiting_memory_usage">限制内存使用</h3>
+<div class="paragraph">
+<p>一旦分析字符串被加载到 fielddata ，他们会一直在那里，直到被驱逐（或者节点崩溃）。由于这个原因，留意内存的使用情况，了解它是如何以及何时加载的，怎样限制对集群的影响是很重要的。</p>
+</div>
+<div class="paragraph">
+<p>Fielddata 是 <em>延迟</em> 加载。如果你从来没有聚合一个分析字符串，就不会加载 fielddata 到内存中。此外，fielddata 是基于字段加载的，
+这意味着只有很活跃地使用字段才会增加 fielddata 的负担。</p>
+</div>
+<div class="paragraph">
+<p>然而，这里有一个令人惊讶的地方。假设你的查询是高度选择性和只返回命中的 100 个结果。大多数人认为 fielddata 只加载 100 个文档。</p>
+</div>
+<div class="paragraph">
+<p>实际情况是，fielddata 会加载索引中（针对该特定字段的） <strong>所有的</strong> 文档，而不管查询的特异性。逻辑是这样：如果查询会访问文档 X、Y 和 Z，那很有可能会在下一个查询中访问其他文档。</p>
+</div>
+<div class="paragraph">
+<p>与 doc values 不同，fielddata 结构不会在索引时创建。相反，它是在查询运行时，动态填充。这可能是一个比较复杂的操作，可能需要一些时间。
+将所有的信息一次加载，再将其维持在内存中的方式要比反复只加载一个 fielddata 的部分代价要低。</p>
+</div>
+<div class="paragraph">
+<p>JVM 堆  是有限资源的，应该被合理利用。
+限制 fielddata 对堆使用的影响有多套机制，这些限制方式非常重要，因为堆栈的乱用会导致节点不稳定（感谢缓慢的垃圾回收机制），甚至导致节点宕机（通常伴随 OutOfMemory 异常）。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">选择堆大小（Choosing a Heap Size）</div>
+<div class="paragraph">
+<p>在设置 Elasticsearch 堆大小时需要通过  <code>$ES_HEAP_SIZE</code> 环境变量应用两个规则：</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">不要超过可用 RAM 的 50% </dt>
+<dd>
+<p>Lucene 能很好利用文件系统的缓存，它是通过系统内核管理的。如果没有足够的文件系统缓存空间，性能会受到影响。
+此外，专用于堆的内存越多意味着其他所有使用 doc values 的字段内存越少。</p>
+</dd>
+<dt class="hdlist1">不要超过 32 GB </dt>
+<dd>
+<p>如果堆大小小于 32 GB，JVM 可以利用指针压缩，这可以大大降低内存的使用：每个指针 4 字节而不是 8 字节。</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>更详细和更完整的堆大小讨论，请参阅 <a href="#heap-sizing">[heap-sizing]</a></p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="fielddata-size">Fielddata的大小</h4>
+<div class="paragraph">
+<p><code>indices.fielddata.cache.size</code>  控制为 fielddata 分配的堆空间大小。
+当你发起一个查询，分析字符串的聚合将会被加载到 fielddata，如果这些字符串之前没有被加载过。如果结果中 fielddata 大小超过了指定 <code>大小</code> ，其他的值将会被回收从而获得空间。</p>
+</div>
+<div class="paragraph">
+<p>默认情况下，设置都是 <em>unbounded</em> ，Elasticsearch 永远都不会从 fielddata 中回收数据。</p>
+</div>
+<div class="paragraph">
+<p>这个默认设置是刻意选择的：fielddata 不是临时缓存。它是驻留内存里的数据结构，必须可以快速执行访问，而且构建它的代价十分高昂。如果每个请求都重载数据，性能会十分糟糕。</p>
+</div>
+<div class="paragraph">
+<p>一个有界的大小会强制数据结构回收数据。我们会看何时应该设置这个值，但请首先阅读以下警告：</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>这个设置是一个安全卫士，而非内存不足的解决方案。</p>
+</div>
+<div class="paragraph">
+<p>如果没有足够空间可以将 fielddata 保留在内存中，Elasticsearch 就会时刻从磁盘重载数据，并回收其他数据以获得更多空间。内存的回收机制会导致重度磁盘I/O，并且在内存中生成很多垃圾，这些垃圾必须在晚些时候被回收掉。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>设想我们正在对日志进行索引，每天使用一个新的索引。通常我们只对过去一两天的数据感兴趣，尽管我们会保留老的索引，但我们很少需要查询它们。不过如果采用默认设置，旧索引的 fielddata 永远不会从缓存中回收！
+fieldata 会保持增长直到 fielddata 发生断熔（请参阅 <a href="#circuit-breaker">断路器</a>），这样我们就无法载入更多的 fielddata。</p>
+</div>
+<div class="paragraph">
+<p>这个时候，我们被困在了死胡同。但我们仍然可以访问旧索引中的 fielddata，也无法加载任何新的值。相反，我们应该回收旧的数据，并为新值获得更多空间。</p>
+</div>
+<div class="paragraph">
+<p>为了防止发生这样的事情，可以通过在 <code>config/elasticsearch.yml</code> 文件中增加配置为 fielddata 设置一个上限：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">indices.fielddata.cache.size:  20% <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>可以设置堆大小的百分比，也可以是某个值，例如： <code>5gb</code> 。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>有了这个设置，最久未使用（LRU）的 fielddata 会被回收为新数据腾出空间。</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>可能发现在线文档有另外一个设置： <code>indices.fielddata.cache.expire</code> 。</p>
+</div>
+<div class="paragraph">
+<p>这个设置 <em>永远都不会</em> 被使用！它很有可能在不久的将来被弃用。</p>
+</div>
+<div class="paragraph">
+<p>这个设置要求 Elasticsearch 回收那些 <code>过期</code> 的 fielddata，不管这些值有没有被用到。</p>
+</div>
+<div class="paragraph">
+<p>这对性能是件 <em>很糟糕</em> 的事情。回收会有消耗性能，它刻意的安排回收方式，而没能获得任何回报。</p>
+</div>
+<div class="paragraph">
+<p>没有理由使用这个设置：我们不能从理论上假设一个有用的情形。目前，它的存在只是为了向前兼容。我们只在很有以前提到过这个设置，但不幸的是网上各种文章都将其作为一种性能调优的小窍门来推荐。</p>
+</div>
+<div class="paragraph">
+<p>它不是。永远不要使用！</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="monitoring-fielddata">监控 fielddata（Monitoring fielddata）</h4>
+<div class="paragraph">
+<p>无论是仔细监控 fielddata 的内存使用情况， 还是看有无数据被回收都十分重要。高的回收数可以预示严重的资源问题以及性能不佳的原因。</p>
+</div>
+<div class="paragraph">
+<p>Fielddata 的使用可以被监控：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>按索引使用 <a href="http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-stats.html"><code>indices-stats</code> API</a> ：</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /_stats/fielddata?fields=*</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>按节点使用 {ref}/cluster-nodes-stats.html[<code>nodes-stats</code> API] ：</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /_nodes/stats/indices/fielddata?fields=*</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>按索引节点：</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET /_nodes/stats/indices/fielddata?level=indices&amp;fields=*</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用设置 <code>?fields=*</code> ，可以将内存使用分配到每个字段。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="circuit-breaker">断路器</h4>
+<div class="paragraph">
+<p>机敏的读者可能已经发现 fielddata 大小设置的一个问题。fielddata 大小是在数据加载 <em>之后</em> 检查的。
+如果一个查询试图加载比可用内存更多的信息到 fielddata 中会发生什么？答案很丑陋：我们会碰到 OutOfMemoryException 。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 包括一个 <em>fielddata 断熔器</em> ，这个设计就是为了处理上述情况。
+断熔器通过内部检查（字段的类型、基数、大小等等）来估算一个查询需要的内存。它然后检查要求加载的 fielddata 是否会导致 fielddata 的总量超过堆的配置比例。</p>
+</div>
+<div class="paragraph">
+<p>如果估算查询的大小超出限制，就会 <em>触发</em> 断路器，查询会被中止并返回异常。这都发生在数据加载 <em>之前</em> ，也就意味着不会引起 OutOfMemoryException 。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">可用的断路器（Available Circuit Breakers）</div>
+<div class="paragraph">
+<p>Elasticsearch 有一系列的断路器，它们都能保证内存不会超出限制：</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>indices.breaker.fielddata.limit</code></dt>
+<dd>
+<p><code>fielddata</code> 断路器默认设置堆的 60% 作为 fielddata 大小的上限。</p>
+</dd>
+<dt class="hdlist1"><code>indices.breaker.request.limit</code></dt>
+<dd>
+<p><code>request</code> 断路器估算需要完成其他请求部分的结构大小，例如创建一个聚合桶，默认限制是堆内存的 40%。</p>
+</dd>
+<dt class="hdlist1"><code>indices.breaker.total.limit</code></dt>
+<dd>
+<p><code>total</code> 揉合 <code>request</code> 和 <code>fielddata</code> 断路器保证两者组合起来不会使用超过堆内存的 70%。</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>断路器的限制可以在文件 <code>config/elasticsearch.yml</code> 中指定，可以动态更新一个正在运行的集群：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">PUT /_cluster/settings
+{
+  "persistent" : {
+    "indices.breaker.fielddata.limit" : "40%" <b class="conum">(1)</b>
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>这个限制是按对内存的百分比设置的。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>最好为断路器设置一个相对保守点的值。 记住 fielddata 需要与 <code>request</code> 断路器共享堆内存、索引缓冲内存和过滤器缓存。Lucene 的数据被用来构造索引，以及各种其他临时的数据结构。
+正因如此，它默认值非常保守，只有 60% 。过于乐观的设置可能会引起潜在的堆栈溢出（OOM）异常，这会使整个节点宕掉。</p>
+</div>
+<div class="paragraph">
+<p>另一方面，过度保守的值只会返回查询异常，应用程序可以对异常做相应处理。异常比服务器崩溃要好。这些异常应该也能促进我们对查询进行重新评估：为什么单个查询需要超过堆内存的 60% 之多？</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>在 <a href="#fielddata-size">Fielddata的大小</a> 中，我们提过关于给 fielddata 的大小加一个限制，从而确保旧的无用 fielddata 被回收的方法。 <code>indices.fielddata.cache.size</code> 和 <code>indices.breaker.fielddata.limit</code> 之间的关系非常重要。
+如果断路器的限制低于缓存大小，没有数据会被回收。为了能正常工作，断路器的限制 <em>必须</em> 要比缓存大小要高。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>值得注意的是：断路器是根据总堆内存大小估算查询大小的，而 <em>非</em> 根据实际堆内存的使用情况。
+这是由于各种技术原因造成的（例如，堆可能看上去是满的但实际上可能只是在等待垃圾回收，这使我们难以进行合理的估算）。但作为终端用户，这意味着设置需要保守，因为它是根据总堆内存必要的，而 <em>不是</em> 可用堆内存。
+</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fielddata_filtering">Fielddata 的过滤</h3>
+<div class="paragraph">
+<p>设想我们正在运行一个网站允许用户收听他们喜欢的歌曲。
+为了让他们可以更容易的管理自己的音乐库，用户可以为歌曲设置任何他们喜欢的标签，这样我们就会有很多歌曲被附上 <code>rock（摇滚）</code> 、 <code>hiphop（嘻哈）</code> 和 <code>electronica（电音）</code> ，但也会有些歌曲被附上 <code>my_16th_birthday_favorite_anthem</code> 这样的标签。</p>
+</div>
+<div class="paragraph">
+<p>现在设想我们想要为用户展示每首歌曲最受欢迎的三个标签，很有可能 <code>rock</code> 这样的标签会排在三个中的最前面，而 <code>my_16th_birthday_favorite_anthem</code> 则不太可能得到评级。
+尽管如此，为了计算最受欢迎的标签，我们必须强制将这些一次性使用的项加载到内存中。</p>
+</div>
+<div class="paragraph">
+<p>感谢 fielddata 过滤，我们可以控制这种状况。我们 <em>知道</em> 自己只对最流行的项感兴趣，所以我们可以简单地避免加载那些不太有意思的长尾项：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">PUT /music/_mapping/song
+{
+  "properties": {
+    "tag": {
+      "type": "string",
+      "fielddata": { <b class="conum">(1)</b>
+        "filter": {
+          "frequency": { <b class="conum">(2)</b>
+            "min":              0.01, <b class="conum">(3)</b>
+            "min_segment_size": 500  <b class="conum">(4)</b>
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>fielddata</code> 关键字允许我们配置 fielddata 处理该字段的方式。</p>
+</li>
+<li>
+<p><code>frequency</code> 过滤器允许我们基于项频率过滤加载 fielddata。</p>
+</li>
+<li>
+<p>只加载那些至少在本段文档中出现 1% 的项。</p>
+</li>
+<li>
+<p>忽略任何文档个数小于 500 的段。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>有了这个映射，只有那些至少在 <em>本段</em> 文档中出现超过 1% 的项才会被加载到内存中。我们也可以指定一个 <code>最大</code> 词频，它可以被用来排除 <em>常用</em> 项，比如 <a href="#stopwords">停用词</a> 。</p>
+</div>
+<div class="paragraph">
+<p>这种情况下，词频是按照段来计算的。这是实现的一个限制：fielddata 是按段来加载的，所以可见的词频只是该段内的频率。但是，这个限制也有些有趣的特性：它可以让受欢迎的新项迅速提升到顶部。</p>
+</div>
+<div class="paragraph">
+<p>比如一个新风格的歌曲在一夜之间受大众欢迎，我们可能想要将这种新风格的歌曲标签包括在最受欢迎列表中，但如果我们倚赖对索引做完整的计算获取词频，我们就必须等到新标签变得像 <code>rock</code> 和 <code>electronica</code> ）一样流行。
+由于频度过滤的实现方式，新加的标签会很快作为高频标签出现在新段内，也当然会迅速上升到顶部。</p>
+</div>
+<div class="paragraph">
+<p><code>min_segment_size</code> 参数要求 Elasticsearch 忽略某个大小以下的段。 如果一个段内只有少量文档，它的词频会非常粗略没有任何意义。
+小的分段会很快被合并到更大的分段中，某一刻超过这个限制，将会被纳入计算。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>通过频次来过滤项并不是唯一的选择，我们也可以使用正则式来决定只加载那些匹配的项。例如，我们可以用 <code>regex</code> 过滤器  处理 twitte 上的消息只将以 <code>#</code> 号开始的标签加载到内存中。
+这假设我们使用的分析器会保留标点符号，像 <code>whitespace</code> 分析器。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Fielddata 过滤对内存使用有 <em>巨大的</em> 影响，权衡也是显而易见的：我们实际上是在忽略数据。但对于很多应用，这种权衡是合理的，因为这些数据根本就没有被使用到。内存的节省通常要比包括一个大量而无用的长尾项更为重要。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="preload-fielddata">预加载 fielddata</h3>
+<div class="paragraph">
+<p>Elasticsearch 加载内存 fielddata 的默认行为是 <em>延迟</em> 加载 。
+当 Elasticsearch 第一次查询某个字段时，它将会完整加载这个字段所有 Segment 中的倒排索引到内存中，以便于以后的查询能够获取更好的性能。</p>
+</div>
+<div class="paragraph">
+<p>对于小索引段来说，这个过程的需要的时间可以忽略。但如果我们有一些 5 GB 的索引段，并希望加载 10 GB 的 fielddata 到内存中，这个过程可能会要数十秒。
+已经习惯亚秒响应的用户很难会接受停顿数秒卡着没反应的网站。</p>
+</div>
+<div class="paragraph">
+<p>有三种方式可以解决这个延时高峰：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>预加载 fielddata</p>
+</li>
+<li>
+<p>预加载全局序号</p>
+</li>
+<li>
+<p>缓存预热</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>所有的变化都基于同一概念：预加载 fielddata ，这样在用户进行搜索时就不会碰到延迟高峰。</p>
+</div>
+<div class="sect3">
+<h4 id="eager-fielddata">预加载 fielddata（Eagerly Loading Fielddata）</h4>
+<div class="paragraph">
+<p>第一个工具称为 <em>预加载</em> （与默认的  延迟加载相对）。随着新分段的创建（通过刷新、写入或合并等方式），
+启动字段预加载可以使那些对搜索不可见的分段里的 fielddata <em>提前</em> 加载。</p>
+</div>
+<div class="paragraph">
+<p>这就意味着首次命中分段的查询不需要促发 fielddata 的加载，因为 fielddata 已经被载入到内存。避免了用户遇到搜索卡顿的情形。</p>
+</div>
+<div class="paragraph">
+<p>预加载是按字段启用的，所以我们可以控制具体哪个字段可以预先加载：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">PUT /music/_mapping/_song
+{
+  "tags": {
+    "type": "string",
+    "fielddata": {
+      "loading" : "eager" <b class="conum">(1)</b>
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>设置 <code>fielddata.loading: eager</code> 可以告诉 Elasticsearch 预先将此字段的内容载入内存中。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Fielddata 的载入可以使用 <code>update-mapping</code> API 对已有字段设置 <code>lazy</code> 或 <code>eager</code> 两种模式。</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>预加载只是简单的将载入 fielddata 的代价转移到索引刷新的时候，而不是查询时，从而大大提高了搜索体验。</p>
+</div>
+<div class="paragraph">
+<p>体积大的索引段会比体积小的索引段需要更长的刷新时间。通常，体积大的索引段是由那些已经对查询可见的小分段合并而成的，所以较慢的刷新时间也不是很重要。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="global-ordinals">全局序号（Global Ordinals）</h4>
+<div class="paragraph">
+<p>有种可以用来降低字符串 fielddata 内存使用的技术叫做 <em>序号</em> 。</p>
+</div>
+<div class="paragraph">
+<p>设想我们有十亿文档，每个文档都有自己的 <code>status</code>  状态字段，状态总共有三种： <code>status_pending</code> 、 <code>status_published</code> 、 <code>status_deleted</code> 。如果我们为每个文档都保留其状态的完整字符串形式，那么每个文档就需要使用 14 到 16 字节，或总共 15 GB。</p>
+</div>
+<div class="paragraph">
+<p>取而代之的是我们可以指定三个不同的字符串，对其排序、编号：0，1，2。</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Ordinal | Term
+-------------------
+0       | status_deleted
+1       | status_pending
+2       | status_published</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>序号字符串在序号列表中只存储一次，每个文档只要使用数值编号的序号来替代它原始的值。</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Doc     | Ordinal
+-------------------------
+0       | 1  # pending
+1       | 1  # pending
+2       | 2  # published
+3       | 0  # deleted</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这样可以将内存使用从 15 GB 降到 1 GB 以下！</p>
+</div>
+<div class="paragraph">
+<p>但这里有个问题，记得 fielddata 是按分 <em>段</em> 来缓存的。如果一个分段只包含两个状态（ <code>status_deleted</code> 和 <code>status_published</code> ）。那么结果中的序号（0 和 1）就会与包含所有三个状态的分段不一样。</p>
+</div>
+<div class="paragraph">
+<p>如果我们尝试对 <code>status</code> 字段运行 <code>terms</code> 聚合，我们需要对实际字符串的值进行聚合，也就是说我们需要识别所有分段中相同的值。一个简单粗暴的方式就是对每个分段执行聚合操作，返回每个分段的字符串值，再将它们归纳得出完整的结果。
+尽管这样做可行，但会很慢而且大量消耗 CPU。</p>
+</div>
+<div class="paragraph">
+<p>取而代之的是使用一个被称为 <em>全局序号</em> 的结构。 全局序号是一个构建在 fielddata 之上的数据结构，它只占用少量内存。唯一值是 <em>跨所有分段</em> 识别的，然后将它们存入一个序号列表中，正如我们描述过的那样。</p>
+</div>
+<div class="paragraph">
+<p>现在， <code>terms</code> 聚合可以对全局序号进行聚合操作，将序号转换成真实字符串值的过程只会在聚合结束时发生一次。这会将聚合（和排序）的性能提高三到四倍。</p>
+</div>
+<div class="sect4">
+<h5 id="_构建全局序号_building_global_ordinals">构建全局序号（Building global ordinals）</h5>
+<div class="paragraph">
+<p>当然，天下没有免费的晚餐。  全局序号分布在索引的所有段中，所以如果新增或删除一个分段时，需要对全局序号进行重建。
+重建需要读取每个分段的每个唯一项，基数越高（即存在更多的唯一项）这个过程会越长。</p>
+</div>
+<div class="paragraph">
+<p>全局序号是构建在内存 fielddata 和 doc values 之上的。实际上，它们正是 doc values 性能表现不错的一个主要原因。</p>
+</div>
+<div class="paragraph">
+<p>和 fielddata 加载一样，全局序号默认也是延迟构建的。首个需要访问索引内 fielddata 的请求会促发全局序号的构建。由于字段的基数不同，这会导致给用户带来显著延迟这一糟糕结果。一旦全局序号发生重建，仍会使用旧的全局序号，直到索引中的分段产生变化：在刷新、写入或合并之后。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="eager-global-ordinals">预构建全局序号（Eager global ordinals）</h5>
+<div class="paragraph">
+<p>单个字符串字段 可以通过配置预先构建全局序号：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">PUT /music/_mapping/_song
+{
+  "song_title": {
+    "type": "string",
+    "fielddata": {
+      "loading" : "eager_global_ordinals" <b class="conum">(1)</b>
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>设置 <code>eager_global_ordinals</code> 也暗示着 fielddata 是预加载的。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>正如 fielddata 的预加载一样，预构建全局序号发生在新分段对于搜索可见之前。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>序号的构建只被应用于字符串。数值信息（integers（整数）、geopoints（地理经纬度）、dates（日期）等等）不需要使用序号映射，因为这些值自己本质上就是序号映射。</p>
+</div>
+<div class="paragraph">
+<p>因此，我们只能为字符串字段预构建其全局序号。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>也可以对 Doc values 进行全局序号预构建：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">PUT /music/_mapping/_song
+{
+  "song_title": {
+    "type":       "string",
+    "doc_values": true,
+    "fielddata": {
+      "loading" : "eager_global_ordinals" <b class="conum">(1)</b>
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>这种情况下，fielddata 没有载入到内存中，而是 doc values 被载入到文件系统缓存中。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>与 fielddata 预加载不一样，预建全局序号会对数据的 <em>实时性</em> 产生影响，构建一个高基数的全局序号会使一个刷新延时数秒。
+选择在于是每次刷新时付出代价，还是在刷新后的第一次查询时。如果经常索引而查询较少，那么在查询时付出代价要比每次刷新时要好。如果写大于读，那么在选择在查询时重建全局序号将会是一个更好的选择。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>针对实际场景优化全局序号的重建频次。如果我们有高基数字段需要花数秒钟重建，增加 <code>refresh_interval</code> 的刷新的时间从而可以使我们的全局序号保留更长的有效期，这也会节省 CPU 资源，因为我们重建的频次下降了。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="index-warmers">索引预热器（Index Warmers）</h4>
+<div class="paragraph">
+<p>最后我们谈谈 <em>索引预热器</em> 。预热器早于  fielddata 预加载和全局序号预加载之前出现，它们仍然有其存在的理由。一个索引预热器允许我们指定一个查询和聚合须要在新分片对于搜索可见之前执行。
+这个想法是通过预先填充或 <em>预热缓存</em> 让用户永远无法遇到延迟的波峰。</p>
+</div>
+<div class="paragraph">
+<p>原来，预热器最重要的用法是确保 fielddata 被预先加载，因为这通常是最耗时的一步。现在可以通过前面讨论的那些技术来更好的控制它，但是预热器还是可以用来预建过滤器缓存，当然我们也还是能选择用它来预加载 fielddata。</p>
+</div>
+<div class="paragraph">
+<p>让我们注册一个预热器然后解释发生了什么：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">PUT /music/_warmer/warmer_1 <b class="conum">(1)</b>
+{
+  "query" : {
+    "bool" : {
+      "filter" : {
+        "bool": {
+          "should": [ <b class="conum">(2)</b>
+            { "term": { "tag": "rock"        }},
+            { "term": { "tag": "hiphop"      }},
+            { "term": { "tag": "electronics" }}
+          ]
+        }
+      }
+    }
+  },
+  "aggs" : {
+    "price" : {
+      "histogram" : {
+        "field" : "price", <b class="conum">(3)</b>
+        "interval" : 10
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>预热器被关联到索引（ <code>music</code> ）上，使用接入口 <code>_warmer</code> 以及 ID （ <code>warmer_1</code> ）。</p>
+</li>
+<li>
+<p>为三种最受欢迎的曲风预建过滤器缓存。</p>
+</li>
+<li>
+<p>字段 price 的 fielddata 和全局序号会被预加载。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>预热器是根据具体索引注册的， 每个预热器都有唯一的 ID ，因为每个索引可能有多个预热器。</p>
+</div>
+<div class="paragraph">
+<p>然后我们可以指定查询，任何查询。它可以包括查询、过滤器、聚合、排序值、脚本，任何有效的查询表达式都毫不夸张。
+这里的目的是想注册那些可以代表用户产生流量压力的查询，从而将合适的内容载入缓存。</p>
+</div>
+<div class="paragraph">
+<p>当新建一个分段时，Elasticsearch 将会执行注册在预热器中的查询。执行这些查询会强制加载缓存，只有在所有预热器执行完，这个分段才会对搜索可见。</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>与预加载类似，预热器只是将冷缓存的代价转移到刷新的时候。当注册预热器时，做出明智的决定十分重要。
+为了确保每个缓存都被读入，我们 <em>可以</em> 加入上千的预热器，但这也会使新分段对于搜索可见的时间急剧上升。</p>
+</div>
+<div class="paragraph">
+<p>实际中，我们会选择少量代表大多数用户的查询，然后注册它们。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>有些管理的细节（比如获得已有预热器和删除预热器）没有在本小节提到，剩下的详细内容可以参考 {ref}/indices-warmers.html[预热器文档（warmers documentation）] 。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_preventing_combinatorial_explosions">优化聚合查询</h3>
+<div class="paragraph">
+<p>“elasticsearch 里面桶的叫法和 SQL 里面分组的概念是类似的，一个桶就类似 SQL 里面的一个 group，多级嵌套的 aggregation，
+类似 SQL 里面的多字段分组（group by field1,field2, &#8230;&#8203;..），注意这里仅仅是概念类似，底层的实现原理是不一样的。 －译者注”</p>
+</div>
+<div class="paragraph">
+<p><code>terms</code> 桶基于我们的数据动态构建桶；它并不知道到底生成了多少桶。 大多数时候对单个字段的聚合查询还是非常快的，
+但是当需要同时聚合多个字段时，就可能会产生大量的分组，最终结果就是占用 es 大量内存，从而导致 OOM 的情况发生。</p>
+</div>
+<div class="paragraph">
+<p>假设我们现在有一些关于电影的数据集，每条数据里面会有一个数组类型的字段存储表演该电影的所有演员的名字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">{
+  "actors" : [
+    "Fred Jones",
+    "Mary Jane",
+    "Elizabeth Worthing"
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果我们想要查询出演影片最多的十个演员以及与他们合作最多的演员，使用聚合是非常简单的：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">{
+  "aggs" : {
+    "actors" : {
+      "terms" : {
+         "field" : "actors",
+         "size" :  10
+      },
+      "aggs" : {
+        "costars" : {
+          "terms" : {
+            "field" : "actors",
+            "size" :  5
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这会返回前十位出演最多的演员，以及与他们合作最多的五位演员。这看起来是一个简单的聚合查询，最终只返回 50 条数据！</p>
+</div>
+<div class="paragraph">
+<p>但是， 这个看上去简单的查询可以轻而易举地消耗大量内存，我们可以通过在内存中构建一个树来查看这个 <code>terms</code> 聚合。
+ <code>actors</code> 聚合会构建树的第一层，每个演员都有一个桶。然后，内套在第一层的每个节点之下， <code>costar</code> 聚合会构建第二层，每个联合出演一个桶，请参见 <a href="#depth-first-1">Build full depth tree</a> 所示。这意味着每部影片会生成 n<sup>2</sup> 个桶！</p>
+</div>
+<div id="depth-first-1" class="imageblock">
+<div class="content">
+<img src="images/300_120_depth_first_1.svg" alt="Build full depth tree">
+</div>
+<div class="title">Figure 1. Build full depth tree</div>
+</div>
+<div class="paragraph">
+<p>用真实点的数据，设想平均每部影片有 10 名演员，每部影片就会生成 10<sup>2</sup> == 100 个桶。如果总共有 20，000 部影片，粗率计算就会生成 2，000，000 个桶。</p>
+</div>
+<div class="paragraph">
+<p>现在，记住，聚合只是简单的希望得到前十位演员和与他们联合出演者，总共 50 条数据。为了得到最终的结果，我们创建了一个有 2，000，000 桶的树，然后对其排序，取 top10。
+图 <a href="#depth-first-2">Sort tree</a> 和图 <a href="#depth-first-3">Prune tree</a> 对这个过程进行了阐述。</p>
+</div>
+<div id="depth-first-2" class="imageblock">
+<div class="content">
+<img src="images/300_120_depth_first_2.svg" alt="Sort tree">
+</div>
+<div class="title">Figure 2. Sort tree</div>
+</div>
+<div id="depth-first-3" class="imageblock">
+<div class="content">
+<img src="images/300_120_depth_first_3.svg" alt="Prune tree">
+</div>
+<div class="title">Figure 3. Prune tree</div>
+</div>
+<div class="paragraph">
+<p>这时我们一定非常抓狂，在 2 万条数据下执行任何聚合查询都是毫无压力的。如果我们有 2 亿文档，想要得到前 100 位演员以及与他们合作最多的 20 位演员，作为查询的最终结果会出现什么情况呢？</p>
+</div>
+<div class="paragraph">
+<p>可以推测聚合出来的分组数非常大，会使这种策略难以维持。世界上并不存在足够的内存来支持这种不受控制的聚合查询。</p>
+</div>
+<div class="sect3">
+<h4 id="_深度优先与广度优先_depth_first_versus_breadth_first">深度优先与广度优先（Depth-First Versus Breadth-First）</h4>
+<div class="paragraph">
+<p>Elasticsearch 允许我们改变聚合的 <em>集合模式</em> ，就是为了应对这种状况。 
+我们之前展示的策略叫做 <em>深度优先</em> ，它是默认设置， 先构建完整的树，然后修剪无用节点。 <em>深度优先</em> 的方式对于大多数聚合都能正常工作，但对于如我们演员和联合演员这样例子的情形就不太适用。</p>
+</div>
+<div class="paragraph">
+<p>为了应对这些特殊的应用场景，我们应该使用另一种集合策略叫做 <em>广度优先</em> 。这种策略的工作方式有些不同，它先执行第一层聚合， <em>再</em> 继续下一层聚合之前会先做修剪。
+图 <a href="#breadth-first-1">Build first level</a> 和图 <a href="#breadth-first-3">Prune first level</a> 对这个过程进行了阐述。</p>
+</div>
+<div class="paragraph">
+<p>在我们的示例中， <code>actors</code> 聚合会首先执行，在这个时候，我们的树只有一层，但我们已经知道了前 10 位的演员！这就没有必要保留其他的演员信息，因为它们无论如何都不会出现在前十位中。</p>
+</div>
+<div id="breadth-first-1" class="imageblock">
+<div class="content">
+<img src="images/300_120_breadth_first_1.svg" alt="Build first level">
+</div>
+<div class="title">Figure 4. Build first level</div>
+</div>
+<div id="breadth-first-2" class="imageblock">
+<div class="content">
+<img src="images/300_120_breadth_first_2.svg" alt="Sort first level">
+</div>
+<div class="title">Figure 5. Sort first level</div>
+</div>
+<div id="breadth-first-3" class="imageblock">
+<div class="content">
+<img src="images/300_120_breadth_first_3.svg" alt="Prune first level">
+</div>
+<div class="title">Figure 6. Prune first level</div>
+</div>
+<div class="paragraph">
+<p>因为我们已经知道了前十名演员，我们可以安全的修剪其他节点。修剪后，下一层是基于 <em>它的</em> 执行模式读入的，重复执行这个过程直到聚合完成，如图 <a href="#breadth-first-4">Populate full depth for remaining nodes</a> 所示。
+这种场景下，广度优先可以大幅度节省内存。</p>
+</div>
+<div id="breadth-first-4" class="imageblock">
+<div class="content">
+<img src="images/300_120_breadth_first_4.svg" alt="Step 4: populate full depth for remaining nodes">
+</div>
+<div class="title">Figure 7. Populate full depth for remaining nodes</div>
+</div>
+<div class="paragraph">
+<p>要使用广度优先，只需简单  的通过参数 <code>collect</code> 开启：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">{
+  "aggs" : {
+    "actors" : {
+      "terms" : {
+         "field" :        "actors",
+         "size" :         10,
+         "collect_mode" : "breadth_first" <b class="conum">(1)</b>
+      },
+      "aggs" : {
+        "costars" : {
+          "terms" : {
+            "field" : "actors",
+            "size" :  5
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>按聚合来开启 <code>breadth_first</code> 。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>广度优先仅仅适用于每个组的聚合数量远远小于当前总组数的情况下，因为广度优先会在内存中缓存裁剪后的仅仅需要缓存的每个组的所有数据，以便于它的子聚合分组查询可以复用上级聚合的数据。</p>
+</div>
+<div class="paragraph">
+<p>广度优先的内存使用情况与裁剪后的缓存分组数据量是成线性的。对于很多聚合来说，每个桶内的文档数量是相当大的。
+想象一种按月分组的直方图，总组数肯定是固定的，因为每年只有12个月，这个时候每个月下的数据量可能非常大。这使广度优先不是一个好的选择，这也是为什么深度优先作为默认策略的原因。</p>
+</div>
+<div class="paragraph">
+<p>针对上面演员的例子，如果数据量越大，那么默认的使用深度优先的聚合模式生成的总分组数就会非常多，但是预估二级的聚合字段分组后的数据量相比总的分组数会小很多所以这种情况下使用广度优先的模式能大大节省内存，从而通过优化聚合模式来大大提高了在某些特定场景下聚合查询的成功率。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_closing_thoughts">总结</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>本小节涵盖了许多基本理论以及很多深入的技术问题。聚合给 Elasticsearch 带来了难以言喻的强大能力和灵活性。桶与度量的嵌套能力，基数与百分位数的快速估算能力，定位信息中统计异常的能力，
+所有的这些都在近乎实时的情况下操作的，而且全文搜索是并行的，它们改变了很多企业的游戏规则。</p>
+</div>
+<div class="paragraph">
+<p>聚合是这样一种功能特性：一旦我们开始使用它，我们就能找到很多其他的可用场景。实时报表与分析对于很多组织来说都是核心功能（无论是应用于商业智能还是服务器日志）。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 默认给 <em>大多数</em> 字段启用 doc values，所以在一些搜索场景大大的节省了内存使用量，但是需要注意的是只有不分词的 string 类型的字段才能使用这种特性。</p>
+</div>
+<div class="paragraph">
+<p>内存的管理形式可以有多种形式，这取决于我们特定的应用场景：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>在规划时，组织好数据，使聚合运行在 <code>not_analyzed</code> 字符串而不是 <code>analyzed</code> 字符串，这样可以有效的利用 doc values 。</p>
+</li>
+<li>
+<p>在测试时，验证分析链不会在之后的聚合计算中创建高基数字段。</p>
+</li>
+<li>
+<p>在搜索时，合理利用近似聚合和数据过滤。</p>
+</li>
+<li>
+<p>在节点层，设置硬内存大小以及动态的断熔限制。</p>
+</li>
+<li>
+<p>在应用层，通过监控集群内存的使用情况和 Full GC 的发生频率，来调整是否需要给集群资源添加更多的机器节点</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>大多数实施会应用到以上一种或几种方法。确切的组合方式与我们特定的系统环境高度相关。</p>
+</div>
+<div class="paragraph">
+<p>无论采取何种方式，对于现有的选择进行评估，并同时创建短期和长期计划，都十分重要。先决定当前内存的使用情况和需要做的事情（如果有），通过评估数据增长速度，来决定未来半年或者一年的集群的规划，使用何种方式来扩展。</p>
+</div>
+<div class="paragraph">
+<p>最好在建立集群之前就计划好这些内容，而不是在我们集群堆内存使用 90% 的时候再临时抱佛脚。</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-05-17 22:26:24 CST
+</div>
+</div>
+</body>
+</html>

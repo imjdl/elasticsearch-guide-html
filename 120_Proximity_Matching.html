@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.2">
+<title>近似匹配</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+audio,canvas,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+[hidden],template{display:none}
+script{display:none!important}
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+a{background:transparent}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
+p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:none}
+p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #ddddd8;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
+abbr{text-transform:none}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
+blockquote cite:before{content:"\2014 \0020"}
+blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media only screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table thead,table tfoot{background:#f7f8f7;font-weight:bold}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
+.clearfix:after,.float-group:after{clear:both}
+*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+*:not(pre)>code.nobreak{word-wrap:normal}
+*:not(pre)>code.nowrap{white-space:nowrap}
+pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
+b.button:before{content:"[";padding:0 3px 0 2px}
+b.button:after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header:before,#header:after,#content:before,#content:after,#footnotes:before,#footnotes:after,#footer:before,#footer:after{content:" ";display:table}
+#header:after,#content:after,#footnotes:after,#footer:after{clear:both}
+#content{margin-top:1.25em}
+#content:before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #ddddd8}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #ddddd8;padding-bottom:8px}
+#header .details{border-bottom:1px solid #ddddd8;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span:before{content:"\00a0\2013\00a0"}
+#header .details br+span.author:before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark:before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber:after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #ddddd8;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #efefed;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media only screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+.sect1{padding-bottom:.625em}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
+.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{color:rgba(0,0,0,.85)}
+table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:initial}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
+.sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
+.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
+.literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]:before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:#999}
+.listingblock:hover code[data-lang]:before{display:block}
+.listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
+.listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
+table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
+table.pyhltable td.code{padding-left:.75em;padding-right:0}
+pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
+pre.pygments .lineno{display:inline-block;margin-right:.25em}
+table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock blockquote p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote:before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.5em;margin-right:.5ex;text-align:right}
+.quoteblock .quoteblock{margin-left:0;margin-right:0;padding:.5em 0;border-left:3px solid rgba(0,0,0,.6)}
+.quoteblock .quoteblock blockquote{padding:0 0 0 .75em}
+.quoteblock .quoteblock blockquote:before{display:none}
+.verseblock{margin:0 1em 1.25em 1em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract{margin:0 0 1.25em 0;display:block}
+.quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
+.quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
+table.tableblock{max-width:100%;border-collapse:separate}
+table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
+table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
+table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
+table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px 0}
+table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0 0}
+table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
+table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
+table.frame-all{border-width:1px}
+table.frame-sides{border-width:0 1px}
+table.frame-topbot{border-width:1px 0}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+td>div.verse{white-space:pre}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
+ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
+ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
+ul.inline>li>*{display:block}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist>table tr>td:first-of-type{padding:.4em .75em 0 .75em;line-height:1;vertical-align:top}
+.colist>table tr>td:first-of-type img{max-width:initial}
+.colist>table tr>td:last-of-type{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
+.imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
+.imageblock.right,.imageblock[style*="float: right"]{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background-color:#00fafa}
+.black{color:#000}
+.black-background{background-color:#000}
+.blue{color:#0000bf}
+.blue-background{background-color:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background-color:#fa00fa}
+.gray{color:#606060}
+.gray-background{background-color:#7d7d7d}
+.green{color:#006000}
+.green-background{background-color:#007d00}
+.lime{color:#00bf00}
+.lime-background{background-color:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background-color:#7d0000}
+.navy{color:#000060}
+.navy-background{background-color:#00007d}
+.olive{color:#606000}
+.olive-background{background-color:#7d7d00}
+.purple{color:#600060}
+.purple-background{background-color:#7d007d}
+.red{color:#bf0000}
+.red-background{background-color:#fa0000}
+.silver{color:#909090}
+.silver-background{background-color:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background-color:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background-color:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background-color:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]:after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@media print{@page{margin:1.25cm .75cm}
+*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]:after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #ddddd8!important;padding-bottom:0!important}
+.sect1{padding-bottom:0!important}
+.sect1+.sect1{border:0!important}
+#header>h1:first-child{margin-top:1.25rem}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em 0}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span:before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]:before{display:block}
+#footer{background:none!important;padding:0 .9375em}
+#footer-text{color:rgba(0,0,0,.6)!important;font-size:.9em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+</style>
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="proximity-matching">近似匹配</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>使用 TF/IDF 的标准全文检索将文档或者文档中的字段作一大袋的词语处理。 <code>match</code> 查询可以告知我们这大袋子中是否包含查询的词条，但却无法告知词语之间的关系。</p>
+</div>
+<div class="paragraph">
+<p>思考下面这几个句子的不同：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sue ate the alligator.</p>
+</li>
+<li>
+<p>The alligator ate Sue.</p>
+</li>
+<li>
+<p>Sue never goes anywhere without her alligator-skin purse.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>用 <code>match</code> 搜索 <code>sue alligator</code> 上面的三个文档都会得到匹配，但它却不能确定这两个词是否只来自于一种语境，甚至都不能确定是否来自于同一个段落。</p>
+</div>
+<div class="paragraph">
+<p>理解分词之间的关系是一个复杂的难题，我们也无法通过换一种查询方式去解决。但我们至少可以通过出现在彼此附近或者仅仅是彼此相邻的分词来判断一些似乎相关的分词。</p>
+</div>
+<div class="paragraph">
+<p>每个文档可能都比我们上面这个例子要长： <code>Sue</code> 和 <code>alligator</code> 这两个词可能会分散在其他的段落文字中，我们可能会希望得到尽可能包含这两个词的文档，但我们也同样需要这些文档与分词有很高的相关度。</p>
+</div>
+<div class="paragraph">
+<p>这就是短语匹配或者近似匹配的所属领域。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>在这一章节，我们还是使用在<a href="#match-test-data"><code>match</code> 查询</a>中使用过的文档作为例子。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="phrase-matching">短语匹配</h3>
+<div class="paragraph">
+<p>就像 <code>match</code> 查询对于标准全文检索是一种最常用的查询一样，当你想找到彼此邻近搜索词的查询方法时，就会想到 <code>match_phrase</code> 查询。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">GET /my_index/my_type/_search
+{
+    "query": {
+        "match_phrase": {
+            "title": "quick brown fox"
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>类似 <code>match</code> 查询， <code>match_phrase</code> 查询首先将查询字符串解析成一个词项列表，然后对这些词项进行搜索，但只保留那些包含 <em>全部</em> 搜索词项，且 <em>位置</em> 与搜索词项相同的文档。
+比如对于 <code>quick fox</code> 的短语搜索可能不会匹配到任何文档，因为没有文档包含的 <code>quick</code> 词之后紧跟着 <code>fox</code> 。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>match_phrase</code> 查询同样可写成一种类型为 <code>phrase</code> 的 <code>match</code> 查询:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">"match": {
+    "title": {
+        "query": "quick brown fox",
+        "type":  "phrase"
+    }
+}</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_词项的位置">词项的位置</h4>
+<div class="paragraph">
+<p>当一个字符串被分词后，这个分析器不但会返回一个词项列表，而且还会返回各词项在原始字符串中的 <em>位置</em> 或者顺序关系：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">GET /_analyze?analyzer=standard
+Quick brown fox</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>返回信息如下：</p>
+</div>
+<div class="listingblock pagebreak-before">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">{
+   "tokens": [
+      {
+         "token": "quick",
+         "start_offset": 0,
+         "end_offset": 5,
+         "type": "&lt;ALPHANUM&gt;",
+         "position": 1 <b class="conum">(1)</b>
+      },
+      {
+         "token": "brown",
+         "start_offset": 6,
+         "end_offset": 11,
+         "type": "&lt;ALPHANUM&gt;",
+         "position": 2 <b class="conum">(1)</b>
+      },
+      {
+         "token": "fox",
+         "start_offset": 12,
+         "end_offset": 15,
+         "type": "&lt;ALPHANUM&gt;",
+         "position": 3 <b class="conum">(1)</b>
+      }
+   ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>position</code> 代表各词项在原始字符串中的位置。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>位置信息可以被存储在倒排索引中，因此 <code>match_phrase</code> 查询这类对词语位置敏感的查询，
+就可以利用位置信息去匹配包含所有查询词项，且各词项顺序也与我们搜索指定一致的文档，中间不夹杂其他词项。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_什么是短语">什么是短语</h4>
+<div class="paragraph">
+<p>一个被认定为和短语 <code>quick brown fox</code> 匹配的文档，必须满足以下这些要求：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>quick</code> 、 <code>brown</code> 和 <code>fox</code> 需要全部出现在域中。</p>
+</li>
+<li>
+<p><code>brown</code> 的位置应该比 <code>quick</code> 的位置大 <code>1</code> 。</p>
+</li>
+<li>
+<p><code>fox</code> 的位置应该比 <code>quick</code> 的位置大 <code>2</code> 。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>如果以上任何一个选项不成立，则该文档不能认定为匹配。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>本质上来讲，<code>match_phrase</code> 查询是利用一种低级别的 <code>span</code> 查询族（query family）去做词语位置敏感的匹配。
+
+Span 查询是一种词项级别的查询，所以它们没有分词阶段；它们只对指定的词项进行精确搜索。</p>
+</div>
+<div class="paragraph">
+<p>值得庆幸的是，<code>match_phrase</code> 查询已经足够优秀，大多数人是不会直接使用 <code>span</code> 查询。
+然而，在一些专业领域，例如专利检索，还是会采用这种低级别查询去执行非常具体而又精心构造的位置搜索。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="slop">混合起来</h3>
+<div class="paragraph">
+<p>精确短语匹配  或许是过于严格了。也许我们想要包含 <code>quick brown fox'' 的文档也能够匹配 </code>quick fox,'' ， 尽管情形不完全相同。</p>
+</div>
+<div class="paragraph">
+<p>我们能够通过使用 <code>slop</code> 参数将灵活度引入短语匹配中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">GET /my_index/my_type/_search
+{
+    "query": {
+        "match_phrase": {
+            "title": {
+            	"query": "quick fox",
+            	"slop":  1
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>slop</code> 参数告诉 <code>match_phrase</code> 查询词条相隔多远时仍然能将文档视为匹配  。 相隔多远的意思是为了让查询和文档匹配你需要移动词条多少次？</p>
+</div>
+<div class="paragraph">
+<p>我们以一个简单的例子开始吧。 为了让查询 <code>quick fox</code> 能匹配一个包含 <code>quick brown fox</code> 的文档， 我们需要 <code>slop</code> 的值为 <code>1</code>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>            Pos 1         Pos 2         Pos 3
+-----------------------------------------------
+Doc:        quick         brown         fox
+-----------------------------------------------
+Query:      quick         fox
+Slop 1:     quick                 ↳     fox</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>尽管在使用了 <code>slop</code> 短语匹配中所有的单词都需要出现， 但是这些单词也不必为了匹配而按相同的序列排列。 有了足够大的 <code>slop</code> 值， 单词就能按照任意顺序排列了。</p>
+</div>
+<div class="paragraph">
+<p>为了使查询 <code>fox quick</code> 匹配我们的文档， 我们需要 <code>slop</code> 的值为 <code>3</code>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>            Pos 1         Pos 2         Pos 3
+-----------------------------------------------
+Doc:        quick         brown         fox
+-----------------------------------------------
+Query:      fox           quick
+Slop 1:     fox|quick  ↵  <b class="conum">(1)</b>
+Slop 2:     quick      ↳  fox
+Slop 3:     quick                 ↳     fox</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>注意 <code>fox</code> 和 <code>quick</code> 在这步中占据同样的位置。 因此将 <code>fox quick</code> 转换顺序成 <code>quick fox</code> 需要两步， 或者值为 <code>2</code> 的 <code>slop</code> 。</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_multivalue_fields_2">多值字段</h3>
+<div class="paragraph">
+<p>对多值字段使用短语匹配时会发生奇怪的事。  想象一下你索引这个文档:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">PUT /my_index/groups/1
+{
+    "names": [ "John Abraham", "Lincoln Smith"]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然后运行一个对 <code>Abraham Lincoln</code> 的短语查询:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">GET /my_index/groups/_search
+{
+    "query": {
+        "match_phrase": {
+            "names": "Abraham Lincoln"
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>令人惊讶的是， 即使 <code>Abraham</code> 和 <code>Lincoln</code> 在 <code>names</code> 数组里属于两个不同的人名， 我们的文档也匹配了查询。 这一切的原因在Elasticsearch数组的索引方式。</p>
+</div>
+<div class="paragraph">
+<p>在分析 <code>John Abraham</code> 的时候， 产生了如下信息：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Position 1: <code>john</code></p>
+</li>
+<li>
+<p>Position 2: <code>abraham</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>然后在分析 <code>Lincoln Smith</code> 的时候， 产生了：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Position 3: <code>lincoln</code></p>
+</li>
+<li>
+<p>Position 4: <code>smith</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>换句话说， Elasticsearch对以上数组分析生成了与分析单个字符串 <code>John Abraham Lincoln Smith</code> 一样几乎完全相同的语汇单元。 我们的查询示例寻找相邻的 <code>lincoln</code> 和 <code>abraham</code> ，
+而且这两个词条确实存在，并且它们俩正好相邻， 所以这个查询匹配了。</p>
+</div>
+<div class="paragraph">
+<p>幸运的是， 在这样的情况下有一种叫做 <code>position_increment_gap</code> 的简单的解决方案， 它在字段映射中配置。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">DELETE /my_index/groups/ <b class="conum">(1)</b>
+
+PUT /my_index/_mapping/groups <b class="conum">(2)</b>
+{
+    "properties": {
+        "names": {
+            "type":                "string",
+            "position_increment_gap": 100
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>首先删除映射 <code>groups</code> 以及这个类型内的所有文档。</p>
+</li>
+<li>
+<p>然后创建一个有正确值的新的映射 <code>groups</code> 。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>position_increment_gap</code> 设置告诉 Elasticsearch 应该为数组中每个新元素增加当前词条 <code>position</code> 的指定值。 所以现在当我们再索引 names 数组时，会产生如下的结果：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Position 1: <code>john</code></p>
+</li>
+<li>
+<p>Position 2: <code>abraham</code></p>
+</li>
+<li>
+<p>Position 103: <code>lincoln</code></p>
+</li>
+<li>
+<p>Position 104: <code>smith</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>现在我们的短语查询可能无法匹配该文档因为 <code>abraham</code> 和 <code>lincoln</code> 之间的距离为 100 。 为了匹配这个文档你必须添加值为 100 的 <code>slop</code> 。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_closer_is_better">越近越好</h3>
+<div class="paragraph">
+<p>鉴于一个短语查询仅仅排除了不包含确切查询短语的文档， 而 <em>邻近查询</em> &#x2014; 一个 
+<code>slop</code> 大于 <code>0</code>&#x2014; 的短语查询将查询词条的邻近度考虑到最终相关度 <code>_score</code> 中。 通过设置一个像 <code>50</code> 或者 <code>100</code> 这样的高 <code>slop</code> 值, 你能够排除单词距离太远的文档， 但是也给予了那些单词临近的的文档更高的分数。</p>
+</div>
+<div class="paragraph">
+<p>下列对 <code>quick dog</code> 的邻近查询匹配了同时包含 <code>quick</code> 和 <code>dog</code> 的文档， 但是也给了与 quick 和 dog 更加临近的文档更高的分数 ：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">POST /my_index/my_type/_search
+{
+   "query": {
+      "match_phrase": {
+         "title": {
+            "query": "quick dog",
+            "slop":  50 <b class="conum">(1)</b>
+         }
+      }
+   }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>注意高 <code>slop</code> 值。</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">{
+  "hits": [
+     {
+        "_id":      "3",
+        "_score":   0.75, <b class="conum">(1)</b>
+        "_source": {
+           "title": "The quick brown fox jumps over the quick dog"
+        }
+     },
+     {
+        "_id":      "2",
+        "_score":   0.28347334, <b class="conum">(2)</b>
+        "_source": {
+           "title": "The quick brown fox jumps over the lazy dog"
+        }
+     }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>分数较高因为 <code>quick</code> 和 <code>dog</code> 很接近</p>
+</li>
+<li>
+<p>分数较低因为 <code>quick</code> 和 <code>dog</code> 分开较远</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proximity-relevance">使用邻近度提高相关度</h3>
+<div class="paragraph">
+<p>虽然邻近查询很有用， 但是所有词条都出现在文档的要求过于严格了。
+我们讨论 <a href="#full-text-search">[full-text-search]</a> 一章的 <a href="#match-precision">[match-precision]</a> 也是同样的问题： 如果七个词条中有六个匹配， 那么这个文档对用户而言就已经足够相关了， 但是 <code>match_phrase</code> 查询可能会将它排除在外。</p>
+</div>
+<div class="paragraph">
+<p>相比将使用邻近匹配作为绝对要求， 我们可以将它作为  <em>信号</em>&#x2014; 使用， 作为许多潜在查询中的一个， 会对每个文档的最终分值做出贡献 (参考 <a href="#most-fields">[most-fields]</a>)。</p>
+</div>
+<div class="paragraph">
+<p>实际上我们想将多个查询的分数累计起来意味着我们应该用 <code>bool</code> 查询将它们合并。</p>
+</div>
+<div class="paragraph">
+<p>我们可以将一个简单的 <code>match</code> 查询作为一个 <code>must</code> 子句。 这个查询将决定哪些文档需要被包含到结果集中。 我们可以用 <code>minimum_should_match</code> 参数去除长尾。 然后我们可以以 <code>should</code> 子句的形式添加更多特定查询。 每一个匹配成功的都会增加匹配文档的相关度。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">GET /my_index/my_type/_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match": { <b class="conum">(1)</b>
+          "title": {
+            "query":                "quick brown fox",
+            "minimum_should_match": "30%"
+          }
+        }
+      },
+      "should": {
+        "match_phrase": { <b class="conum">(2)</b>
+          "title": {
+            "query": "quick brown fox",
+            "slop":  50
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>must</code> 子句从结果集中包含或者排除文档。</p>
+</li>
+<li>
+<p><code>should</code> 子句增加了匹配到文档的相关度评分。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>我们当然可以在 <code>should</code> 子句里面添加其它的查询， 其中每一个查询只针对某一特定方面的相关度。</p>
+</div>
+</div>
+<div class="sect2 pagebreak-before">
+<h3 id="_Improving_Performance">性能优化</h3>
+<div class="paragraph">
+<p>短语查询和邻近查询都比简单的 <code>query</code> 查询代价更高。
+一个 <code>match</code> 查询仅仅是看词条是否存在于倒排索引中，而一个 <code>match_phrase</code> 查询是必须计算并比较多个可能重复词项的位置。</p>
+</div>
+<div class="paragraph">
+<p><a href="http://people.apache.org/~mikemccand/lucenebench/">Lucene nightly benchmarks</a> 表明一个简单的 <code>term</code> 查询比一个短语查询大约快 10 倍，比邻近查询(有 <code>slop</code> 的短语
+查询)大约快 20 倍。当然，这个代价指的是在搜索时而不是索引时。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>通常，短语查询的额外成本并不像这些数字所暗示的那么吓人。事实上，性能上的差距只是证明一个简单的 <code>term</code> 查询有多快。标准全文数据的短语查询通常在几毫秒内完成，因此实际上都是完全可用，即使是在一个繁忙的集群上。</p>
+</div>
+<div class="paragraph">
+<p>在某些特定病理案例下，短语查询可能成本太高了，但比较少见。一个典型例子就是DNA序列，在序列里很多同样的词项在很多位置重复出现。在这里使用高 <code>slop</code> 值会到导致位置计算大量增加。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>那么我们应该如何限制短语查询和邻近近查询的性能消耗呢？一种有用的方法是减少需要通过短语查询检查的文档总数。</p>
+</div>
+<div class="sect3">
+<h4 id="rescore-api">结果集重新评分</h4>
+<div class="paragraph">
+<p>在<a href="#proximity-relevance">先前的章节中</a> ，我们讨论了而使用邻近查询来调整相关度，而不是使用它将文档从结果列表中添加或者排除。一个查询可能会匹配成千上万的结果，但我们的用户很可能只对结果的前几页感兴趣。</p>
+</div>
+<div class="paragraph">
+<p>一个简单的 <code>match</code> 查询已经通过排序把包含所有含有搜索词条的文档放在结果列表的前面了。事实上，我们只想对这些 <em>顶部文档</em> 重新排序，来给同时匹配了短语查询的文档一个额外的相关度升级。</p>
+</div>
+<div class="paragraph">
+<p><code>search</code> API 通过 <em>重新评分</em> 明确支持该功能。重新评分阶段支持一个代价更高的评分算法&#8212;&#8203;比如 <code>phrase</code> 查询&#8212;&#8203;只是为了从每个分片中获得前 <code>K</code> 个结果。 然后会根据它们的最新评分
+重新排序。</p>
+</div>
+<div class="paragraph">
+<p>该请求如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">GET /my_index/my_type/_search
+{
+    "query": {
+        "match": {  <b class="conum">(1)</b>
+            "title": {
+                "query":                "quick brown fox",
+                "minimum_should_match": "30%"
+            }
+        }
+    },
+    "rescore": {
+        "window_size": 50, <b class="conum">(2)</b>
+        "query": {         <b class="conum">(3)</b>
+            "rescore_query": {
+                "match_phrase": {
+                    "title": {
+                        "query": "quick brown fox",
+                        "slop":  50
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>match</code> 查询决定哪些文档将包含在最终结果集中，并通过 TF/IDF 排序。</p>
+</li>
+<li>
+<p><code>window_size</code> 是每一分片进行重新评分的顶部文档数量。</p>
+</li>
+<li>
+<p>目前唯一支持的重新打分算法就是另一个查询，但是以后会有计划增加更多的算法。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="shingles">寻找相关词</h3>
+<div class="paragraph">
+<p>短语查询和邻近查询都很好用，但仍有一个缺点。它们过于严格了：为了匹配短语查询，所有词项都必须存在，即使使用了 <code>slop</code> 。
+</p>
+</div>
+<div class="paragraph">
+<p>用 <code>slop</code> 得到的单词顺序的灵活性也需要付出代价，因为失去了单词对之间的联系。即使可以识别 <code>sue</code> 、 <code>alligator</code> 和 <code>ate</code>
+相邻出现的文档，但无法分辨是 <em>Sue ate</em> 还是  <em>alligator ate</em> 。</p>
+</div>
+<div class="paragraph">
+<p>当单词相互结合使用的时候，表达的含义比单独使用更丰富。两个子句 <em>I&#8217;m not happy I&#8217;m working</em> 和 <em>I&#8217;m happy I&#8217;m not working</em> 包含相同
+的单词，也拥有相同的邻近度，但含义截然不同。</p>
+</div>
+<div class="paragraph">
+<p>如果索引单词对而不是索引独立的单词，就能对这些单词的上下文尽可能多的保留。</p>
+</div>
+<div class="paragraph">
+<p>对句子 <code>Sue ate the alligator</code> ，不仅要将每一个单词（或者 <em>unigram</em> ）作为词项索引</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>["sue", "ate", "the", "alligator"]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>也要将每个单词 <em>以及它的邻近词</em> 作为单个词项索引：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>["sue ate", "ate the", "the alligator"]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这些单词对（或者 <em>bigrams</em> ）被称为 <em>shingles</em> 。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Shingles 不限于单词对；你也可以索引三个单词（ <em>trigrams</em> ）：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>["sue ate the", "ate the alligator"]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Trigrams 提供了更高的精度，但是也大大增加了索引中唯一词项的数量。在大多数情况下，Bigrams 就够了。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当然，只有当用户输入的查询内容和在原始文档中顺序相同时，shingles 才是有用的；对 <code>sue alligator</code> 的查询可能会匹配到单个单词，但是不会匹配任何 shingles 。</p>
+</div>
+<div class="paragraph">
+<p>幸运的是，用户倾向于使用和搜索数据相似的构造来表达搜索意图。但这一点很重要：只是索引 bigrams 是不够的；我们仍然需要 unigrams ，但可以将匹配 bigrams 作为增加相关度评分的信号。</p>
+</div>
+<div class="sect3">
+<h4 id="_生成_shingles">生成 Shingles</h4>
+<div class="paragraph">
+<p>Shingles 需要在索引时作为分析过程的一部分被创建。我们可以将 unigrams 和 bigrams 都索引到单个字段中，
+但将它们分开保存在能被独立查询的字段会更清晰。unigrams 字段将构成我们搜索的基础部分，而 bigrams 字段用来提高相关度。</p>
+</div>
+<div class="paragraph">
+<p>首先，我们需要在创建分析器时使用 <code>shingle</code> 语汇单元过滤器：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">DELETE /my_index
+
+PUT /my_index
+{
+    "settings": {
+        "number_of_shards": 1,  <b class="conum">(1)</b>
+        "analysis": {
+            "filter": {
+                "my_shingle_filter": {
+                    "type":             "shingle",
+                    "min_shingle_size": 2, <b class="conum">(2)</b>
+                    "max_shingle_size": 2, <b class="conum">(2)</b>
+                    "output_unigrams":  false   <b class="conum">(3)</b>
+                }
+            },
+            "analyzer": {
+                "my_shingle_analyzer": {
+                    "type":             "custom",
+                    "tokenizer":        "standard",
+                    "filter": [
+                        "lowercase",
+                        "my_shingle_filter" <b class="conum">(4)</b>
+                    ]
+                }
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>参考 <a href="#relevance-is-broken">[relevance-is-broken]</a> 。</p>
+</li>
+<li>
+<p>默认最小/最大的 shingle 大小是 <code>2</code> ，所以实际上不需要设置。</p>
+</li>
+<li>
+<p><code>shingle</code> 语汇单元过滤器默认输出 unigrams ，但是我们想让 unigrams 和 bigrams 分开。</p>
+</li>
+<li>
+<p><code>my_shingle_analyzer</code> 使用我们常规的 <code>my_shingles_filter</code> 语汇单元过滤器。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>首先，用 <code>analyze</code> API 测试下分析器：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">GET /my_index/_analyze?analyzer=my_shingle_analyzer
+Sue ate the alligator</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>果然， 我们得到了 3 个词项：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sue ate</code></p>
+</li>
+<li>
+<p><code>ate the</code></p>
+</li>
+<li>
+<p><code>the alligator</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>现在我们可以继续创建一个使用新的分析器的字段。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_多字段">多字段</h4>
+<div class="paragraph">
+<p>我们曾谈到将 unigrams 和 bigrams 分开索引更清晰，所以 <code>title</code> 字段将创建成一个多字段（参考 <a href="#multi-fields">[multi-fields]</a> ）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">PUT /my_index/_mapping/my_type
+{
+    "my_type": {
+        "properties": {
+            "title": {
+                "type": "string",
+                "fields": {
+                    "shingles": {
+                        "type":     "string",
+                        "analyzer": "my_shingle_analyzer"
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>通过这个映射， JSON 文档中的 <code>title</code> 字段将会被以 unigrams (<code>title</code>)和 bigrams (<code>title.shingles</code>)被索引，这意味着可以独立地查询这些字段。</p>
+</div>
+<div class="paragraph">
+<p>最后，我们可以索引以下示例文档:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">POST /my_index/my_type/_bulk
+{ "index": { "_id": 1 }}
+{ "title": "Sue ate the alligator" }
+{ "index": { "_id": 2 }}
+{ "title": "The alligator ate Sue" }
+{ "index": { "_id": 3 }}
+{ "title": "Sue never goes anywhere without her alligator skin purse" }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_搜索_shingles">搜索 Shingles</h4>
+<div class="paragraph">
+<p>为了理解添加 <code>shingles</code> 字段的好处，让我们首先来看 <code>The hungry alligator ate Sue</code> 进行简单 <code>match</code> 查询的结果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">GET /my_index/my_type/_search
+{
+   "query": {
+        "match": {
+           "title": "the hungry alligator ate sue"
+        }
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个查询返回了所有的三个文档， 但是注意文档 1 和 2 有相同的相关度评分因为他们包含了相同的单词：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">{
+  "hits": [
+     {
+        "_id": "1",
+        "_score": 0.44273707, <b class="conum">(1)</b>
+        "_source": {
+           "title": "Sue ate the alligator"
+        }
+     },
+     {
+        "_id": "2",
+        "_score": 0.44273707, <b class="conum">(1)</b>
+        "_source": {
+           "title": "The alligator ate Sue"
+        }
+     },
+     {
+        "_id": "3", <b class="conum">(2)</b>
+        "_score": 0.046571054,
+        "_source": {
+           "title": "Sue never goes anywhere without her alligator skin purse"
+        }
+     }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>两个文档都包含 <code>the</code> 、 <code>alligator</code> 和 <code>ate</code> ，所以获得相同的评分。</p>
+</li>
+<li>
+<p>我们可以通过设置 <code>minimum_should_match</code> 参数排除文档 3 ，参考 <a href="#match-precision">[match-precision]</a> 。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>现在在查询里添加 <code>shingles</code> 字段。不要忘了在 <code>shingles</code> 字段上的匹配是充当一
+种信号&#8212;&#8203;为了提高相关度评分&#8212;&#8203;所以我们仍然需要将基本 <code>title</code> 字段包含到查询中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">GET /my_index/my_type/_search
+{
+   "query": {
+      "bool": {
+         "must": {
+            "match": {
+               "title": "the hungry alligator ate sue"
+            }
+         },
+         "should": {
+            "match": {
+               "title.shingles": "the hungry alligator ate sue"
+            }
+         }
+      }
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>仍然匹配到了所有的 3 个文档， 但是文档 2 现在排到了第一名因为它匹配了 shingled 词项 <code>ate sue</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">{
+  "hits": [
+     {
+        "_id": "2",
+        "_score": 0.4883322,
+        "_source": {
+           "title": "The alligator ate Sue"
+        }
+     },
+     {
+        "_id": "1",
+        "_score": 0.13422975,
+        "_source": {
+           "title": "Sue ate the alligator"
+        }
+     },
+     {
+        "_id": "3",
+        "_score": 0.014119488,
+        "_source": {
+           "title": "Sue never goes anywhere without her alligator skin purse"
+        }
+     }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>即使查询包含的单词 <code>hungry</code> 没有在任何文档中出现，我们仍然使用单词邻近度返回了最相关的文档。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_performance性能">Performance性能</h4>
+<div class="paragraph">
+<p>shingles 不仅比短语查询更灵活，而且性能也更好。
+shingles 查询跟一个简单的 <code>match</code> 查询一样高效，而不用每次搜索花费短语查询的代价。只是在索引期间因为更多词项需要被索引会付出一些小的代价，
+这也意味着有 shingles 的字段会占用更多的磁盘空间。
+然而，大多数应用写入一次而读取多次，所以在索引期间优化我们的查询速度是有意义的。</p>
+</div>
+<div class="paragraph">
+<p>这是一个在 Elasticsearch 里会经常碰到的话题：不需要任何前期进行过多的设置，就能够在搜索的时候有很好的效果。
+一旦更清晰的理解了自己的需求，就能在索引时通过正确的为你的数据建模获得更好结果和性能。
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-05-17 22:26:24 CST
+</div>
+</div>
+</body>
+</html>

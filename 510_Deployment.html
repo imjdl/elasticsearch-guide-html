@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.2">
+<title>部署</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+audio,canvas,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+[hidden],template{display:none}
+script{display:none!important}
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+a{background:transparent}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
+p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:none}
+p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #ddddd8;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
+abbr{text-transform:none}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
+blockquote cite:before{content:"\2014 \0020"}
+blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media only screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table thead,table tfoot{background:#f7f8f7;font-weight:bold}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
+.clearfix:after,.float-group:after{clear:both}
+*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+*:not(pre)>code.nobreak{word-wrap:normal}
+*:not(pre)>code.nowrap{white-space:nowrap}
+pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
+b.button:before{content:"[";padding:0 3px 0 2px}
+b.button:after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header:before,#header:after,#content:before,#content:after,#footnotes:before,#footnotes:after,#footer:before,#footer:after{content:" ";display:table}
+#header:after,#content:after,#footnotes:after,#footer:after{clear:both}
+#content{margin-top:1.25em}
+#content:before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #ddddd8}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #ddddd8;padding-bottom:8px}
+#header .details{border-bottom:1px solid #ddddd8;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span:before{content:"\00a0\2013\00a0"}
+#header .details br+span.author:before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark:before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber:after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #ddddd8;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #efefed;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media only screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+.sect1{padding-bottom:.625em}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
+.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{color:rgba(0,0,0,.85)}
+table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:initial}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
+.sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
+.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
+.literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]:before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:#999}
+.listingblock:hover code[data-lang]:before{display:block}
+.listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
+.listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
+table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
+table.pyhltable td.code{padding-left:.75em;padding-right:0}
+pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
+pre.pygments .lineno{display:inline-block;margin-right:.25em}
+table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock blockquote p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote:before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.5em;margin-right:.5ex;text-align:right}
+.quoteblock .quoteblock{margin-left:0;margin-right:0;padding:.5em 0;border-left:3px solid rgba(0,0,0,.6)}
+.quoteblock .quoteblock blockquote{padding:0 0 0 .75em}
+.quoteblock .quoteblock blockquote:before{display:none}
+.verseblock{margin:0 1em 1.25em 1em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract{margin:0 0 1.25em 0;display:block}
+.quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
+.quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
+table.tableblock{max-width:100%;border-collapse:separate}
+table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
+table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
+table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
+table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px 0}
+table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0 0}
+table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
+table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
+table.frame-all{border-width:1px}
+table.frame-sides{border-width:0 1px}
+table.frame-topbot{border-width:1px 0}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+td>div.verse{white-space:pre}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
+ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
+ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
+ul.inline>li>*{display:block}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist>table tr>td:first-of-type{padding:.4em .75em 0 .75em;line-height:1;vertical-align:top}
+.colist>table tr>td:first-of-type img{max-width:initial}
+.colist>table tr>td:last-of-type{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
+.imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
+.imageblock.right,.imageblock[style*="float: right"]{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background-color:#00fafa}
+.black{color:#000}
+.black-background{background-color:#000}
+.blue{color:#0000bf}
+.blue-background{background-color:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background-color:#fa00fa}
+.gray{color:#606060}
+.gray-background{background-color:#7d7d7d}
+.green{color:#006000}
+.green-background{background-color:#007d00}
+.lime{color:#00bf00}
+.lime-background{background-color:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background-color:#7d0000}
+.navy{color:#000060}
+.navy-background{background-color:#00007d}
+.olive{color:#606000}
+.olive-background{background-color:#7d7d00}
+.purple{color:#600060}
+.purple-background{background-color:#7d007d}
+.red{color:#bf0000}
+.red-background{background-color:#fa0000}
+.silver{color:#909090}
+.silver-background{background-color:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background-color:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background-color:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background-color:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]:after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@media print{@page{margin:1.25cm .75cm}
+*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]:after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #ddddd8!important;padding-bottom:0!important}
+.sect1{padding-bottom:0!important}
+.sect1+.sect1{border:0!important}
+#header>h1:first-child{margin-top:1.25rem}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em 0}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span:before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]:before{display:block}
+#footer{background:none!important;padding:0 .9375em}
+#footer-text{color:rgba(0,0,0,.6)!important;font-size:.9em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+</style>
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="deploy">部署</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>如果你按照书中步骤做到了这一步，希望你已经学到了一两件关于 Elasticsearch 的事情并且准备把你的集群部署到生产环境。 这一章不是在生产中运行集群的详尽指南，但是它涵盖了集群上线之前需要考虑的关键事项。</p>
+</div>
+<div class="paragraph">
+<p>主要包括三个方面：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>后勤方面的考虑，如硬件和部署策略的建议</p>
+</li>
+<li>
+<p>更适合于生产环境的配置更改</p>
+</li>
+<li>
+<p>部署后的考虑，例如安全，最大限度的索引性能和备份</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="hardware">硬件</h3>
+<div class="paragraph">
+<p>按照正常的流程，你可能已经在自己的笔记本电脑或集群上使用了 Elasticsearch。
+但是当要部署 Elasticsearch 到生产环境时，有一些建议是你需要考虑的。这里没有什么必须要遵守的准则，Elasticsearch 被用于在众多的机器上处理各种任务。基于我们在生产环境使用 Elasticsearch 集群的经验，这些建议可以为你提供一个好的起点。</p>
+</div>
+<div class="sect3">
+<h4 id="_内存">内存</h4>
+<div class="paragraph">
+<p>如果有一种资源是最先被耗尽的，它可能是内存。排序和聚合都很耗内存，所以有足够的堆空间来应付它们是很重要的。即使堆空间是比较小的时候，
+也能为操作系统文件缓存提供额外的内存。因为 Lucene 使用的许多数据结构是基于磁盘的格式，Elasticsearch 利用操作系统缓存能产生很大效果。</p>
+</div>
+<div class="paragraph">
+<p>64 GB 内存的机器是非常理想的， 但是32 GB 和16 GB 机器也是很常见的。少于8 GB 会适得其反（你最终需要很多很多的小机器），大于64 GB 的机器也会有问题，
+我们将在 <a href="#heap-sizing">堆内存:大小和交换</a> 中讨论。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cpus">CPUs</h4>
+<div class="paragraph">
+<p>大多数 Elasticsearch 部署往往对 CPU 要求不高。因此，相对其它资源，具体配置多少个（CPU）不是那么关键。你应该选择具有多个内核的现代处理器，常见的集群使用两到八个核的机器。</p>
+</div>
+<div class="paragraph">
+<p>如果你要在更快的 CPUs 和更多的核心之间选择，选择更多的核心更好。多个内核提供的额外并发远胜过稍微快一点点的时钟频率。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_硬盘">硬盘</h4>
+<div class="paragraph">
+<p>硬盘对所有的集群都很重要，对大量写入的集群更是加倍重要（例如那些存储日志数据的）。硬盘是服务器上最慢的子系统，这意味着那些写入量很大的集群很容易让硬盘饱和，使得它成为集群的瓶颈。</p>
+</div>
+<div class="paragraph">
+<p>如果你负担得起 SSD，它将远远超出任何旋转介质（注：机械硬盘，磁带等）。 基于 SSD 的节点，查询和索引性能都有提升。如果你负担得起，SSD 是一个好的选择。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">检查你的 I/O 调度程序</div>
+<div class="paragraph">
+<p>如果你正在使用 SSDs，确保你的系统 I/O 调度程序是配置正确的。
+当你向硬盘写数据，I/O 调度程序决定何时把数据实际发送到硬盘。
+大多数默认 *nix 发行版下的调度程序都叫做 <code>cfq</code>（完全公平队列）。</p>
+</div>
+<div class="paragraph">
+<p>调度程序分配 <em>时间片</em> 到每个进程。并且优化这些到硬盘的众多队列的传递。但它是为旋转介质优化的：
+机械硬盘的固有特性意味着它写入数据到基于物理布局的硬盘会更高效。</p>
+</div>
+<div class="paragraph">
+<p>这对 SSD 来说是低效的，尽管这里没有涉及到机械硬盘。但是，<code>deadline</code> 或者 <code>noop</code> 应该被使用。<code>deadline</code> 调度程序基于写入等待时间进行优化，
+<code>noop</code> 只是一个简单的 FIFO 队列。</p>
+</div>
+<div class="paragraph">
+<p>这个简单的更改可以带来显著的影响。仅仅是使用正确的调度程序，我们看到了500倍的写入能力提升。</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你使用旋转介质，尝试获取尽可能快的硬盘（高性能服务器硬盘，15k RPM 驱动器）。</p>
+</div>
+<div class="paragraph">
+<p>使用 RAID 0 是提高硬盘速度的有效途径，对机械硬盘和 SSD 来说都是如此。没有必要使用镜像或其它 RAID 变体，因为高可用已经通过 replicas 内建于 Elasticsearch 之中。</p>
+</div>
+<div class="paragraph">
+<p>最后，避免使用网络附加存储（NAS）。人们常声称他们的 NAS 解决方案比本地驱动器更快更可靠。除却这些声称，
+我们从没看到 NAS 能配得上它的大肆宣传。NAS 常常很慢，显露出更大的延时和更宽的平均延时方差，而且它是单点故障的。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_网络">网络</h4>
+<div class="paragraph">
+<p>快速可靠的网络显然对分布式系统的性能是很重要的。
+低延时能帮助确保节点间能容易的通讯，大带宽能帮助分片移动和恢复。现代数据中心网络（1 GbE, 10 GbE）对绝大多数集群都是足够的。</p>
+</div>
+<div class="paragraph">
+<p>即使数据中心们近在咫尺，也要避免集群跨越多个数据中心。绝对要避免集群跨越大的地理距离。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 假定所有节点都是平等的&#8212;&#8203;并不会因为有一半的节点在150ms 外的另一数据中心而有所不同。更大的延时会加重分布式系统中的问题而且使得调试和排错更困难。</p>
+</div>
+<div class="paragraph">
+<p>和 NAS 的争论类似，每个人都声称他们的数据中心间的线路都是健壮和低延时的。这是真的&#8212;&#8203;直到它不是时（网络失败终究是会发生的，你可以相信它）。
+从我们的经验来看，处理跨数据中心集群的麻烦事是根本不值得的。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_总则">总则</h4>
+<div class="paragraph">
+<p>获取真正的高配机器在今天是可能的：成百 GB 的 RAM 和几十个 CPU 核心。
+反之，在云平台上串联起成千的小虚拟机也是可能的，例如 EC2。哪种方式是最好的?</p>
+</div>
+<div class="paragraph">
+<p>通常，选择中配或者高配机器更好。避免使用低配机器，
+因为你不会希望去管理拥有上千个节点的集群，而且在这些低配机器上运行 Elasticsearch 的开销也是显著的。</p>
+</div>
+<div class="paragraph">
+<p>与此同时，避免使用真正的高配机器。它们通常会导致资源使用不均衡（例如，所有的内存都被使用，但 CPU 却没有）而且在单机上运行多个节点时，会增加逻辑复杂度。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_java_virtual_machine">Java 虚拟机</h3>
+<div class="paragraph">
+<p>你应该始终运行最新版本的 Java 虚拟机（ JVM ），
+除非 Elasticsearch 网站上另有说明。  Elasticsearch，
+特别是 Lucene，是一个高要求的软件。Lucene 的单元测试和集成测试经常暴露出 JVM 本身的 bug。这些 bug 的范围从轻微的麻烦到严重段错误，所以，最好尽可能的使用最新版本的 JVM。</p>
+</div>
+<div class="paragraph">
+<p>Java 8 强烈优先选择于 Java 7。不再支持 Java 6。Oracle 或者 OpenJDK 是可以接受的，它们在性能和稳定性也差不多。</p>
+</div>
+<div class="paragraph">
+<p>如果你的应用程序是用 Java 编写并正在使用传输客户端（注：Transport Client，下同）或节点客户端（注：Node Client，下同），请确保运行你应用程序的 JVM 和服务器的 JVM 是完全一样的。
+在 Elasticsearch 的几个地方，使用 Java 的本地序列化（ IP 地址、异常等等）。不幸的是，Oracle 的 JVM 在几个小版本之间有修改序列化格式，从而导致奇怪的错误。
+这种情况很少见，但最佳实践是客户端和服务器使用相同版本 JVM。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">请不要调整 JVM 设置</div>
+<div class="paragraph">
+<p>JVM 暴露出几十个（甚至数百）的设置、参数和配置。 它们允许你进行微调 JVM 几乎是每一个方面。
+当遇到一个旋钮，要打开它是人的本性。我们恳求你压制这个本性，而 <em>不要</em> 去调整 JVM 参数。Elasticsearch 是复杂的软件，并且我们根据多年的实际使用情况调整了当前 JVM 设置。
+它很容易开始转动旋钮，并产生难以衡量的、未知的影响，并最终使集群进入一个缓慢的、不稳定的混乱的效果。当调试集群时，第一步往往是去除所有的自定义配置。多数情况下，仅此就可以恢复稳定和性能。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_transport_client_versus_node_client">Transport Client 与 Node Client</h3>
+<div class="paragraph">
+<p>如果你使用的是 Java，你可能想知道何时使用传输客户端（注：Transport Client，下同）与节点客户端（注：Node Client，下同）。 在书的开头所述，
+传输客户端作为一个集群和应用程序之间的通信层。它知道 API 并能自动帮你在节点之间轮询，帮你嗅探集群等等。但它是集群 <em>外部的</em> ，和 REST 客户端类似。</p>
+</div>
+<div class="paragraph">
+<p>另一方面，节点客户端，实际上是一个集群中的节点（但不保存数据，不能成为主节点）。因为它是一个节点，它知道整个集群状态（所有节点驻留，分片分布在哪些节点，等等）。
+这意味着它可以执行 APIs 但少了一个网络跃点。</p>
+</div>
+<div class="paragraph">
+<p>这里有两个客户端案例的使用情况：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>如果要将应用程序和 Elasticsearch 集群进行解耦，传输客户端是一个理想的选择。例如，如果您的应用程序需要快速的创建和销毁到集群的连接，传输客户端比节点客户端”轻”，因为它不是一个集群的一部分。</p>
+<div class="paragraph">
+<p>类似地，如果您需要创建成千上万的连接，你不想有成千上万节点加入集群。传输客户端（ TC ）将是一个更好的选择。</p>
+</div>
+</li>
+<li>
+<p>另一方面，如果你只需要有少数的、长期持久的对象连接到集群，客户端节点可以更高效，因为它知道集群的布局。但是它会使你的应用程序和集群耦合在一起，所以从防火墙的角度，它可能会构成问题。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuration_management">配置管理</h3>
+<div class="paragraph">
+<p>如果你已经使用配置管理（ Puppet，Chef，Ansible），则可以跳过此提示。</p>
+</div>
+<div class="paragraph">
+<p>如果你没有使用配置管理工具，那么应该注意了！通过 <code>parallel-ssh</code> 管理少量服务器现在可能正常工作，但伴随着集群的增长它将成为一场噩梦。
+在不犯错误的情况下手动编辑 30 个配置文件几乎是不可能的。</p>
+</div>
+<div class="paragraph">
+<p>配置管理工具通过自动化更改配置的过程保持集群的一致性。这可能需要一点时间来建立和学习，但它本身，随着时间的推移会有丰厚的回报。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="important-configuration-changes">重要配置的修改</h3>
+<div class="paragraph">
+<p>Elasticsearch 已经有了 <em>很好</em> 的默认值，特别是涉及到性能相关的配置或者选项。
+如果你有疑问，最好就不要动它。我们已经目睹了数十个因为错误的设置而导致毁灭的集群，
+因为它的管理者总认为改动一个配置或者选项就可以带来 100 倍的提升。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>请阅读整节文章，所有的配置项都同等重要，和描述顺序无关，请阅读所有的配置选项，并应用到你的集群中。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>其它数据库可能需要调优，但总得来说，Elasticsearch 不需要。
+如果你遇到了性能问题，解决方法通常是更好的数据布局或者更多的节点。
+在 Elasticsearch 中很少有“神奇的配置项”，
+如果存在，我们也已经帮你优化了！</p>
+</div>
+<div class="paragraph">
+<p>另外，有些 <em>逻辑上的</em> 配置在生产环境中是应该调整的。
+这些调整可能会让你的工作更加轻松，又或者因为没办法设定一个默认值（它取决于你的集群布局）。</p>
+</div>
+<div class="sect3">
+<h4 id="_指定名字">指定名字</h4>
+<div class="paragraph">
+<p>Elasticsearch 默认启动的集群名字叫 <code>elasticsearch</code> 。你最好给你的生产环境的集群改个名字，改名字的目的很简单，
+就是防止某人的笔记本电脑加入了集群这种意外。简单修改成 <code>elasticsearch_production</code> 会很省心。</p>
+</div>
+<div class="paragraph">
+<p>你可以在你的 <code>elasticsearch.yml</code> 文件中修改：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">cluster.name: elasticsearch_production</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>同样，最好也修改你的节点名字。就像你现在可能发现的那样，
+Elasticsearch 会在你的节点启动的时候随机给它指定一个名字。你可能会觉得这很有趣，但是当凌晨 3 点钟的时候，
+你还在尝试回忆哪台物理机是 Tagak the Leopard Lord 的时候，你就不觉得有趣了。</p>
+</div>
+<div class="paragraph">
+<p>更重要的是，这些名字是在启动的时候产生的，每次启动节点，
+它都会得到一个新的名字。这会使日志变得很混乱，因为所有节点的名称都是不断变化的。</p>
+</div>
+<div class="paragraph">
+<p>这可能会让你觉得厌烦，我们建议给每个节点设置一个有意义的、清楚的、描述性的名字，同样你可以在 <code>elasticsearch.yml</code> 中配置：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">node.name: elasticsearch_005_data</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_路径">路径</h4>
+<div class="paragraph">
+<p>默认情况下，Elasticsearch 会把插件、日志以及你最重要的数据放在安装目录下。这会带来不幸的事故，
+如果你重新安装 Elasticsearch 的时候不小心把安装目录覆盖了。如果你不小心，你就可能把你的全部数据删掉了。</p>
+</div>
+<div class="paragraph">
+<p>不要笑，这种情况，我们见过很多次了。</p>
+</div>
+<div class="paragraph">
+<p>最好的选择就是把你的数据目录配置到安装目录以外的地方，
+同样你也可以选择转移你的插件和日志目录。</p>
+</div>
+<div class="paragraph">
+<p>可以更改如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">path.data: /path/to/data1,/path/to/data2 <b class="conum">(1)</b>
+
+# Path to log files:
+path.logs: /path/to/logs
+
+# Path to where plugins are installed:
+path.plugins: /path/to/plugins</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>注意：你可以通过逗号分隔指定多个目录。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>数据可以保存到多个不同的目录，
+如果将每个目录分别挂载不同的硬盘，这可是一个简单且高效实现一个软磁盘阵列（ RAID 0 ）的办法。Elasticsearch 会自动把条带化（注：RAID 0 又称为 Stripe（条带化），在磁盘阵列中,数据是以条带的方式贯穿在磁盘阵列所有硬盘中的）
+数据分隔到不同的目录，以便提高性能。</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="title">多个数据路径的安全性和性能</div>
+<div class="paragraph">
+<p>如同任何磁盘阵列（ RAID 0 ）的配置，只有单一的数据拷贝保存到硬盘驱动器。如果你失去了一个硬盘驱动器，你 <em>肯定</em> 会失去该计算机上的一部分数据。
+运气好的话你的副本在集群的其他地方，可以用来恢复数据和最近的备份。</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 试图将全部的条带化分片放到单个驱动器来保证最小程度的数据丢失。这意味着 <code>分片 0</code> 将完全被放置在单个驱动器上。
+Elasticsearch 没有一个条带化的分片跨越在多个驱动器，因为一个驱动器的损失会破坏整个分片。</p>
+</div>
+<div class="paragraph">
+<p>这对性能产生的影响是：如果您添加多个驱动器来提高一个单独索引的性能，可能帮助不大，因为
+大多数节点只有一个分片和这样一个积极的驱动器。多个数据路径只是帮助如果你有许多索引／分片在单个节点上。</p>
+</div>
+<div class="paragraph">
+<p>多个数据路径是一个非常方便的功能，但到头来，Elasticsearch 并不是软磁盘阵列（ software RAID ）的软件。如果你需要更高级的、稳健的、灵活的配置，
+我们建议你使用软磁盘阵列（ software RAID ）的软件，而不是多个数据路径的功能。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_最小主节点数">最小主节点数</h4>
+<div class="paragraph">
+<p><code>minimum_master_nodes</code> 设定对你的集群的稳定 <em>极其</em> 重要。
+
+当你的集群中有两个 masters（注：主节点）的时候，这个配置有助于防止 <em>脑裂</em> ，一种两个主节点同时存在于一个集群的现象。</p>
+</div>
+<div class="paragraph">
+<p>如果你的集群发生了脑裂，那么你的集群就会处在丢失数据的危险中，因为主节点被认为是这个集群的最高统治者，它决定了什么时候新的索引可以创建，分片是如何移动的等等。如果你有 <em>两个</em> masters 节点，
+你的数据的完整性将得不到保证，因为你有两个节点认为他们有集群的控制权。</p>
+</div>
+<div class="paragraph">
+<p>这个配置就是告诉 Elasticsearch 当没有足够 master 候选节点的时候，就不要进行 master 节点选举，等 master 候选节点足够了才进行选举。</p>
+</div>
+<div class="paragraph">
+<p>此设置应该始终被配置为 master 候选节点的法定个数（大多数个）。法定个数就是 <code>( master 候选节点个数 / 2) + 1</code> 。
+这里有几个例子：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>如果你有 10 个节点（能保存数据，同时能成为 master），法定数就是 <code>6</code> 。</p>
+</li>
+<li>
+<p>如果你有 3 个候选 master 节点，和 100 个 data 节点，法定数就是 <code>2</code> ，你只要数数那些可以做 master 的节点数就可以了。</p>
+</li>
+<li>
+<p>如果你有两个节点，你遇到难题了。法定数当然是 <code>2</code> ，但是这意味着如果有一个节点挂掉，你整个集群就不可用了。
+设置成 <code>1</code> 可以保证集群的功能，但是就无法保证集群脑裂了，像这样的情况，你最好至少保证有 3 个节点。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>你可以在你的 <code>elasticsearch.yml</code> 文件中这样配置：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">discovery.zen.minimum_master_nodes: 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但是由于 ELasticsearch 是动态的，你可以很容易的添加和删除节点，
+但是这会改变这个法定个数。
+你不得不修改每一个索引节点的配置并且重启你的整个集群只是为了让配置生效，这将是非常痛苦的一件事情。</p>
+</div>
+<div class="paragraph">
+<p>基于这个原因， <code>minimum_master_nodes</code> （还有一些其它配置）允许通过 API 调用的方式动态进行配置。
+当你的集群在线运行的时候，你可以这样修改配置：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">PUT /_cluster/settings
+{
+    "persistent" : {
+        "discovery.zen.minimum_master_nodes" : 2
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这将成为一个永久的配置，并且无论你配置项里配置的如何，这个将优先生效。当你添加和删除 master 节点的时候，你需要更改这个配置。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_集群恢复方面的配置">集群恢复方面的配置</h4>
+<div class="paragraph">
+<p>当你集群重启时，几个配置项影响你的分片恢复的表现。首先，我们需要明白如果什么也没配置将会发生什么。</p>
+</div>
+<div class="paragraph">
+<p>想象一下假设你有 10 个节点，每个节点只保存一个分片，这个分片是一个主分片或者是一个副本分片，或者说有一个有 5 个主分片／1 个副本分片的索引。有时你需要为整个集群做离线维护（比如，为了安装一个新的驱动程序），
+当你重启你的集群，恰巧出现了 5 个节点已经启动，还有 5 个还没启动的场景。</p>
+</div>
+<div class="paragraph">
+<p>假设其它 5 个节点出问题，或者他们根本没有收到立即重启的命令。不管什么原因，你有 5 个节点在线上，这五个节点会相互通信，选出一个 master，从而形成一个集群。
+他们注意到数据不再均匀分布，因为有 5 个节点在集群中丢失了，所以他们之间会立即启动分片复制。</p>
+</div>
+<div class="paragraph">
+<p>最后，你的其它 5 个节点打开加入了集群。这些节点会发现 <em>它们</em> 的数据正在被复制到其他节点，所以他们删除本地数据（因为这份数据要么是多余的，要么是过时的）。
+然后整个集群重新进行平衡，因为集群的大小已经从 5 变成了 10。</p>
+</div>
+<div class="paragraph">
+<p>在整个过程中，你的节点会消耗磁盘和网络带宽，来回移动数据，因为没有更好的办法。对于有 TB 数据的大集群,
+这种无用的数据传输需要 <em>很长时间</em> 。如果等待所有的节点重启好了，整个集群再上线，所有的本地的数据都不需要移动。</p>
+</div>
+<div class="paragraph">
+<p>现在我们知道问题的所在了，我们可以修改一些设置来缓解它。
+首先我们要给 ELasticsearch 一个严格的限制：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">gateway.recover_after_nodes: 8</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这将阻止 Elasticsearch 在存在至少 8 个节点（数据节点或者 master 节点）之前进行数据恢复。
+这个值的设定取决于个人喜好：整个集群提供服务之前你希望有多少个节点在线？这种情况下，我们设置为 8，这意味着至少要有 8 个节点，该集群才可用。</p>
+</div>
+<div class="paragraph">
+<p>现在我们要告诉 Elasticsearch 集群中 <em>应该</em> 有多少个节点，以及我们愿意为这些节点等待多长时间：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">gateway.expected_nodes: 10
+gateway.recover_after_time: 5m</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这意味着 Elasticsearch 会采取如下操作：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>等待集群至少存在 8 个节点</p>
+</li>
+<li>
+<p>等待 5 分钟，或者10 个节点上线后，才进行数据恢复，这取决于哪个条件先达到。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>这三个设置可以在集群重启的时候避免过多的分片交换。这可能会让数据恢复从数个小时缩短为几秒钟。</p>
+</div>
+<div class="paragraph">
+<p>注意：这些配置只能设置在 <code>config/elasticsearch.yml</code> 文件中或者是在命令行里（它们不能动态更新）它们只在整个集群重启的时候有实质性作用。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="unicast">最好使用单播代替组播</h4>
+<div class="paragraph">
+<p>Elasticsearch 默认被配置为使用单播发现，以防止节点无意中加入集群。只有在同一台机器上运行的节点才会自动组成集群。</p>
+</div>
+<div class="paragraph">
+<p>虽然组播仍然 <a href="https://www.elastic.co/guide/en/elasticsearch/plugins/current/discovery-multicast.html">作为插件提供</a>，
+但它应该永远不被使用在生产环境了，否则你得到的结果就是一个节点意外的加入到了你的生产环境，仅仅是因为他们收到了一个错误的组播信号。
+对于组播 <em>本身</em> 并没有错，组播会导致一些愚蠢的问题，并且导致集群变的脆弱（比如，一个网络工程师正在捣鼓网络，而没有告诉你，你会发现所有的节点突然发现不了对方了）。</p>
+</div>
+<div class="paragraph">
+<p>使用单播，你可以为 Elasticsearch 提供一些它应该去尝试连接的节点列表。
+当一个节点联系到单播列表中的成员时，它就会得到整个集群所有节点的状态，然后它会联系 master 节点，并加入集群。</p>
+</div>
+<div class="paragraph">
+<p>这意味着你的单播列表不需要包含你的集群中的所有节点，
+它只是需要足够的节点，当一个新节点联系上其中一个并且说上话就可以了。如果你使用 master 候选节点作为单播列表，你只要列出三个就可以了。
+这个配置在 <code>elasticsearch.yml</code> 文件中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">discovery.zen.ping.unicast.hosts: ["host1", "host2:port"]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>关于 Elasticsearch 节点发现的详细信息，请参阅 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-zen.html">Zen Discovery</a> Elasticsearch 文献。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dont-touch-these-settings">不要触碰这些配置！</h3>
+<div class="paragraph">
+<p>在 Elasticsearch 中有一些热点，人们可能不可避免的会碰到。 我们理解的，所有的调整就是为了优化，但是这些调整，你真的不需要理会它。因为它们经常会被乱用，从而造成系统的不稳定或者糟糕的性能，甚至两者都有可能。</p>
+</div>
+<div class="sect3">
+<h4 id="_垃圾回收器">垃圾回收器</h4>
+<div class="paragraph">
+<p>这里已经简要介绍了 <a href="#garbage_collector_primer">[garbage_collector_primer]</a>，JVM 使用一个垃圾回收器来释放不再使用的内存。 这篇内容的确是上一篇的一个延续，
+但是因为重要，所以值得单独拿出来作为一节。</p>
+</div>
+<div class="paragraph">
+<p>不要更改默认的垃圾回收器！</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 默认的垃圾回收器（ GC ）是 CMS。 这个垃圾回收器可以和应用并行处理，以便它可以最小化停顿。
+然而，它有两个 stop-the-world 阶段，处理大内存也有点吃力。</p>
+</div>
+<div class="paragraph">
+<p>尽管有这些缺点，它还是目前对于像 Elasticsearch 这样低延迟需求软件的最佳垃圾回收器。官方建议使用 CMS。</p>
+</div>
+<div class="paragraph">
+<p>现在有一款新的垃圾回收器，叫 G1 垃圾回收器（ G1GC ）。 这款新的 GC 被设计，旨在比 CMS 更小的暂停时间，以及对大内存的处理能力。
+它的原理是把内存分成许多区域，并且预测哪些区域最有可能需要回收内存。通过优先收集这些区域（ <em>garbage first</em> ），产生更小的暂停时间，从而能应对更大的内存。</p>
+</div>
+<div class="paragraph">
+<p>听起来很棒！遗憾的是，G1GC 还是太新了，经常发现新的 bugs。这些错误通常是段（ segfault ）类型，便造成硬盘的崩溃。
+Lucene 的测试套件对垃圾回收算法要求严格，看起来这些缺陷 G1GC 并没有很好地解决。</p>
+</div>
+<div class="paragraph">
+<p>我们很希望在将来某一天推荐使用 G1GC，但是对于现在，它还不能足够稳定的满足 Elasticsearch 和 Lucene 的要求。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_线程池">线程池</h4>
+<div class="paragraph">
+<p>许多人 <em>喜欢</em> 调整线程池。 无论什么原因，人们都对增加线程数无法抵抗。索引太多了？增加线程！搜索太多了？增加线程！节点空闲率低于 95％？增加线程！</p>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 默认的线程设置已经是很合理的了。对于所有的线程池（除了 <code>搜索</code> ），线程个数是根据 CPU 核心数设置的。
+如果你有 8 个核，你可以同时运行的只有 8 个线程，只分配 8 个线程给任何特定的线程池是有道理的。</p>
+</div>
+<div class="paragraph">
+<p>搜索线程池设置的大一点，配置为 <code>int（（ 核心数 ＊ 3 ）／ 2 ）＋ 1</code> 。</p>
+</div>
+<div class="paragraph">
+<p>你可能会认为某些线程可能会阻塞（如磁盘上的 I／O 操作），所以你才想加大线程的。对于 Elasticsearch 来说这并不是一个问题：因为大多数 I／O 的操作是由 Lucene 线程管理的，而不是 Elasticsearch。</p>
+</div>
+<div class="paragraph">
+<p>此外，线程池通过传递彼此之间的工作配合。你不必再因为它正在等待磁盘写操作而担心网络线程阻塞，
+因为网络线程早已把这个工作交给另外的线程池，并且网络进行了响应。</p>
+</div>
+<div class="paragraph">
+<p>最后，你的处理器的计算能力是有限的，拥有更多的线程会导致你的处理器频繁切换线程上下文。
+一个处理器同时只能运行一个线程。所以当它需要切换到其它不同的线程的时候，它会存储当前的状态（寄存器等等），然后加载另外一个线程。
+如果幸运的话，这个切换发生在同一个核心，如果不幸的话，这个切换可能发生在不同的核心，这就需要在内核间总线上进行传输。</p>
+</div>
+<div class="paragraph">
+<p>这个上下文的切换，会给 CPU 时钟周期带来管理调度的开销；在现代的 CPUs 上，开销估计高达 30 μs。也就是说线程会被堵塞超过 30 μs，如果这个时间用于线程的运行，极有可能早就结束了。</p>
+</div>
+<div class="paragraph">
+<p>人们经常稀里糊涂的设置线程池的值。8 个核的 CPU，我们遇到过有人配了 60、100 甚至 1000 个线程。
+这些设置只会让 CPU 实际工作效率更低。</p>
+</div>
+<div class="paragraph">
+<p>所以，下次请不要调整线程池的线程数。如果你真 <em>想调整</em> ，
+一定要关注你的 CPU 核心数，最多设置成核心数的两倍，再多了都是浪费。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="heap-sizing">堆内存:大小和交换</h3>
+<div class="paragraph">
+<p>Elasticsearch 默认安装后设置的堆内存是 1 GB。对于任何一个业务部署来说，
+这个设置都太小了。如果你正在使用这些默认堆内存配置，您的集群可能会出现问题。</p>
+</div>
+<div class="paragraph">
+<p>这里有两种方式修改 Elasticsearch 的堆内存。最简单的一个方法就是指定 <code>ES_HEAP_SIZE</code> 环境变量。服务进程在启动时候会读取这个变量，并相应的设置堆的大小。
+比如，你可以用下面的命令设置它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">export ES_HEAP_SIZE=10g</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此外，你也可以通过命令行参数的形式，在程序启动的时候把内存大小传递给它，如果你觉得这样更简单的话：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">./bin/elasticsearch -Xmx10g -Xms10g <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>确保堆内存最小值（ <code>Xms</code> ）与最大值（ <code>Xmx</code> ）的大小是相同的，防止程序在运行时改变堆内存大小，
+这是一个很耗系统资源的过程。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>通常来说，设置 <code>ES_HEAP_SIZE</code> 环境变量，比直接写 <code>-Xmx -Xms</code> 更好一点。</p>
+</div>
+<div class="sect3">
+<h4 id="_把你的内存的_少于_一半给_lucene">把你的内存的（少于）一半给 Lucene</h4>
+<div class="paragraph">
+<p>一个常见的问题是给 Elasticsearch 分配的内存 <em>太</em> 大了。假设你有一个 64 GB 内存的机器，
+天啊，我要把 64 GB 内存全都给 Elasticsearch。因为越多越好啊！</p>
+</div>
+<div class="paragraph">
+<p>当然，内存对于 Elasticsearch 来说绝对是重要的，它可以被许多内存数据结构使用来提供更快的操作。但是说到这里，
+还有另外一个内存消耗大户 <em>非堆内存</em> （off-heap）：Lucene。</p>
+</div>
+<div class="paragraph">
+<p>Lucene 被设计为可以利用操作系统底层机制来缓存内存数据结构。
+Lucene 的段是分别存储到单个文件中的。因为段是不可变的，这些文件也都不会变化，这是对缓存友好的，同时操作系统也会把这些段文件缓存起来，以便更快的访问。</p>
+</div>
+<div class="paragraph">
+<p>Lucene 的性能取决于和操作系统的相互作用。如果你把所有的内存都分配给 Elasticsearch 的堆内存，那将不会有剩余的内存交给 Lucene。
+这将严重地影响全文检索的性能。</p>
+</div>
+<div class="paragraph">
+<p>标准的建议是把 50％ 的可用内存作为 Elasticsearch 的堆内存，保留剩下的 50％。当然它也不会被浪费，Lucene 会很乐意利用起余下的内存。</p>
+</div>
+<div class="paragraph">
+<p>如果你不需要对分词字符串做聚合计算（例如，不需要 <a href="#aggregations-and-analysis">fielddata</a> ）可以考虑降低堆内存。堆内存越小，Elasticsearch（更快的 GC）和 Lucene（更多的内存用于缓存）的性能越好。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="compressed_oops">不要超过 32 GB！</h4>
+<div class="paragraph">
+<p>这里有另外一个原因不分配大内存给 Elasticsearch。事实上，
+JVM 在内存小于 32 GB 的时候会采用一个内存对象指针压缩技术。</p>
+</div>
+<div class="paragraph">
+<p>在 Java 中，所有的对象都分配在堆上，并通过一个指针进行引用。
+普通对象指针（OOP）指向这些对象，通常为 CPU <em>字长</em> 的大小：32 位或 64 位，取决于你的处理器。指针引用的就是这个 OOP 值的字节位置。</p>
+</div>
+<div class="paragraph">
+<p>对于 32 位的系统，意味着堆内存大小最大为 4 GB。对于 64 位的系统，
+可以使用更大的内存，但是 64 位的指针意味着更大的浪费，因为你的指针本身大了。更糟糕的是，
+更大的指针在主内存和各级缓存（例如 LLC，L1 等）之间移动数据的时候，会占用更多的带宽。</p>
+</div>
+<div class="paragraph">
+<p>Java 使用一个叫作  <a href="https://wikis.oracle.com/display/HotSpotInternals/CompressedOops">内存指针压缩（compressed oops）</a>的技术来解决这个问题。
+它的指针不再表示对象在内存中的精确位置，而是表示 <em>偏移量</em> 。这意味着 32 位的指针可以引用 40 亿个 <em>对象</em> ，
+而不是 40 亿个字节。最终，
+也就是说堆内存增长到 32 GB 的物理内存，也可以用 32 位的指针表示。</p>
+</div>
+<div class="paragraph">
+<p>一旦你越过那个神奇的 ~32 GB 的边界，指针就会切回普通对象的指针。
+每个对象的指针都变长了，就会使用更多的 CPU 内存带宽，也就是说你实际上失去了更多的内存。事实上，当内存到达
+40&#x2013;50 GB 的时候，有效内存才相当于使用内存对象指针压缩技术时候的 32 GB 内存。</p>
+</div>
+<div class="paragraph">
+<p>这段描述的意思就是说：即便你有足够的内存，也尽量不要
+超过 32 GB。因为它浪费了内存，降低了 CPU 的性能，还要让 GC 应对大内存。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_到底需要低于_32_gb多少_来设置我的_jvm">到底需要低于 32 GB多少，来设置我的 JVM？</h4>
+<div class="paragraph">
+<p>遗憾的是，这需要看情况。确切的划分要根据 JVMs 和操作系统而定。
+如果你想保证其安全可靠，设置堆内存为 <code>31 GB</code> 是一个安全的选择。
+另外，你可以在你的 JVM 设置里添加 <code>-XX:+PrintFlagsFinal</code> 用来验证 <code>JVM</code> 的临界值，
+并且检查 UseCompressedOops 的值是否为 true。对于你自己使用的 JVM 和操作系统，这将找到最合适的堆内存临界值。</p>
+</div>
+<div class="paragraph">
+<p>例如，我们在一台安装  Java 1.7 的 MacOSX 上测试，可以看到指针压缩在被禁用之前，最大堆内存大约是在 32600 mb（~31.83 gb）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ JAVA_HOME=`/usr/libexec/java_home -v 1.7` java -Xmx32600m -XX:+PrintFlagsFinal 2&gt; /dev/null | grep UseCompressedOops
+     bool UseCompressedOops   := true
+$ JAVA_HOME=`/usr/libexec/java_home -v 1.7` java -Xmx32766m -XX:+PrintFlagsFinal 2&gt; /dev/null | grep UseCompressedOops
+     bool UseCompressedOops   = false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>相比之下，同一台机器安装 Java 1.8，可以看到指针压缩在被禁用之前，最大堆内存大约是在 32766 mb（~31.99 gb）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ JAVA_HOME=`/usr/libexec/java_home -v 1.8` java -Xmx32766m -XX:+PrintFlagsFinal 2&gt; /dev/null | grep UseCompressedOops
+     bool UseCompressedOops   := true
+$ JAVA_HOME=`/usr/libexec/java_home -v 1.8` java -Xmx32767m -XX:+PrintFlagsFinal 2&gt; /dev/null | grep UseCompressedOops
+     bool UseCompressedOops   = false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个例子告诉我们，影响内存指针压缩使用的临界值，
+是会根据 JVM 的不同而变化的。
+所以从其他地方获取的例子，需要谨慎使用，要确认检查操作系统配置和 JVM。</p>
+</div>
+<div class="paragraph">
+<p>如果使用的是  Elasticsearch v2.2.0，启动日志其实会告诉你 JVM 是否正在使用内存指针压缩。
+你会看到像这样的日志消息：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">[2015-12-16 13:53:33,417][INFO ][env] [Illyana Rasputin] heap size [989.8mb], compressed ordinary object pointers [true]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这表明内存指针压缩正在被使用。如果没有，日志消息会显示 <code>[false]</code> 。</p>
+</div>
+<div class="sidebarblock pagebreak-before">
+<div class="content">
+<div class="title">我有一个 1 TB 内存的机器！</div>
+<div class="paragraph">
+<p>这个 32 GB 的分割线是很重要的。那如果你的机器有很大的内存怎么办呢？
+一台有着 512&#x2013;768 GB内存的服务器愈发常见。</p>
+</div>
+<div class="paragraph">
+<p>首先，我们建议避免使用这样的高配机器（参考 <a href="#hardware">硬件</a>）。</p>
+</div>
+<div class="paragraph">
+<p>但是如果你已经有了这样的机器，你有三个可选项：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>你主要做全文检索吗？考虑给 Elasticsearch 4 - 32 GB 的内存，
+让 Lucene 通过操作系统文件缓存来利用余下的内存。那些内存都会用来缓存 segments，带来极速的全文检索。</p>
+</li>
+<li>
+<p>你需要更多的排序和聚合？而且大部分的聚合计算是在数字、日期、地理点和 <code>非分词</code> 字符串上？你很幸运，你的聚合计算将在内存友好的 doc values 上完成！
+给 Elasticsearch 4 到 32 GB 的内存，其余部分为操作系统缓存内存中的 doc values。</p>
+</li>
+<li>
+<p>你在对分词字符串做大量的排序和聚合（例如，标签或者 SigTerms，等等）不幸的是，这意味着你需要 fielddata，意味着你需要堆空间。考虑在单个机器上运行两个或多个节点，而不是拥有大量 RAM 的一个节点。仍然要坚持 50％ 原则。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>假设你有个机器有 128 GB 的内存，你可以创建两个节点，每个节点内存分配不超过 32 GB。
+也就是说不超过 64 GB 内存给 ES 的堆内存，剩下的超过 64 GB 的内存给 Lucene。</p>
+</div>
+<div class="paragraph">
+<p>如果你选择这一种，你需要配置 <code>cluster.routing.allocation.same_shard.host: true</code> 。
+这会防止同一个分片（shard）的主副本存在同一个物理机上（因为如果存在一个机器上，副本的高可用性就没有了）。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_swapping_是性能的坟墓">Swapping 是性能的坟墓</h4>
+<div class="paragraph">
+<p>这是显而易见的，但是还是有必要说的更清楚一点：内存交换
+到磁盘对服务器性能来说是 <em>致命</em> 的。想想看：一个内存操作必须能够被快速执行。</p>
+</div>
+<div class="paragraph">
+<p>如果内存交换到磁盘上，一个 100 微秒的操作可能变成 10 毫秒。
+再想想那么多 10 微秒的操作时延累加起来。
+不难看出 swapping 对于性能是多么可怕。</p>
+</div>
+<div class="paragraph">
+<p>最好的办法就是在你的操作系统中完全禁用 swap。这样可以暂时禁用：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo swapoff -a</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果需要永久禁用，你可能需要修改 <code>/etc/fstab</code> 文件，这要参考你的操作系统相关文档。</p>
+</div>
+<div class="paragraph">
+<p>如果你并不打算完全禁用 swap，也可以选择降低 <code>swappiness</code> 的值。
+这个值决定操作系统交换内存的频率。
+这可以预防正常情况下发生交换，但仍允许操作系统在紧急情况下发生交换。</p>
+</div>
+<div class="paragraph">
+<p>对于大部分Linux操作系统，可以在 <code>sysctl</code> 中这样配置：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">vm.swappiness = 1 <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>swappiness</code> 设置为 <code>1</code> 比设置为 <code>0</code> 要好，因为在一些内核版本 <code>swappiness</code> 设置为 <code>0</code> 会触发系统 OOM-killer（注：Linux 内核的 Out of Memory（OOM）killer 机制）。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>最后，如果上面的方法都不合适，你需要打开配置文件中的 <code>mlockall</code> 开关。
+它的作用就是允许 JVM 锁住内存，禁止操作系统交换出去。在你的 <code>elasticsearch.yml</code> 文件中，设置如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">bootstrap.mlockall: true</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_file_descriptors_and_mmap">文件描述符和 MMap</h3>
+<div class="paragraph">
+<p>Lucene 使用了 <em>大量的</em> 文件。 同时，Elasticsearch 在节点和 HTTP 客户端之间进行通信也使用了大量的套接字（注：sockets）。
+所有这一切都需要足够的文件描述符。</p>
+</div>
+<div class="paragraph">
+<p>可悲的是，许多现代的 Linux 发行版本，每个进程默认允许一个微不足道的 1024 文件描述符。这对一个小的 Elasticsearch 节点来说实在是太 <em>低</em> 了，更不用说一个处理数以百计索引的节点。</p>
+</div>
+<div class="paragraph">
+<p>你应该增加你的文件描述符，设置一个很大的值，如 64,000。这个过程困难得让人恼火，它高度依赖于你的特定操作系统和分布。请参考你操作系统文档来确定如何最好地修改允许的文件描述符数量。</p>
+</div>
+<div class="paragraph">
+<p>一旦你认为已经改变了它，检查 Elasticsearch，以确保它的真的起作用并且有足够的文件描述符：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">GET /_nodes/process
+
+{
+   "cluster_name": "elasticsearch__zach",
+   "nodes": {
+      "TGn9iO2_QQKb0kavcLbnDw": {
+         "name": "Zach",
+         "transport_address": "inet[/192.168.1.131:9300]",
+         "host": "zacharys-air",
+         "ip": "192.168.1.131",
+         "version": "2.0.0-SNAPSHOT",
+         "build": "612f461",
+         "http_address": "inet[/192.168.1.131:9200]",
+         "process": {
+            "refresh_interval_in_millis": 1000,
+            "id": 19808,
+            "max_file_descriptors": 64000, <b class="conum">(1)</b>
+            "mlockall": true
+         }
+      }
+   }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>max_file_descriptors</code> 字段显示 Elasticsearch 进程可以访问的可用文件描述符数量。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Elasticsearch 对各种文件混合使用了 NioFs（ 注：非阻塞文件系统）和 MMapFs （ 注：内存映射文件系统）。请确保你配置的最大映射数量，以便有足够的虚拟内存可用于 mmapped 文件。这可以暂时设置：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">sysctl -w vm.max_map_count=262144</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>或者你可以在 <code>/etc/sysctl.conf</code> 通过修改 <code>vm.max_map_count</code> 永久设置它。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_revisit_this_list_before_production">在生产之前，重温这个列表</h3>
+<div class="paragraph">
+<p>在你进入生产之前，你可能阅读了本节。本章中涉及的细节非常好，一般是可以知道的，但关键是，正确部署到生产环境之前需要重温这个列表。</p>
+</div>
+<div class="paragraph">
+<p>一些问题会简单地阻止你(如：可用的文件描述符太少)。因为他们很快显现出来，这些都是容易调试的。
+其他的一些问题，如脑裂和内存设置，只有在糟糕的事情发生之后才可见。在这一点上，解决办法往往是凌乱和繁琐的。</p>
+</div>
+<div class="paragraph">
+<p>在灾难发生 <em>之前</em> ，通过适当配置集群来主动阻止这些情况发生，是更好的选择。所以如果你想要从整本书的一个部分折角（或保存书签），本章将是一个很好的选择。在部署到生产环境的前一周，简单地浏览这里给出的列表，并检查所有的建议。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-05-17 22:26:24 CST
+</div>
+</div>
+</body>
+</html>
